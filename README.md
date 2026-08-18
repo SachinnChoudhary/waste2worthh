@@ -1,16 +1,12 @@
-# React + Vite
+# Waste2Worth
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Waste2Worth is a B2B circular economy marketplace connecting manufacturers, refineries, and industrial operations with buyers who can transform waste and byproducts into valuable raw materials. It enables businesses to list waste streams, discover industrial materials, negotiate deals, and track environmental impact metrics such as CO₂ saved and landfill diverted.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- **Frontend Framework:** React 19
+- **Build Tool:** Vite
+- **Routing:** React Router v7
+- **Styling:** Tailwind CSS v4
+- **Authentication:** Clerk (`@clerk/clerk-react`)
+- **Linter:** Oxlint
