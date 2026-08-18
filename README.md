@@ -9,4 +9,3 @@ Waste2Worth is a B2B circular economy marketplace connecting manufacturers, refi
 - **Routing:** React Router v7
 - **Styling:** Tailwind CSS v4
 - **Authentication:** Clerk (`@clerk/clerk-react`)
-- **Linter:** Oxlint
