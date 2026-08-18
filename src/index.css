@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Earthy, nature-inspired palette */
+  --color-forest-900: #1a2e1a;
+  --color-forest-800: #243524;
+  --color-forest-700: #2d4a2d;
+  --color-forest-600: #3d6b3d;
+  --color-forest-500: #4a8c4a;
+  --color-forest-400: #6aad6a;
+  --color-forest-300: #8ec48e;
+  --color-forest-200: #c2dfc2;
+  --color-forest-100: #e8f3e8;
+  --color-forest-50: #f4faf4;
+
+  --color-earth-900: #3d2b1a;
+  --color-earth-800: #5c3d24;
+  --color-earth-700: #7a5133;
+  --color-earth-600: #96643e;
+  --color-earth-500: #b07d52;
+  --color-earth-400: #c49a70;
+  --color-earth-300: #d4b896;
+  --color-earth-200: #e8d5be;
+  --color-earth-100: #f3ebe0;
+  --color-earth-50: #faf6f1;
+
+  --color-terra-600: #9e4a32;
+  --color-terra-500: #c25d3e;
+  --color-terra-400: #d4826a;
+  --color-terra-300: #e2a693;
+  --color-terra-200: #f0cfc5;
+  --color-terra-100: #f9ece8;
+
+  --color-sage-50: #f8faf6;
+  --color-sage-100: #eef2ea;
+  --color-sage-200: #dce5d4;
+  --color-sage-300: #b8ccaa;
+  --color-sage-400: #8faa7a;
+
+  --color-cream: #fdfbf7;
+  --color-warm-white: #f9f6f0;
+  --color-bark: #2c1e10;
+
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+}
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-bark);
+  background: var(--color-cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-sage-100); }
+::-webkit-scrollbar-thumb { background: var(--color-forest-300); border-radius: 3px; }
+
+/* Utility layer */
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+}
