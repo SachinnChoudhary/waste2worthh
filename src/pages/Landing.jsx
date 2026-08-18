@@ -1,176 +1,375 @@
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import { Button } from '../components/Button'
+import { Badge } from '../components/Badge'
+import {
+  ArrowRight,
+  Sparkles,
+  Leaf,
+  Scale,
+  Cpu,
+  Layers,
+  Zap,
+  Building2,
+  BarChart3,
+  Flame,
+  Truck,
+  FileCheck,
+} from 'lucide-react'
+
+const categories = [
+  { name: 'Metal Scrap', count: 142, icon: Scale, volume: '8,400 MT' },
+  { name: 'Plastics & Polymers', count: 96, icon: Layers, volume: '2,100 MT' },
+  { name: 'Chemical Byproducts', count: 64, icon: Flame, volume: '450 KL' },
+  { name: 'Textile Waste', count: 52, icon: Sparkles, volume: '1,800 MT' },
+  { name: 'Fly Ash & Slag', count: 88, icon: Building2, volume: '25,000 MT' },
+  { name: 'E-Waste & PCBs', count: 71, icon: Cpu, volume: '340 MT' },
+  { name: 'Wood & Biomass', count: 41, icon: Leaf, volume: '4,200 MT' },
+  { name: 'Rubber & Tyres', count: 35, icon: Zap, volume: '950 MT' },
+]
 
 export default function Landing() {
-  return (
-    <>
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-forest-50 via-cream to-earth-50 -z-10" />
-        <div className="absolute top-20 right-0 w-96 h-96 bg-forest-200 rounded-full opacity-20 blur-3xl -z-10" />
-        <div className="absolute bottom-0 left-20 w-72 h-72 bg-earth-200 rounded-full opacity-30 blur-3xl -z-10" />
+  const [calcMaterial, setCalcMaterial] = useState('Steel Mill Slag')
+  const [calcQuantity, setCalcQuantity] = useState(100)
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-28">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h1 className="font-display text-5xl lg:text-6xl text-forest-900 leading-[1.1] mb-6 text-balance">
-                Your waste is someone else's{' '}
-                <span className="text-forest-500 italic">raw material</span>
-              </h1>
-              <p className="text-lg text-earth-600 leading-relaxed mb-8 max-w-lg">
-                Waste2Worth connects manufacturers, refineries, and industrial operations 
-                with buyers who can transform their byproducts into valuable inputs — 
-                cutting costs, reducing landfill, and closing the loop.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Link to="/signup">
-                  <Button size="lg">List your waste — it's free</Button>
-                </Link>
-                <Link to="/marketplace">
-                  <Button variant="outline" size="lg">Browse marketplace</Button>
-                </Link>
+  const materialRates = {
+    'Steel Mill Slag': { rate: 8200, unit: 'tonne', co2Factor: 1.24 },
+    'HDPE Drum Regrind': { rate: 42000, unit: 'tonne', co2Factor: 3.1 },
+    'Spent Caustic Soda': { rate: 6500, unit: 'KL', co2Factor: 0.89 },
+    'Cotton Selvedge': { rate: 15000, unit: 'tonne', co2Factor: 5.2 },
+    'Class F Fly Ash': { rate: 800, unit: 'tonne', co2Factor: 0.42 },
+  }
+
+  const currentRate = materialRates[calcMaterial] || materialRates['Steel Mill Slag']
+  const estValue = (calcQuantity * currentRate.rate).toLocaleString('en-IN')
+  const estCo2 = (calcQuantity * currentRate.co2Factor).toFixed(1)
+
+  return (
+    <div className="flex flex-col gap-24 lg:gap-32 pb-24 overflow-hidden">
+      {/* ─── Hero Section ─── */}
+      <section className="relative pt-12 lg:pt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          {/* Main Hero Headline */}
+          <div className="text-center max-w-4xl mx-auto flex flex-col gap-6">
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-zinc-100 leading-[1.08] text-balance">
+              Your industrial waste is someone else’s{' '}
+              <span className="bg-gradient-to-r from-emerald-300 via-emerald-400 to-cyan-400 bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(52,211,153,0.3)]">
+                raw material
+              </span>
+            </h1>
+
+            <p className="text-base sm:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed text-balance">
+              The verified B2B circular exchange where heavy industry, refineries, and recyclers trade high-volume byproducts with AI valuation, real-time CO₂ audits, and guaranteed escrow settlement.
+            </p>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+              <Link to="/listing/new" className="w-full sm:w-auto no-underline">
+                <Button size="lg" className="w-full sm:w-auto" rightIcon={<ArrowRight className="w-4 h-4" />}>
+                  List Industrial Waste Free
+                </Button>
+              </Link>
+              <Link to="/marketplace" className="w-full sm:w-auto no-underline">
+                <Button variant="secondary" size="lg" className="w-full sm:w-auto">
+                  Explore Live Marketplace
+                </Button>
+              </Link>
+            </div>
+
+          </div>
+
+          {/* ─── Hero Key Performance Metrics Ribbon ─── */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 max-w-5xl mx-auto">
+            <div className="surface-card rounded-2xl p-6 border border-white/[0.08] text-center flex flex-col gap-1">
+              <span className="text-2xl sm:text-3xl font-extrabold text-zinc-100 tracking-tight">
+                ₹4.2 Cr+
+              </span>
+              <p className="text-xs text-zinc-400 font-medium">Waste Value Monetized</p>
+              <span className="text-[10px] text-emerald-400 font-mono mt-0.5 inline-block">+28% this quarter</span>
+            </div>
+
+            <div className="surface-card rounded-2xl p-6 border border-white/[0.08] text-center flex flex-col gap-1">
+              <span className="text-2xl sm:text-3xl font-extrabold text-zinc-100 tracking-tight">
+                2,400+ MT
+              </span>
+              <p className="text-xs text-zinc-400 font-medium">Landfill Diverted</p>
+              <span className="text-[10px] text-emerald-400 font-mono mt-0.5 inline-block">100% circular tracking</span>
+            </div>
+
+            <div className="surface-card rounded-2xl p-6 border border-white/[0.08] text-center flex flex-col gap-1">
+              <span className="text-2xl sm:text-3xl font-extrabold text-zinc-100 tracking-tight">
+                340+
+              </span>
+              <p className="text-xs text-zinc-400 font-medium">Verified Manufacturers</p>
+              <span className="text-[10px] text-cyan-400 font-mono mt-0.5 inline-block">Tata, Reliance, UltraTech</span>
+            </div>
+
+            <div className="surface-card rounded-2xl p-6 border border-white/[0.08] text-center flex flex-col gap-1">
+              <span className="text-2xl sm:text-3xl font-extrabold text-zinc-100 tracking-tight">
+                12,800 t
+              </span>
+              <p className="text-xs text-zinc-400 font-medium">CO₂ Emissions Abated</p>
+              <span className="text-[10px] text-emerald-400 font-mono mt-0.5 inline-block">ISO 14064 Verified</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Interactive Live Material Valuation Simulator ─── */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="surface-card rounded-3xl p-6 sm:p-10 border border-emerald-500/20 relative overflow-hidden shadow-2xl">
+          <div className="grid lg:grid-cols-12 gap-8 items-center relative z-10">
+            <div className="lg:col-span-6 flex flex-col gap-4">
+              <div>
+                <Badge variant="emerald" size="md" icon={<Sparkles className="w-3.5 h-3.5" />}>
+                  Instant AI Pricing Engine
+                </Badge>
               </div>
-              <div className="mt-10 flex items-center gap-8 text-sm text-earth-500">
-                <div><span className="text-2xl font-display text-forest-700">2,400+</span><br />tonnes matched</div>
-                <div className="w-px h-10 bg-sage-200" />
-                <div><span className="text-2xl font-display text-forest-700">340+</span><br />companies</div>
-                <div className="w-px h-10 bg-sage-200" />
-                <div><span className="text-2xl font-display text-forest-700">₹4.2Cr</span><br />waste value recovered</div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-zinc-100 tracking-tight">
+                Simulate your waste stream value in seconds
+              </h2>
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                Select your byproduct type and quantity to see live spot market pricing based on ongoing industrial bids across India.
+              </p>
+
+              <div className="flex flex-col gap-4 pt-2">
+                <div className="flex flex-col gap-2">
+                  <label className="text-xs font-bold text-zinc-300 uppercase tracking-wider block">
+                    Select Material Type
+                  </label>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    {Object.keys(materialRates).map(mat => (
+                      <button
+                        key={mat}
+                        onClick={() => setCalcMaterial(mat)}
+                        className={`px-3 py-2 rounded-xl text-xs font-semibold border text-left transition-all cursor-pointer ${
+                          calcMaterial === mat
+                            ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/50 shadow-md'
+                            : 'bg-zinc-900/80 text-zinc-400 border-zinc-700/60 hover:border-zinc-500'
+                        }`}
+                      >
+                        {mat}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <div className="flex justify-between items-center text-xs font-bold text-zinc-300">
+                    <span>Batch Quantity</span>
+                    <span className="font-mono text-emerald-400 font-bold">{calcQuantity} {currentRate.unit}s</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="10"
+                    max="1000"
+                    step="10"
+                    value={calcQuantity}
+                    onChange={e => setCalcQuantity(Number(e.target.value))}
+                    className="w-full h-2.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-emerald-400"
+                  />
+                  <div className="flex justify-between text-[10px] text-zinc-500 font-mono">
+                    <span>10 {currentRate.unit}s</span>
+                    <span>500 {currentRate.unit}s</span>
+                    <span>1000 {currentRate.unit}s</span>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Right side visual — abstract illustration using CSS */}
-            <div className="hidden lg:block relative">
-              <div className="w-full aspect-square max-w-md ml-auto relative">
-                {/* Circles representing circular economy */}
-                <div className="absolute inset-8 rounded-full border-2 border-dashed border-forest-300 animate-[spin_60s_linear_infinite]" />
-                <div className="absolute inset-20 rounded-full border-2 border-dashed border-earth-300 animate-[spin_40s_linear_infinite_reverse]" />
-                
-                {/* Floating cards */}
-                <div className="absolute top-8 right-4 bg-white rounded-xl shadow-lg p-4 border border-sage-200 transform rotate-3 w-56">
-                  <div className="text-xs text-earth-400 mb-1">New listing</div>
-                  <div className="font-medium text-sm text-bark">Steel Slag — 450t</div>
-                  <div className="text-xs text-forest-600 mt-1">₹8,200/tonne</div>
+            {/* Live Calculation Output Card */}
+            <div className="lg:col-span-6">
+              <div className="surface-card rounded-2xl p-6 border border-emerald-500/30 bg-zinc-950/80 flex flex-col gap-5">
+                <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                      <BarChart3 className="w-5 h-5" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-xs font-bold text-zinc-100 block">AI Market Estimate</span>
+                      <span className="text-[10px] text-emerald-400 font-mono">98.4% Valuation Confidence</span>
+                    </div>
+                  </div>
+                  <Badge variant="cyan" size="sm">
+                    Spot Rate
+                  </Badge>
                 </div>
-                <div className="absolute bottom-16 left-0 bg-white rounded-xl shadow-lg p-4 border border-sage-200 transform -rotate-2 w-52">
-                  <div className="text-xs text-earth-400 mb-1">Matched</div>
-                  <div className="font-medium text-sm text-bark">HDPE Regrind → Pipe Co.</div>
-                  <div className="text-xs text-forest-600 mt-1">12 tonnes diverted</div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] flex flex-col gap-1">
+                    <span className="text-xs text-zinc-400 font-medium block">Total Recoverable Value</span>
+                    <span className="text-2xl sm:text-3xl font-extrabold text-emerald-400 tracking-tight font-sans block">
+                      ₹{estValue}
+                    </span>
+                    <span className="text-[10px] text-zinc-400 block">₹{currentRate.rate.toLocaleString('en-IN')} / {currentRate.unit}</span>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] flex flex-col gap-1">
+                    <span className="text-xs text-zinc-400 font-medium block">Carbon Footprint Saved</span>
+                    <span className="text-2xl sm:text-3xl font-extrabold text-cyan-400 tracking-tight font-sans block">
+                      {estCo2} t
+                    </span>
+                    <span className="text-[10px] text-zinc-400 block">CO₂ equivalent emissions</span>
+                  </div>
                 </div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-forest-600 text-white rounded-2xl shadow-xl p-5 w-44 text-center">
-                  <div className="text-3xl font-display">♻️</div>
-                  <div className="text-sm font-medium mt-2">890 kg CO₂</div>
-                  <div className="text-xs text-forest-200 mt-0.5">saved this month</div>
+
+                <div className="flex flex-col gap-2.5 pt-2 border-t border-white/[0.06]">
+                  <div className="flex items-center justify-between text-xs text-zinc-400">
+                    <span className="flex items-center gap-1.5">
+                      <Truck className="w-3.5 h-3.5 text-zinc-500" /> Logistics Cost Est.
+                    </span>
+                    <span className="font-mono font-semibold text-zinc-200">₹{(calcQuantity * 350).toLocaleString('en-IN')} (Avg 120km)</span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs text-zinc-400">
+                    <span className="flex items-center gap-1.5">
+                      <FileCheck className="w-3.5 h-3.5 text-zinc-500" /> ESG Compliance Certificate
+                    </span>
+                    <span className="text-emerald-400 font-bold">Included Free</span>
+                  </div>
                 </div>
+
+                <Link to="/listing/new" className="block no-underline pt-2">
+                  <Button fullWidth size="lg" rightIcon={<ArrowRight className="w-4 h-4" />}>
+                    Publish This Batch to Marketplace
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* How it works */}
-      <section className="bg-white border-y border-sage-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="text-center mb-14">
-            <h2 className="font-display text-3xl text-forest-900 mb-3">How it works</h2>
-            <p className="text-earth-500 max-w-lg mx-auto">
-              Three steps to turn your waste streams into revenue — or find the raw materials you need at a fraction of the cost.
+      {/* ─── Bento Box Platform Architecture ─── */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-12">
+        <div className="text-center max-w-2xl mx-auto flex flex-col gap-3">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-zinc-100 tracking-tight">
+            How enterprise circular exchange works
+          </h2>
+          <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+            Eliminate intermediary brokers with smart classification, direct factory-to-factory bidding, and automated ESG verification.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="surface-card rounded-3xl p-8 border border-white/[0.08] hover:border-emerald-500/30 transition-all duration-300 flex flex-col gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+              <Sparkles className="w-6 h-6" />
+            </div>
+            <span className="font-mono text-xs text-emerald-400 font-bold uppercase tracking-wider block">
+              01. AI Material Fingerprinting
+            </span>
+            <h3 className="text-xl font-bold text-zinc-100">
+              Automated Chemical & Purity Valuation
+            </h3>
+            <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+              Upload basic specs or test sheets. Our models map ASTM / BIS standards, determine impurity thresholds, and suggest high-yield buyer verticals.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                step: '01',
-                title: 'List or Search',
-                desc: 'Sellers describe their waste — type, quantity, condition, location. Buyers browse or set alerts for specific materials. Our AI auto-classifies and estimates market value.',
-                icon: '📋',
-              },
-              {
-                step: '02',
-                title: 'Match & Bid',
-                desc: 'The platform suggests matches based on material compatibility, logistics proximity, and pricing. Buyers place bids. Sellers review and negotiate directly.',
-                icon: '🤝',
-              },
-              {
-                step: '03',
-                title: 'Close & Track',
-                desc: 'Agree on terms, arrange logistics, and complete the transaction. Track your environmental impact — CO₂ saved, landfill diverted, circular economy contribution.',
-                icon: '📊',
-              },
-            ].map(item => (
-              <div key={item.step} className="relative p-6 rounded-2xl bg-sage-50 border border-sage-100 group hover:border-forest-200 transition-colors">
-                <span className="text-5xl mb-4 block">{item.icon}</span>
-                <span className="text-xs font-medium text-forest-400 tracking-widest uppercase">Step {item.step}</span>
-                <h3 className="font-display text-xl text-forest-900 mt-1 mb-2">{item.title}</h3>
-                <p className="text-sm text-earth-500 leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
+          <div className="surface-card rounded-3xl p-8 border border-white/[0.08] hover:border-cyan-500/30 transition-all duration-300 flex flex-col gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
+              <Scale className="w-6 h-6" />
+            </div>
+            <span className="font-mono text-xs text-cyan-400 font-bold uppercase tracking-wider block">
+              02. Transparent Multi-Buyer Bidding
+            </span>
+            <h3 className="text-xl font-bold text-zinc-100">
+              Direct Negotiation & Smart Escrow
+            </h3>
+            <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+              Receive competitive tenders from verified consumers within a 300km radius. Lock funds into escrow with milestone payment releases upon weighbridge verification.
+            </p>
+          </div>
+
+          <div className="surface-card rounded-3xl p-8 border border-white/[0.08] hover:border-purple-500/30 transition-all duration-300 flex flex-col gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+              <Leaf className="w-6 h-6" />
+            </div>
+            <span className="font-mono text-xs text-purple-400 font-bold uppercase tracking-wider block">
+              03. Certified Scope-3 Audit Trails
+            </span>
+            <h3 className="text-xl font-bold text-zinc-100">
+              Real-time ESG & CO₂ Ledger
+            </h3>
+            <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+              Every completed transaction generates an immutable life-cycle audit certificate ready for BRSR, GRI, and international carbon credit accounting.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Categories preview */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
-          <div>
-            <h2 className="font-display text-3xl text-forest-900 mb-2">Waste categories</h2>
-            <p className="text-earth-500">Find or list materials across major industrial waste streams.</p>
+      {/* ─── Material Category Grid with Supply Counters ─── */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-8">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div className="flex flex-col gap-1">
+            <h2 className="text-2xl sm:text-3xl font-bold text-zinc-100 tracking-tight">
+              Active Material Exchanges
+            </h2>
+            <p className="text-xs sm:text-sm text-zinc-400">
+              Explore high-demand raw byproduct streams updated in real time.
+            </p>
           </div>
-          <Link to="/marketplace">
-            <Button variant="outline" size="sm">View all →</Button>
+          <Link to="/marketplace" className="no-underline">
+            <Button variant="outline" size="sm" rightIcon={<ArrowRight className="w-3.5 h-3.5" />}>
+              View All 450+ Listings
+            </Button>
           </Link>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-          {[
-            { name: 'Metal Scrap', icon: '🔩', count: 124 },
-            { name: 'Plastics', icon: '♳', count: 89 },
-            { name: 'Chemicals', icon: '🧪', count: 56 },
-            { name: 'Textiles', icon: '🧵', count: 43 },
-            { name: 'Fly Ash', icon: '🏭', count: 78 },
-            { name: 'E-Waste', icon: '💻', count: 65 },
-            { name: 'Wood & Paper', icon: '🪵', count: 37 },
-            { name: 'Glass', icon: '🫙', count: 22 },
-            { name: 'Rubber', icon: '🛞', count: 31 },
-            { name: 'Organics', icon: '🌿', count: 48 },
-          ].map(cat => (
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {categories.map(({ name, count, icon: Icon, volume }) => (
             <Link
-              key={cat.name}
+              key={name}
               to="/marketplace"
-              className="group flex flex-col items-center p-4 rounded-xl bg-white border border-sage-200 hover:border-forest-300 hover:shadow-sm transition-all no-underline"
+              className="surface-card rounded-2xl p-6 border border-white/[0.08] hover:border-emerald-500/40 hover:bg-zinc-900/80 transition-all duration-200 group no-underline flex flex-col gap-3"
             >
-              <span className="text-3xl mb-2 group-hover:scale-110 transition-transform">{cat.icon}</span>
-              <span className="text-sm font-medium text-bark">{cat.name}</span>
-              <span className="text-xs text-earth-400 mt-0.5">{cat.count} listings</span>
+              <div className="flex items-center justify-between">
+                <div className="w-12 h-12 rounded-xl bg-zinc-800/80 border border-white/10 flex items-center justify-center text-zinc-400 group-hover:text-emerald-400 group-hover:border-emerald-500/30 transition-all">
+                  <Icon className="w-6 h-6" />
+                </div>
+                <Badge variant="zinc" size="sm">
+                  {volume}
+                </Badge>
+              </div>
+              <div className="flex flex-col gap-0.5">
+                <h4 className="text-sm font-bold text-zinc-100 group-hover:text-emerald-400 transition-colors">
+                  {name}
+                </h4>
+                <p className="text-xs text-zinc-400 font-mono">
+                  {count} active lots
+                </p>
+              </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-forest-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-          <h2 className="font-display text-3xl md:text-4xl mb-4">
-            Ready to turn waste into worth?
-          </h2>
-          <p className="text-forest-300 max-w-lg mx-auto mb-8">
-            Join 340+ companies already trading industrial byproducts on the platform. 
-            Free to list, no commission on your first 5 deals.
-          </p>
-          <div className="flex justify-center gap-3">
-            <Link to="/signup">
-              <Button size="lg" className="!bg-white !text-forest-900 hover:!bg-forest-50">
-                Get started free
-              </Button>
-            </Link>
-            <Link to="/marketplace">
-              <Button variant="outline" size="lg" className="!border-forest-400 !text-forest-200 hover:!bg-forest-800">
-                Explore listings
-              </Button>
-            </Link>
+      {/* ─── Enterprise Call to Action ─── */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="surface-card rounded-3xl p-8 sm:p-14 border border-emerald-500/30 bg-gradient-to-b from-emerald-950/30 to-zinc-950/80 text-center flex flex-col items-center gap-6">
+          <div className="max-w-2xl mx-auto flex flex-col gap-4">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-zinc-100 tracking-tight">
+              Ready to monetize your industrial byproduct inventory?
+            </h2>
+            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+              Join 340+ certified manufacturing hubs already trading on Waste2Worth. Zero listing fees and zero transaction commission on your first 5 deals.
+            </p>
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link to="/signup" className="w-full sm:w-auto no-underline">
+                <Button size="lg" className="w-full sm:w-auto" rightIcon={<ArrowRight className="w-4 h-4" />}>
+                  Create Enterprise Account
+                </Button>
+              </Link>
+              <Link to="/marketplace" className="w-full sm:w-auto no-underline">
+                <Button variant="secondary" size="lg" className="w-full sm:w-auto">
+                  Browse Active Tenders
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

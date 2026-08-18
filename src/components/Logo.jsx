@@ -1,33 +1,69 @@
-/* Leaf-loop logo mark for Waste2Worth */
-export function Logo({ size = 'md', showText = true }) {
-  const sizes = { sm: 28, md: 36, lg: 48 }
-  const s = sizes[size] || sizes.md
+import { Link } from 'react-router-dom'
+
+export function Logo({ size = 'md', showText = true, className = '' }) {
+  const sizeMap = {
+    sm: { icon: 26, text: 'text-lg' },
+    md: { icon: 32, text: 'text-xl' },
+    lg: { icon: 40, text: 'text-2xl' },
+  }
+
+  const { icon, text } = sizeMap[size] || sizeMap.md
 
   return (
-    <a href="/" className="flex items-center gap-2 no-underline group">
-      <svg width={s} height={s} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Circular arrow loop */}
-        <path
-          d="M24 6C13.1 6 4.2 13.7 2.3 24h4.1C8.2 16 15.5 10 24 10c7.7 0 14.3 5 16.8 12h-6.3l8.5 9 8.5-9h-6.2C42.8 11.2 34.2 6 24 6z"
-          fill="var(--color-forest-500)"
-          opacity="0.7"
-        />
-        <path
-          d="M24 42c10.9 0 19.8-7.7 21.7-18h-4.1C39.8 32 32.5 38 24 38c-7.7 0-14.3-5-16.8-12h6.3L5 17l-8.5 9h6.2C5.2 36.8 13.8 42 24 42z"
-          fill="var(--color-forest-400)"
-          opacity="0.7"
-        />
-        {/* Leaf in center */}
-        <path
-          d="M24 16c-6 4-8 12-4 16 2-4 6-8 12-10-2 6-4 10-8 12 6-2 10-8 10-14-4 0-8 0-10-4z"
-          fill="var(--color-forest-600)"
-        />
-      </svg>
+    <Link
+      to="/"
+      className={`inline-flex items-center gap-2.5 no-underline group select-none ${className}`}
+    >
+      <div className="relative flex items-center justify-center">
+        {/* Ambient glow behind mark */}
+        <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/30 to-cyan-500/20 rounded-xl blur-sm opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+        
+        {/* High-tech vector mark */}
+        <svg
+          width={icon}
+          height={icon}
+          viewBox="0 0 36 36"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="relative drop-shadow-[0_2px_8px_rgba(16,185,129,0.3)] transition-transform duration-300 group-hover:scale-105"
+        >
+          <rect width="36" height="36" rx="10" fill="#0e1713" stroke="rgba(255,255,255,0.12)" strokeWidth="1" />
+          
+          {/* Circular loop arrows in emerald/cyan gradient */}
+          <path
+            d="M18 8C12.477 8 8 12.477 8 18C8 19.8 8.48 21.48 9.32 22.92L11.5 21.5C10.9 20.46 10.5 19.26 10.5 18C10.5 13.86 13.86 10.5 18 10.5C20.32 10.5 22.38 11.56 23.76 13.22L21 15H27V9L24.88 11.12C23.16 9.22 20.72 8 18 8Z"
+            fill="url(#logo-grad-1)"
+          />
+          <path
+            d="M18 28C23.523 28 28 23.523 28 18C28 16.2 27.52 14.52 26.68 13.08L24.5 14.5C25.1 15.54 25.5 16.74 25.5 18C25.5 22.14 22.14 25.5 18 25.5C15.68 25.5 13.62 24.44 12.24 22.78L15 21H9V27L11.12 24.88C12.84 26.78 15.28 28 18 28Z"
+            fill="url(#logo-grad-2)"
+          />
+          {/* Inner spark leaf */}
+          <circle cx="18" cy="18" r="2.5" fill="#34d399" />
+
+          <defs>
+            <linearGradient id="logo-grad-1" x1="8" y1="8" x2="27" y2="18" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#34d399" />
+              <stop offset="1" stopColor="#06b6d4" />
+            </linearGradient>
+            <linearGradient id="logo-grad-2" x1="28" y1="28" x2="9" y2="18" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#10b981" />
+              <stop offset="1" stopColor="#059669" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
       {showText && (
-        <span className="font-display text-forest-900 text-xl tracking-tight group-hover:text-forest-600 transition-colors">
-          Waste<span className="text-forest-500">2</span>Worth
-        </span>
+        <div className="flex flex-col">
+          <span className={`font-bold tracking-tight text-fg-primary ${text} leading-none`}>
+            Waste<span className="text-emerald-400 font-extrabold">2</span>Worth
+          </span>
+          <span className="text-[9px] uppercase tracking-widest text-fg-muted font-mono font-medium mt-0.5">
+            Circular SaaS
+          </span>
+        </div>
       )}
-    </a>
+    </Link>
   )
 }

@@ -1,116 +1,262 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Card, CardBody } from '../components/Card'
+import { Card, CardHeader, CardTitle, CardDescription, CardBody } from '../components/Card'
 import { Badge } from '../components/Badge'
 import { Button } from '../components/Button'
+import { StatCard } from '../components/StatCard'
 import { sellerStats, recentActivity, listings } from '../data'
-
-const statCards = [
-  { label: 'Active Listings', value: sellerStats.activeListings, icon: '📦', color: 'bg-forest-50 border-forest-200' },
-  { label: 'Bids Received', value: sellerStats.totalBids, icon: '💬', color: 'bg-earth-50 border-earth-200' },
-  { label: 'CO₂ Saved', value: sellerStats.co2Saved, icon: '🌱', color: 'bg-sage-50 border-sage-200' },
-  { label: 'Revenue', value: sellerStats.revenue, icon: '💰', color: 'bg-terra-100 border-terra-200' },
-]
+import {
+  PlusCircle,
+  TrendingUp,
+  Package,
+  Leaf,
+  IndianRupee,
+  FileSpreadsheet,
+  ArrowUpRight,
+  Download,
+  MessageSquare,
+  ShieldCheck,
+} from 'lucide-react'
 
 export default function SellerDashboard() {
-  const myListings = listings.slice(0, 4)
+  const [activeTab, setActiveTab] = useState('inventory')
+  const myListings = listings.slice(0, 5)
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-        <div>
-          <h1 className="font-display text-2xl text-forest-900">Seller Dashboard</h1>
-          <p className="text-sm text-earth-500 mt-1">Welcome back, Sachin. Here's your overview.</p>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col gap-8">
+      {/* ─── Top Command Bar ─── */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-zinc-100 tracking-tight">
+              Seller Command Center
+            </h1>
+            <Badge variant="emerald" size="sm" dot>
+              Live Operations
+            </Badge>
+          </div>
+          <p className="text-xs sm:text-sm text-zinc-400">
+            Manage your industrial waste streams, review incoming tender bids, and monitor ESG carbon offsets.
+          </p>
         </div>
-        <Link to="/listing/new">
-          <Button>
-            <span>+</span> New Listing
+
+        <div className="flex items-center gap-3">
+          <Button
+            size="sm"
+            variant="secondary"
+            leftIcon={<FileSpreadsheet className="w-4 h-4" />}
+          >
+            Export Ledger
           </Button>
-        </Link>
+
+          <Link to="/listing/new" className="no-underline">
+            <Button size="sm" variant="primary" leftIcon={<PlusCircle className="w-4 h-4" />}>
+              Create New Listing
+            </Button>
+          </Link>
+        </div>
       </div>
 
-      {/* Stats grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        {statCards.map(stat => (
-          <div key={stat.label} className={`rounded-xl border p-5 ${stat.color}`}>
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-2xl">{stat.icon}</span>
-              <Badge color="sage" className="text-xs">This month</Badge>
-            </div>
-            <div className="text-2xl font-display text-bark">{stat.value}</div>
-            <div className="text-xs text-earth-500 mt-0.5">{stat.label}</div>
-          </div>
-        ))}
+      {/* ─── Top KPI Cards Row ─── */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <StatCard
+          title="Active Inventory Lots"
+          value={sellerStats.activeListings}
+          trend="+2 new"
+          isPositive={true}
+          description="8 published, 2 in review"
+          icon={<Package className="w-5 h-5" />}
+          accentColor="emerald"
+        />
+
+        <StatCard
+          title="Total Bids Received"
+          value={sellerStats.totalBids}
+          trend="+18.4%"
+          isPositive={true}
+          description="Avg 5.8 bids per lot"
+          icon={<TrendingUp className="w-5 h-5" />}
+          accentColor="cyan"
+        />
+
+        <StatCard
+          title="Net Recovered Revenue"
+          value={sellerStats.revenue}
+          trend="+24.2%"
+          isPositive={true}
+          description="₹6.4L pending in escrow"
+          icon={<IndianRupee className="w-5 h-5" />}
+          accentColor="purple"
+        />
+
+        <StatCard
+          title="CO₂ Emissions Abated"
+          value={sellerStats.co2Saved}
+          trend="+3.2 MT"
+          isPositive={true}
+          description="Equal to 62 trees planted"
+          icon={<Leaf className="w-5 h-5" />}
+          accentColor="emerald"
+        />
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-6">
-        {/* Recent listings */}
-        <div className="lg:col-span-2">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="font-display text-lg text-forest-900">Your Listings</h2>
-            <Button variant="ghost" size="sm">View all →</Button>
+      {/* ─── Main Operations Split Grid ─── */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        {/* Left 2 Cols: Tabs & Inventory Management Table */}
+        <div className="lg:col-span-2 flex flex-col gap-5">
+          {/* Sub Navigation Tabs */}
+          <div className="flex items-center gap-1 border-b border-white/[0.08] pb-1">
+            {[
+              { id: 'inventory', label: 'Active Lots', count: myListings.length },
+              { id: 'bids', label: 'Incoming Tenders', count: 14 },
+              { id: 'closed', label: 'Dispatched & Settled', count: 6 },
+            ].map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`
+                  px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-150 cursor-pointer flex items-center gap-2
+                  ${
+                    activeTab === tab.id
+                      ? 'bg-white/[0.08] text-emerald-400 border border-emerald-500/30 shadow-[0_0_12px_rgba(52,211,153,0.15)]'
+                      : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/40'
+                  }
+                `}
+              >
+                <span>{tab.label}</span>
+                <span
+                  className={`text-[10px] font-mono px-1.5 py-0.2 rounded-md ${
+                    activeTab === tab.id
+                      ? 'bg-emerald-500/20 text-emerald-300'
+                      : 'bg-white/[0.06] text-zinc-400'
+                  }`}
+                >
+                  {tab.count}
+                </span>
+              </button>
+            ))}
           </div>
-          <div className="space-y-3">
+
+          {/* Table / Card List */}
+          <div className="flex flex-col gap-3">
             {myListings.map(listing => (
-              <Link key={listing.id} to={`/listing/${listing.id}`} className="no-underline">
-                <Card className="p-4">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-start gap-3">
-                      <div className="w-12 h-12 rounded-lg bg-sage-100 flex items-center justify-center text-xl flex-shrink-0">
-                        {listing.category === 'Metal Scrap' ? '🔩' :
-                         listing.category === 'Plastic Waste' ? '♳' :
-                         listing.category === 'Chemical Byproducts' ? '🧪' :
-                         listing.category === 'Textile Waste' ? '🧵' :
-                         listing.category === 'Electronic Waste' ? '💻' : '🏭'}
-                      </div>
-                      <div>
-                        <h3 className="font-medium text-sm text-bark">{listing.title}</h3>
-                        <p className="text-xs text-earth-400 mt-0.5">{listing.quantity} · {listing.price}</p>
-                        <p className="text-xs text-earth-400">{listing.location}</p>
-                      </div>
+              <div
+                key={listing.id}
+                className="surface-card rounded-2xl p-5 border border-white/[0.08] hover:border-emerald-500/30 transition-all duration-200"
+              >
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div className="flex items-start gap-3.5">
+                    <div className="w-12 h-12 rounded-xl bg-zinc-800/80 border border-white/10 flex items-center justify-center text-2xl shrink-0">
+                      {listing.category === 'Metal Scrap' ? '🔩' :
+                       listing.category === 'Plastic Waste' ? '♳' :
+                       listing.category === 'Chemical Byproducts' ? '🧪' :
+                       listing.category === 'Textile Waste' ? '🧵' :
+                       listing.category === 'Electronic Waste' ? '💻' : '🏭'}
                     </div>
-                    <div className="text-right flex-shrink-0">
-                      <Badge color={listing.bids > 5 ? 'green' : 'brown'}>{listing.bids} bids</Badge>
-                      <p className="text-xs text-earth-400 mt-1">{listing.postedAt}</p>
+
+                    <div className="flex flex-col gap-1">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <Badge variant="emerald" size="sm">
+                          {listing.category}
+                        </Badge>
+                        <span className="text-[11px] text-zinc-500 font-mono">
+                          ID: #{listing.id}0924
+                        </span>
+                      </div>
+                      <h3 className="text-sm font-bold text-zinc-100">
+                        {listing.title}
+                      </h3>
+                      <p className="text-xs text-zinc-400 font-mono">
+                        {listing.quantity} • Asking {listing.price}
+                      </p>
                     </div>
                   </div>
-                </Card>
-              </Link>
+
+                  <div className="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end border-t sm:border-t-0 border-white/[0.06] pt-3 sm:pt-0">
+                    <div className="text-left sm:text-right">
+                      <Badge variant="cyan" size="sm" icon={<MessageSquare className="w-3 h-3" />}>
+                        {listing.bids} Bids Active
+                      </Badge>
+                      <span className="text-[10px] text-zinc-400 block mt-1">
+                        High bid: ₹8,400/t
+                      </span>
+                    </div>
+
+                    <Link to={`/listing/${listing.id}`} className="no-underline">
+                      <Button size="xs" variant="secondary" rightIcon={<ArrowUpRight className="w-3 h-3" />}>
+                        Manage
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
 
-        {/* Activity feed */}
-        <div>
-          <h2 className="font-display text-lg text-forest-900 mb-4">Recent Activity</h2>
-          <Card hover={false} className="p-4">
-            <div className="space-y-4">
-              {recentActivity.map((item, i) => (
-                <div key={i} className={`${i !== 0 ? 'pt-4 border-t border-sage-100' : ''}`}>
-                  <div className="flex items-start gap-3">
-                    <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${
-                      item.action.includes('bid') ? 'bg-forest-500' :
-                      item.action.includes('approved') ? 'bg-forest-400' :
-                      item.action.includes('closed') ? 'bg-earth-500' : 'bg-earth-300'
-                    }`} />
-                    <div>
-                      <p className="text-sm font-medium text-bark">{item.action}</p>
-                      <p className="text-xs text-earth-400 mt-0.5">{item.detail}</p>
-                      <p className="text-xs text-earth-300 mt-1">{item.time}</p>
-                    </div>
+        {/* Right Col: Live Activity Stream & ESG Certificate Box */}
+        <div className="flex flex-col gap-6">
+          {/* Live Activity Feed */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-sm flex items-center justify-between">
+                <span>Real-Time Audit Stream</span>
+                <Badge variant="zinc" size="sm">Live</Badge>
+              </CardTitle>
+              <CardDescription>
+                Recent tender bids, logistics confirmations, and payments
+              </CardDescription>
+            </CardHeader>
+
+            <CardBody className="flex flex-col gap-4">
+              {recentActivity.map((act, i) => (
+                <div key={i} className="flex items-start gap-3 text-xs">
+                  <div className="w-2 h-2 rounded-full mt-1.5 shrink-0 bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                  <div className="flex flex-col gap-0.5 flex-1">
+                    <p className="font-bold text-zinc-100 leading-snug">
+                      {act.action}
+                    </p>
+                    <p className="text-zinc-300 text-[11px] leading-normal">
+                      {act.detail}
+                    </p>
+                    <span className="text-[10px] text-zinc-500 font-mono block">
+                      {act.time}
+                    </span>
                   </div>
                 </div>
               ))}
-            </div>
+            </CardBody>
           </Card>
 
-          {/* CO₂ impact card */}
-          <Card hover={false} className="mt-4 p-5 bg-gradient-to-br from-forest-700 to-forest-900 border-forest-600 text-white">
-            <div className="text-3xl mb-2">🌍</div>
-            <div className="font-display text-2xl">{sellerStats.co2Saved}</div>
-            <p className="text-sm text-forest-200 mt-1">CO₂ emissions prevented through your waste recovery this month.</p>
-            <p className="text-xs text-forest-300 mt-3">Equivalent to planting ~62 trees 🌳</p>
-          </Card>
+          {/* ESG Scope-3 Certification Card */}
+          <div className="surface-card rounded-2xl p-6 border border-emerald-500/30 bg-gradient-to-b from-emerald-950/40 to-zinc-950/80 flex flex-col gap-4">
+            <div className="flex items-center justify-between">
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                <Leaf className="w-5 h-5" />
+              </div>
+              <Badge variant="emerald" size="sm" icon={<ShieldCheck className="w-3 h-3" />}>
+                ISO 14064
+              </Badge>
+            </div>
+
+            <div className="flex flex-col gap-1">
+              <h4 className="text-sm font-bold text-zinc-100">
+                Monthly Circular Audit Certificate
+              </h4>
+              <p className="text-xs text-zinc-300 leading-relaxed">
+                Your company diverted 450 tonnes from landfill this month. Download your official ESG report for audit filing.
+              </p>
+            </div>
+
+            <Button
+              fullWidth
+              size="sm"
+              variant="outline"
+              leftIcon={<Download className="w-3.5 h-3.5" />}
+            >
+              Download PDF Certificate
+            </Button>
+          </div>
         </div>
       </div>
     </div>

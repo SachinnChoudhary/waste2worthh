@@ -1,0 +1,1001 @@
+listing_id,description,category,hazard_level,condition,quantity_kg,location,price_per_kg,market_value_usd,disposal_cost_saved_usd,co2_reduction_kg
+L0000,"regular supply of PET bottle scrap generated from our production line, available for pickup",Plastic Waste,Low,Clean / sorted,1914.9,Bengaluru,0.227,434.34,114.89,2642.6
+L0001,"steady stream of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,483.1,Mumbai,0.178,85.99,28.99,500.0
+L0002,"regular supply of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Clean / sorted,3719.8,Mumbai,0.433,1612.12,223.19,7700.0
+L0003,"regular supply of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Loose,818.9,Delhi NCR,0.108,88.45,49.13,389.0
+L0004,"one-time lot of corrugated scrap generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,1599.2,Chennai,0.102,162.95,95.95,839.6
+L0005,"surplus of plywood trimmings generated from our production line, available for pickup",Wood Waste,Low,Clean / sorted,2366.8,Pune,0.097,230.7,142.01,1905.3
+L0006,"large batch of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,598.2,Chennai,0.073,43.67,35.89,355.9
+L0007,"surplus of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Baled,783.2,Mumbai,0.223,174.3,46.99,986.8
+L0008,"one-time lot of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Contaminated,846.4,Delhi NCR,0.1,84.72,50.78,465.5
+L0009,"surplus of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Baled,804.5,Mumbai,0.23,184.95,48.27,1013.7
+L0010,"large batch of tire scrap generated from our production line, available for pickup",Rubber Waste,Medium,Contaminated,803.4,Chennai,0.117,94.27,48.2,441.9
+L0011,"large batch of fruit pulp waste generated from our production line, available for pickup",Organic Waste,Low,Contaminated,854.6,Mumbai,0.027,23.49,51.28,188.0
+L0012,"regular supply of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,2376.0,Kolkata,0.039,91.78,142.56,784.1
+L0013,"large batch of chemical sludge generated from our production line, available for pickup",Chemical Residue,High,Contaminated,6753.4,Chennai,0.246,1663.09,405.2,7800.2
+L0014,"steady stream of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Mixed / unsorted,2250.7,Chennai,0.156,350.26,135.04,1913.1
+L0015,"large batch of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,539.1,Chennai,0.037,19.96,32.35,177.9
+L0016,"surplus of spent grain generated from our production line, available for pickup",Organic Waste,Low,Clean / sorted,911.9,Ahmedabad,0.064,57.98,54.71,419.5
+L0017,"steady stream of PET bottle scrap generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,473.4,Ahmedabad,0.172,81.56,28.4,482.9
+L0018,"regular supply of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Baled,749.3,Pune,0.089,66.79,44.96,472.1
+L0019,"steady stream of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Loose,2029.4,Bengaluru,0.052,104.95,121.76,771.2
+L0020,"regular supply of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Baled,640.8,Ahmedabad,0.183,117.37,38.45,672.8
+L0021,"large batch of cardboard offcuts generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,303.5,Mumbai,0.14,42.45,18.21,159.3
+L0022,"large batch of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,486.0,Hyderabad,0.112,54.55,29.16,371.8
+L0023,"surplus of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Baled,2394.7,Kolkata,0.086,207.12,143.68,1508.7
+L0024,"surplus of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,1742.8,Mumbai,0.129,224.99,104.57,1002.1
+L0025,"regular supply of resin waste generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,3550.9,Bengaluru,0.476,1688.65,213.05,8575.4
+L0026,"regular supply of damaged PCB units generated from our production line, available for pickup",E-Waste,High,Clean / sorted,45.2,Bengaluru,0.747,33.75,2.71,129.9
+L0027,"one-time lot of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,339.3,Bengaluru,0.152,51.7,20.36,195.1
+L0028,"one-time lot of fruit pulp waste generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,1119.1,Ahmedabad,0.044,49.26,67.15,380.5
+L0029,"large batch of corrugated scrap generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,673.0,Ahmedabad,0.148,99.78,40.38,387.0
+L0030,"large batch of PET bottle scrap generated from our production line, available for pickup",Plastic Waste,Low,Contaminated,660.5,Bengaluru,0.104,69.01,39.63,435.9
+L0031,"steady stream of food processing residue generated from our production line, available for pickup",Organic Waste,Low,Loose,1921.2,Mumbai,0.053,101.83,115.27,730.1
+L0032,"steady stream of PET bottle scrap generated from our production line, available for pickup",Plastic Waste,Low,Loose,857.6,Pune,0.2,171.31,51.46,977.7
+L0033,"one-time lot of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Mixed / unsorted,3311.3,Bengaluru,0.104,343.68,198.68,1407.3
+L0034,"steady stream of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Mixed / unsorted,731.7,Chennai,0.066,48.13,43.9,373.2
+L0035,"regular supply of solvent residue generated from our production line, available for pickup",Chemical Residue,High,Baled,3128.9,Kolkata,0.408,1275.77,187.73,6899.2
+L0036,"one-time lot of food processing residue generated from our production line, available for pickup",Organic Waste,Low,Clean / sorted,1338.6,Ahmedabad,0.056,75.16,80.32,615.8
+L0037,"large batch of cardboard offcuts generated from our production line, available for pickup",Paper & Cardboard,Low,Mixed / unsorted,965.1,Chennai,0.099,95.59,57.91,410.2
+L0038,"surplus of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,1173.6,Mumbai,0.31,363.25,70.42,1795.6
+L0039,"steady stream of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Loose,577.3,Chennai,0.217,125.09,34.64,658.1
+L0040,"one-time lot of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Loose,171.3,Pune,0.047,8.12,10.28,65.1
+L0041,"regular supply of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,1441.9,Kolkata,0.488,703.56,86.51,3064.0
+L0042,"steady stream of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Clean / sorted,1144.4,Hyderabad,0.237,271.15,68.66,1579.3
+L0043,"large batch of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Baled,1716.0,Delhi NCR,0.084,144.04,102.96,1081.1
+L0044,"regular supply of brick waste generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,2896.2,Mumbai,0.047,137.01,173.77,955.7
+L0045,"steady stream of fruit pulp waste generated from our production line, available for pickup",Organic Waste,Low,Loose,664.8,Kolkata,0.054,35.95,39.89,252.6
+L0046,"large batch of cotton scrap generated from our production line, available for pickup",Textile Waste,Low,Contaminated,2035.9,Kolkata,0.101,204.75,122.15,1007.8
+L0047,"one-time lot of circuit board scrap generated from our production line, available for pickup",E-Waste,High,Loose,885.9,Mumbai,0.623,551.58,53.15,2104.0
+L0048,"steady stream of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Clean / sorted,1438.9,Chennai,0.382,550.0,86.33,2978.5
+L0049,"large batch of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Baled,1342.8,Chennai,0.607,815.04,80.57,3524.9
+L0050,"surplus of yarn waste generated from our production line, available for pickup",Textile Waste,Low,Baled,509.6,Delhi NCR,0.165,84.06,30.58,481.6
+L0051,"steady stream of damaged PCB units generated from our production line, available for pickup",E-Waste,High,Contaminated,2082.4,Hyderabad,0.325,676.13,124.94,2863.3
+L0052,"large batch of cotton scrap generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,677.0,Bengaluru,0.123,83.54,40.62,517.9
+L0053,"large batch of conveyor belt waste generated from our production line, available for pickup",Rubber Waste,Medium,Loose,997.8,Delhi NCR,0.181,180.11,59.87,947.9
+L0054,"one-time lot of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Loose,1582.3,Kolkata,0.376,594.89,94.94,2705.7
+L0055,"large batch of cotton scrap generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,1025.5,Mumbai,0.169,173.26,61.53,1061.4
+L0056,"large batch of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Clean / sorted,1620.2,Chennai,0.223,361.6,97.21,1863.2
+L0057,"large batch of vulcanized rubber scrap generated from our production line, available for pickup",Rubber Waste,Medium,Mixed / unsorted,3175.9,Delhi NCR,0.14,443.78,190.55,2699.5
+L0058,"regular supply of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Loose,1609.1,Ahmedabad,0.079,126.53,96.55,917.2
+L0059,"regular supply of resin waste generated from our production line, available for pickup",Chemical Residue,High,Mixed / unsorted,1581.0,Bengaluru,0.369,583.09,94.86,2822.1
+L0060,"large batch of sawdust generated from our production line, available for pickup",Wood Waste,Low,Baled,1659.5,Ahmedabad,0.097,161.8,99.57,1219.7
+L0061,"one-time lot of circuit board scrap generated from our production line, available for pickup",E-Waste,High,Loose,1522.2,Mumbai,0.501,762.07,91.33,3615.2
+L0062,"surplus of fruit pulp waste generated from our production line, available for pickup",Organic Waste,Low,Loose,442.6,Bengaluru,0.051,22.4,26.56,168.2
+L0063,"regular supply of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,698.3,Ahmedabad,0.151,105.29,41.9,712.3
+L0064,"one-time lot of damaged PCB units generated from our production line, available for pickup",E-Waste,High,Loose,2596.3,Bengaluru,0.594,1540.98,155.78,6166.2
+L0065,"regular supply of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Loose,623.0,Bengaluru,0.337,210.17,37.38,1065.3
+L0066,"regular supply of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Clean / sorted,609.5,Mumbai,0.106,64.37,36.57,490.6
+L0067,"regular supply of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Contaminated,2462.3,Chennai,0.054,132.18,147.74,948.0
+L0068,"large batch of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Loose,1346.8,Kolkata,0.109,146.54,80.81,895.6
+L0069,"large batch of HDPE offcuts generated from our production line, available for pickup",Plastic Waste,Low,Baled,344.4,Bengaluru,0.209,72.07,20.66,433.9
+L0070,"steady stream of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Mixed / unsorted,505.0,Bengaluru,0.356,179.98,30.3,901.4
+L0071,"large batch of cardboard offcuts generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,1209.2,Delhi NCR,0.135,163.64,72.55,634.8
+L0072,"one-time lot of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Loose,636.0,Delhi NCR,0.121,76.9,38.16,543.8
+L0073,"large batch of paper trimmings generated from our production line, available for pickup",Paper & Cardboard,Low,Mixed / unsorted,587.4,Hyderabad,0.097,56.84,35.24,249.6
+L0074,"regular supply of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Contaminated,1520.3,Delhi NCR,0.057,86.84,91.22,585.3
+L0075,"steady stream of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Clean / sorted,1586.4,Ahmedabad,0.053,83.84,95.18,729.7
+L0076,"regular supply of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Mixed / unsorted,1394.4,Chennai,0.136,188.96,83.66,1185.2
+L0077,"steady stream of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Clean / sorted,2452.6,Pune,0.102,249.7,147.16,1692.3
+L0078,"steady stream of food processing residue generated from our production line, available for pickup",Organic Waste,Low,Contaminated,356.6,Pune,0.025,8.89,21.4,78.5
+L0079,"steady stream of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Baled,1673.1,Chennai,0.377,630.68,100.39,3162.2
+L0080,"large batch of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Contaminated,1939.1,Chennai,0.305,590.96,116.35,2239.7
+L0081,"large batch of vegetable trimmings generated from our production line, available for pickup",Organic Waste,Low,Baled,3234.3,Ahmedabad,0.058,186.58,194.06,1358.4
+L0082,"surplus of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Contaminated,1033.5,Hyderabad,0.059,61.16,62.01,397.9
+L0083,"one-time lot of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Clean / sorted,1511.1,Bengaluru,0.368,556.16,90.67,3128.0
+L0084,"steady stream of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Clean / sorted,5437.2,Mumbai,0.094,508.52,326.23,4376.9
+L0085,"one-time lot of industrial coolant residue generated from our production line, available for pickup",Chemical Residue,High,Contaminated,949.4,Hyderabad,0.222,210.54,56.96,1096.6
+L0086,"large batch of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Baled,902.9,Chennai,0.233,210.26,54.17,1137.7
+L0087,"steady stream of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Clean / sorted,3681.4,Chennai,0.093,343.04,220.88,2540.2
+L0088,"surplus of HDPE offcuts generated from our production line, available for pickup",Plastic Waste,Low,Contaminated,712.3,Ahmedabad,0.112,80.05,42.74,470.1
+L0089,"steady stream of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Contaminated,5635.7,Hyderabad,0.078,440.52,338.14,1549.8
+L0090,"steady stream of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Loose,144.8,Pune,0.097,14.01,8.69,96.3
+L0091,"one-time lot of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Mixed / unsorted,924.9,Bengaluru,0.057,52.4,55.49,471.7
+L0092,"steady stream of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Contaminated,1925.8,Bengaluru,0.209,402.81,115.55,1906.5
+L0093,"steady stream of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Loose,1017.1,Ahmedabad,0.166,168.4,61.03,966.2
+L0094,"large batch of cable waste generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,4114.1,Kolkata,0.531,2183.16,246.85,8742.5
+L0095,"regular supply of sawdust generated from our production line, available for pickup",Wood Waste,Low,Loose,1762.2,Ahmedabad,0.111,195.05,105.73,1171.9
+L0096,"large batch of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,299.2,Chennai,0.081,24.2,17.95,178.0
+L0097,"large batch of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,1102.9,Kolkata,0.353,389.54,66.17,1687.4
+L0098,"steady stream of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Baled,530.5,Chennai,0.733,388.77,31.83,1392.6
+L0099,"large batch of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Mixed / unsorted,334.6,Pune,0.067,22.46,20.08,170.6
+L0100,"steady stream of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Mixed / unsorted,907.9,Pune,0.076,68.92,54.47,463.0
+L0101,"steady stream of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Loose,1343.9,Chennai,0.326,437.8,80.63,2298.1
+L0102,"one-time lot of yarn waste generated from our production line, available for pickup",Textile Waste,Low,Baled,1397.2,Ahmedabad,0.159,222.56,83.83,1320.4
+L0103,"steady stream of paper trimmings generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,2140.8,Kolkata,0.118,253.15,128.45,1123.9
+L0104,"one-time lot of used batteries generated from our production line, available for pickup",E-Waste,High,Contaminated,4918.6,Chennai,0.325,1598.5,295.12,6763.1
+L0105,"large batch of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,2037.9,Bengaluru,0.485,988.77,122.27,4330.5
+L0106,"surplus of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,1559.4,Bengaluru,0.08,124.74,93.56,927.8
+L0107,"regular supply of paper trimmings generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,2417.4,Pune,0.151,365.36,145.04,1390.0
+L0108,"steady stream of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Mixed / unsorted,3466.5,Chennai,0.074,254.88,207.99,1767.9
+L0109,"large batch of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,2095.1,Kolkata,0.046,97.27,125.71,691.4
+L0110,"large batch of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Baled,726.2,Hyderabad,0.052,38.05,43.57,305.0
+L0111,"surplus of tire scrap generated from our production line, available for pickup",Rubber Waste,Medium,Baled,1458.2,Kolkata,0.176,257.16,87.49,1531.1
+L0112,"one-time lot of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Baled,2929.4,Hyderabad,0.103,300.89,175.76,2153.1
+L0113,"surplus of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Mixed / unsorted,2820.5,Kolkata,0.147,413.93,169.23,2397.4
+L0114,"surplus of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Baled,1622.2,Delhi NCR,0.095,154.05,97.33,1022.0
+L0115,"one-time lot of brick waste generated from our production line, available for pickup",Construction Debris,Medium,Mixed / unsorted,1355.1,Kolkata,0.066,89.94,81.31,691.1
+L0116,"one-time lot of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,2424.1,Hyderabad,0.142,345.37,145.45,1393.9
+L0117,"steady stream of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Clean / sorted,1203.4,Hyderabad,0.479,577.0,72.2,2491.0
+L0118,"surplus of yarn waste generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,2763.8,Bengaluru,0.155,428.79,165.83,2860.5
+L0119,"steady stream of vegetable trimmings generated from our production line, available for pickup",Organic Waste,Low,Baled,431.4,Ahmedabad,0.057,24.39,25.88,181.2
+L0120,"steady stream of sawdust generated from our production line, available for pickup",Wood Waste,Low,Baled,2147.7,Bengaluru,0.105,225.23,128.86,1578.6
+L0121,"regular supply of scrap metal sheets generated from our production line, available for pickup",Metal Scrap,Low,Loose,604.8,Delhi NCR,0.263,159.07,36.29,1034.2
+L0122,"regular supply of PET bottle scrap generated from our production line, available for pickup",Plastic Waste,Low,Clean / sorted,4125.0,Delhi NCR,0.211,870.43,247.5,5692.5
+L0123,"regular supply of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Loose,1028.2,Pune,0.353,362.86,61.69,1758.2
+L0124,"surplus of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Clean / sorted,3284.9,Chennai,0.707,2322.1,197.09,9444.1
+L0125,"surplus of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Mixed / unsorted,875.3,Mumbai,0.359,314.24,52.52,1562.4
+L0126,"one-time lot of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Loose,2452.8,Delhi NCR,0.162,398.55,147.17,2796.2
+L0127,"one-time lot of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Baled,344.0,Chennai,0.078,26.98,20.64,216.7
+L0128,"large batch of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Clean / sorted,3289.1,Bengaluru,0.059,195.0,197.35,1513.0
+L0129,"steady stream of vulcanized rubber scrap generated from our production line, available for pickup",Rubber Waste,Medium,Clean / sorted,3511.2,Ahmedabad,0.201,704.84,210.67,4037.9
+L0130,"steady stream of solvent residue generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,1328.6,Ahmedabad,0.475,630.88,79.72,3208.6
+L0131,"steady stream of used batteries generated from our production line, available for pickup",E-Waste,High,Clean / sorted,648.5,Hyderabad,0.724,469.51,38.91,1864.4
+L0132,"surplus of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Baled,1427.2,Pune,0.168,240.3,85.63,1348.7
+L0133,"steady stream of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Loose,960.4,Kolkata,0.172,165.37,57.62,912.4
+L0134,"large batch of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Contaminated,2628.9,Ahmedabad,0.1,262.8,157.73,1445.9
+L0135,"one-time lot of plywood trimmings generated from our production line, available for pickup",Wood Waste,Low,Baled,683.7,Chennai,0.129,88.13,41.02,502.5
+L0136,"steady stream of tire scrap generated from our production line, available for pickup",Rubber Waste,Medium,Baled,1798.4,Ahmedabad,0.23,413.08,107.9,1888.3
+L0137,"surplus of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Mixed / unsorted,687.5,Kolkata,0.336,231.16,41.25,1227.2
+L0138,"surplus of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Contaminated,2617.2,Bengaluru,0.05,131.86,157.03,1007.6
+L0139,"regular supply of cardboard offcuts generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,805.1,Chennai,0.152,122.58,48.31,462.9
+L0140,"steady stream of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Baled,201.5,Chennai,0.087,17.5,12.09,126.9
+L0141,"regular supply of used batteries generated from our production line, available for pickup",E-Waste,High,Clean / sorted,4361.3,Mumbai,0.729,3181.23,261.68,12538.7
+L0142,"surplus of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Mixed / unsorted,2607.8,Bengaluru,0.059,153.92,156.47,1330.0
+L0143,"one-time lot of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Loose,4260.3,Ahmedabad,0.566,2410.5,255.62,10118.2
+L0144,"surplus of chemical sludge generated from our production line, available for pickup",Chemical Residue,High,Contaminated,1062.6,Kolkata,0.182,193.72,63.76,1227.3
+L0145,"surplus of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,3277.4,Mumbai,0.087,286.26,196.64,1950.1
+L0146,"regular supply of PET bottle scrap generated from our production line, available for pickup",Plastic Waste,Low,Loose,1642.4,Pune,0.16,262.3,98.54,1872.3
+L0147,"regular supply of circuit board scrap generated from our production line, available for pickup",E-Waste,High,Contaminated,805.2,Bengaluru,0.339,272.61,48.31,1107.2
+L0148,"surplus of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,1670.6,Ahmedabad,0.085,142.08,100.24,994.0
+L0149,"large batch of scrap metal sheets generated from our production line, available for pickup",Metal Scrap,Low,Loose,1382.4,Pune,0.322,445.26,82.94,2363.9
+L0150,"steady stream of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Loose,269.8,Bengaluru,0.336,90.79,16.19,461.4
+L0151,"steady stream of polypropylene granules generated from our production line, available for pickup",Plastic Waste,Low,Clean / sorted,1938.3,Bengaluru,0.254,493.08,116.3,2674.9
+L0152,"surplus of circuit board scrap generated from our production line, available for pickup",E-Waste,High,Contaminated,3642.9,Pune,0.341,1242.11,218.57,5009.0
+L0153,"steady stream of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Clean / sorted,700.1,Mumbai,0.698,488.62,42.01,2012.8
+L0154,"regular supply of PET bottle scrap generated from our production line, available for pickup",Plastic Waste,Low,Loose,3662.9,Delhi NCR,0.229,839.37,219.77,4175.7
+L0155,"large batch of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Contaminated,4092.0,Mumbai,0.089,363.77,245.52,2250.6
+L0156,"steady stream of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,1074.3,Chennai,0.134,144.1,64.46,564.0
+L0157,"steady stream of damaged PCB units generated from our production line, available for pickup",E-Waste,High,Baled,3305.2,Bengaluru,0.603,1991.98,198.31,8676.1
+L0158,"large batch of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Loose,1010.1,Delhi NCR,0.105,106.12,60.61,671.7
+L0159,"regular supply of food processing residue generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,216.9,Bengaluru,0.046,10.04,13.01,73.7
+L0160,"large batch of fruit pulp waste generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,1196.7,Mumbai,0.049,58.5,71.8,406.9
+L0161,"large batch of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Baled,1411.3,Kolkata,0.092,130.19,84.68,889.1
+L0162,"large batch of spent grain generated from our production line, available for pickup",Organic Waste,Low,Contaminated,1704.9,Bengaluru,0.023,38.9,102.29,375.1
+L0163,"large batch of spent grain generated from our production line, available for pickup",Organic Waste,Low,Contaminated,1276.8,Chennai,0.027,35.09,76.61,280.9
+L0164,"regular supply of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Mixed / unsorted,1794.5,Pune,0.089,159.16,107.67,762.7
+L0165,"one-time lot of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Clean / sorted,2151.5,Pune,0.205,440.35,129.09,2969.1
+L0166,"steady stream of tire scrap generated from our production line, available for pickup",Rubber Waste,Medium,Contaminated,1903.1,Kolkata,0.098,187.23,114.19,1046.7
+L0167,"one-time lot of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Baled,2583.1,Bengaluru,0.1,259.11,154.99,1898.6
+L0168,"large batch of damaged PCB units generated from our production line, available for pickup",E-Waste,High,Baled,899.9,Mumbai,0.597,536.87,53.99,2362.2
+L0169,"large batch of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,670.7,Bengaluru,0.038,25.28,40.24,221.3
+L0170,"one-time lot of vegetable trimmings generated from our production line, available for pickup",Organic Waste,Low,Loose,1145.1,Delhi NCR,0.057,65.08,68.71,435.1
+L0171,"steady stream of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,1370.1,Kolkata,0.313,428.58,82.21,2096.3
+L0172,"large batch of plywood trimmings generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,3004.6,Hyderabad,0.084,252.52,180.28,1787.7
+L0173,"surplus of used batteries generated from our production line, available for pickup",E-Waste,High,Contaminated,1117.9,Hyderabad,0.306,341.74,67.07,1537.1
+L0174,"steady stream of polypropylene granules generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,2025.9,Ahmedabad,0.165,334.93,121.55,2066.4
+L0175,"large batch of plywood trimmings generated from our production line, available for pickup",Wood Waste,Low,Baled,89.0,Delhi NCR,0.098,8.76,5.34,65.4
+L0176,"steady stream of solvent residue generated from our production line, available for pickup",Chemical Residue,High,Contaminated,109.0,Ahmedabad,0.233,25.36,6.54,125.9
+L0177,"large batch of corrugated scrap generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,1681.3,Kolkata,0.125,209.46,100.88,966.7
+L0178,"steady stream of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Loose,1417.1,Ahmedabad,0.04,56.5,85.03,538.5
+L0179,"one-time lot of used batteries generated from our production line, available for pickup",E-Waste,High,Clean / sorted,1554.7,Chennai,0.677,1052.69,93.28,4469.8
+L0180,"large batch of yarn waste generated from our production line, available for pickup",Textile Waste,Low,Contaminated,1284.6,Kolkata,0.077,99.13,77.08,635.9
+L0181,"surplus of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Loose,499.2,Chennai,0.34,169.61,29.95,853.6
+L0182,"regular supply of cardboard offcuts generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,2512.2,Hyderabad,0.138,346.41,150.73,1444.5
+L0183,"steady stream of PET bottle scrap generated from our production line, available for pickup",Plastic Waste,Low,Baled,3520.3,Mumbai,0.26,914.79,211.22,4435.6
+L0184,"steady stream of plywood trimmings generated from our production line, available for pickup",Wood Waste,Low,Loose,2679.6,Bengaluru,0.085,228.16,160.78,1781.9
+L0185,"regular supply of damaged PCB units generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,1146.3,Kolkata,0.581,666.21,68.78,2435.9
+L0186,"surplus of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Mixed / unsorted,386.6,Pune,0.058,22.61,23.2,197.2
+L0187,"surplus of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,2003.4,Bengaluru,0.042,84.11,120.2,661.1
+L0188,"steady stream of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Loose,785.7,Kolkata,0.089,70.22,47.14,522.5
+L0189,"one-time lot of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,625.3,Ahmedabad,0.094,59.07,37.52,328.3
+L0190,"regular supply of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,2172.8,Kolkata,0.123,267.23,130.37,1140.7
+L0191,"steady stream of fruit pulp waste generated from our production line, available for pickup",Organic Waste,Low,Loose,598.5,Hyderabad,0.049,29.1,35.91,227.4
+L0192,"steady stream of copper wire ends generated from our production line, available for pickup",Metal Scrap,Low,Contaminated,1636.3,Kolkata,0.202,330.77,98.18,1619.9
+L0193,"one-time lot of cotton scrap generated from our production line, available for pickup",Textile Waste,Low,Baled,557.1,Delhi NCR,0.19,105.67,33.43,526.5
+L0194,"large batch of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Contaminated,3803.1,Mumbai,0.092,351.56,228.19,2091.7
+L0195,"steady stream of paper trimmings generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,2013.7,Delhi NCR,0.13,260.82,120.82,1057.2
+L0196,"surplus of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,33.3,Kolkata,0.177,5.89,2.0,34.5
+L0197,"one-time lot of conveyor belt waste generated from our production line, available for pickup",Rubber Waste,Medium,Baled,600.5,Mumbai,0.167,100.57,36.03,630.5
+L0198,"large batch of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,1629.4,Kolkata,0.041,67.02,97.76,537.7
+L0199,"regular supply of conveyor belt waste generated from our production line, available for pickup",Rubber Waste,Medium,Clean / sorted,1382.9,Chennai,0.195,269.03,82.97,1590.3
+L0200,"steady stream of HDPE offcuts generated from our production line, available for pickup",Plastic Waste,Low,Baled,2282.7,Mumbai,0.221,504.76,136.96,2876.2
+L0201,"surplus of fabric offcuts generated from our production line, available for pickup",Textile Waste,Low,Contaminated,3445.1,Delhi NCR,0.068,233.91,206.71,1705.3
+L0202,"steady stream of scrap metal sheets generated from our production line, available for pickup",Metal Scrap,Low,Contaminated,525.9,Ahmedabad,0.2,104.99,31.55,520.6
+L0203,"regular supply of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,801.8,Hyderabad,0.134,107.22,48.11,613.4
+L0204,"steady stream of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,3721.7,Mumbai,0.132,490.54,223.3,2847.1
+L0205,"regular supply of vulcanized rubber scrap generated from our production line, available for pickup",Rubber Waste,Medium,Mixed / unsorted,951.6,Kolkata,0.148,140.96,57.1,808.9
+L0206,"surplus of spent grain generated from our production line, available for pickup",Organic Waste,Low,Baled,1030.2,Bengaluru,0.054,55.65,61.81,432.7
+L0207,"regular supply of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Baled,4830.6,Bengaluru,0.358,1727.28,289.84,9129.8
+L0208,"surplus of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Baled,2571.0,Ahmedabad,0.167,429.87,154.26,3239.5
+L0209,"regular supply of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,539.7,Kolkata,0.049,26.24,32.38,178.1
+L0210,"steady stream of brick waste generated from our production line, available for pickup",Construction Debris,Medium,Baled,638.1,Mumbai,0.087,55.35,38.29,402.0
+L0211,"large batch of conveyor belt waste generated from our production line, available for pickup",Rubber Waste,Medium,Contaminated,1119.6,Bengaluru,0.108,120.73,67.18,615.8
+L0212,"large batch of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,1434.5,Delhi NCR,0.037,53.79,86.07,473.4
+L0213,"one-time lot of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Baled,2897.8,Bengaluru,0.199,575.58,173.87,3042.7
+L0214,"surplus of industrial coolant residue generated from our production line, available for pickup",Chemical Residue,High,Mixed / unsorted,3081.0,Chennai,0.346,1066.59,184.86,5499.6
+L0215,"steady stream of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,1606.5,Delhi NCR,0.154,246.88,96.39,1662.7
+L0216,"large batch of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Loose,655.0,Ahmedabad,0.335,219.35,39.3,1120.0
+L0217,"regular supply of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Contaminated,898.4,Hyderabad,0.053,47.69,53.9,345.9
+L0218,"one-time lot of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Loose,2386.1,Ahmedabad,0.139,330.84,143.17,2040.1
+L0219,"surplus of plywood trimmings generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,556.4,Bengaluru,0.081,45.27,33.38,331.1
+L0220,"regular supply of solvent residue generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,840.1,Kolkata,0.5,420.05,50.41,2028.8
+L0221,"steady stream of food processing residue generated from our production line, available for pickup",Organic Waste,Low,Baled,3280.7,Ahmedabad,0.044,144.12,196.84,1377.9
+L0222,"surplus of copper wire ends generated from our production line, available for pickup",Metal Scrap,Low,Contaminated,1645.1,Mumbai,0.158,260.35,98.71,1628.6
+L0223,"large batch of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Loose,3552.1,Hyderabad,0.097,343.54,213.13,2362.1
+L0224,"one-time lot of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Baled,6351.2,Delhi NCR,0.053,337.09,381.07,2667.5
+L0225,"steady stream of solvent residue generated from our production line, available for pickup",Chemical Residue,High,Loose,2232.1,Chennai,0.388,866.59,133.93,4453.0
+L0226,"large batch of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Baled,1844.1,Mumbai,0.125,230.07,110.65,1355.4
+L0227,"large batch of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Contaminated,3261.5,Kolkata,0.196,639.38,195.69,3228.9
+L0228,"steady stream of spent grain generated from our production line, available for pickup",Organic Waste,Low,Loose,1439.4,Pune,0.043,61.61,86.36,547.0
+L0229,"regular supply of industrial coolant residue generated from our production line, available for pickup",Chemical Residue,High,Loose,1207.6,Hyderabad,0.476,575.39,72.46,2409.2
+L0230,"steady stream of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Clean / sorted,1951.0,Kolkata,0.091,176.66,117.06,1346.2
+L0231,"steady stream of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Clean / sorted,939.3,Ahmedabad,0.125,117.23,56.36,756.1
+L0232,"surplus of circuit board scrap generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,395.5,Ahmedabad,0.444,175.58,23.73,840.4
+L0233,"surplus of corrugated scrap generated from our production line, available for pickup",Paper & Cardboard,Low,Contaminated,305.6,Delhi NCR,0.064,19.64,18.34,84.0
+L0234,"regular supply of food processing residue generated from our production line, available for pickup",Organic Waste,Low,Clean / sorted,1095.3,Kolkata,0.056,61.26,65.72,503.8
+L0235,"regular supply of conveyor belt waste generated from our production line, available for pickup",Rubber Waste,Medium,Clean / sorted,2348.7,Delhi NCR,0.204,478.54,140.92,2701.0
+L0236,"one-time lot of fabric offcuts generated from our production line, available for pickup",Textile Waste,Low,Loose,4299.6,Chennai,0.159,681.72,257.98,3676.2
+L0237,"surplus of fruit pulp waste generated from our production line, available for pickup",Organic Waste,Low,Loose,534.5,Chennai,0.05,26.7,32.07,203.1
+L0238,"regular supply of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Loose,1074.5,Delhi NCR,0.127,136.17,64.47,918.7
+L0239,"large batch of cotton scrap generated from our production line, available for pickup",Textile Waste,Low,Loose,1334.1,Bengaluru,0.145,193.12,80.05,1140.7
+L0240,"regular supply of scrap metal sheets generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,1347.8,Delhi NCR,0.297,400.0,80.87,2062.1
+L0241,"surplus of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Contaminated,1218.2,Delhi NCR,0.101,122.47,73.09,670.0
+L0242,"large batch of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,1299.8,Hyderabad,0.281,365.68,77.99,1988.7
+L0243,"one-time lot of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Baled,3343.1,Kolkata,0.154,515.35,200.59,4212.3
+L0244,"regular supply of vulcanized rubber scrap generated from our production line, available for pickup",Rubber Waste,Medium,Clean / sorted,3078.8,Kolkata,0.164,505.17,184.73,3540.6
+L0245,"large batch of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Clean / sorted,1655.6,Bengaluru,0.202,333.98,99.34,1903.9
+L0246,"large batch of copper wire ends generated from our production line, available for pickup",Metal Scrap,Low,Baled,344.0,Hyderabad,0.339,116.59,20.64,650.2
+L0247,"surplus of circuit board scrap generated from our production line, available for pickup",E-Waste,High,Baled,993.4,Mumbai,0.626,621.49,59.6,2607.7
+L0248,"surplus of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Mixed / unsorted,2552.0,Mumbai,0.172,440.1,153.12,2169.2
+L0249,"one-time lot of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Loose,730.1,Ahmedabad,0.159,115.75,43.81,693.6
+L0250,"one-time lot of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Contaminated,861.7,Kolkata,0.069,59.66,51.7,237.0
+L0251,"regular supply of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Clean / sorted,1003.0,Mumbai,0.09,90.16,60.18,692.1
+L0252,"surplus of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Baled,2210.6,Chennai,0.088,193.94,132.64,1392.7
+L0253,"surplus of circuit board scrap generated from our production line, available for pickup",E-Waste,High,Baled,3859.0,Hyderabad,0.567,2186.33,231.54,10129.9
+L0254,"regular supply of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,2044.5,Bengaluru,0.043,87.17,122.67,674.7
+L0255,"large batch of circuit board scrap generated from our production line, available for pickup",E-Waste,High,Clean / sorted,245.5,Mumbai,0.812,199.29,14.73,705.8
+L0256,"one-time lot of brick waste generated from our production line, available for pickup",Construction Debris,Medium,Clean / sorted,863.1,Ahmedabad,0.102,87.73,51.79,595.5
+L0257,"steady stream of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Loose,3206.2,Ahmedabad,0.274,879.17,192.37,5482.6
+L0258,"one-time lot of chemical sludge generated from our production line, available for pickup",Chemical Residue,High,Baled,399.9,Delhi NCR,0.494,197.43,23.99,881.8
+L0259,"one-time lot of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Contaminated,846.0,Mumbai,0.06,51.05,50.76,325.7
+L0260,"large batch of fruit pulp waste generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,1301.6,Kolkata,0.041,53.31,78.1,442.5
+L0261,"surplus of solvent residue generated from our production line, available for pickup",Chemical Residue,High,Loose,1275.4,Ahmedabad,0.462,589.11,76.52,2544.4
+L0262,"one-time lot of vulcanized rubber scrap generated from our production line, available for pickup",Rubber Waste,Medium,Mixed / unsorted,2155.1,Hyderabad,0.156,335.36,129.31,1831.8
+L0263,"surplus of vulcanized rubber scrap generated from our production line, available for pickup",Rubber Waste,Medium,Loose,1152.2,Delhi NCR,0.149,171.64,69.13,1094.6
+L0264,"surplus of scrap metal sheets generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,1440.2,Bengaluru,0.303,436.85,86.41,2203.5
+L0265,"one-time lot of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,556.6,Pune,0.552,307.39,33.4,1344.2
+L0266,"large batch of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Clean / sorted,2220.3,Pune,0.094,209.5,133.22,1532.0
+L0267,"steady stream of corrugated scrap generated from our production line, available for pickup",Paper & Cardboard,Low,Mixed / unsorted,2627.5,Hyderabad,0.092,241.1,157.65,1116.7
+L0268,"surplus of chemical sludge generated from our production line, available for pickup",Chemical Residue,High,Mixed / unsorted,1932.9,Ahmedabad,0.277,536.21,115.97,3450.2
+L0269,"regular supply of tire scrap generated from our production line, available for pickup",Rubber Waste,Medium,Loose,400.3,Mumbai,0.165,66.07,24.02,380.3
+L0270,"surplus of fabric offcuts generated from our production line, available for pickup",Textile Waste,Low,Loose,1549.1,Delhi NCR,0.134,207.25,92.95,1324.5
+L0271,"steady stream of damaged PCB units generated from our production line, available for pickup",E-Waste,High,Baled,344.3,Kolkata,0.715,246.0,20.66,903.8
+L0272,"large batch of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,613.0,Chennai,0.04,24.41,36.78,202.3
+L0273,"one-time lot of chemical sludge generated from our production line, available for pickup",Chemical Residue,High,Baled,6318.5,Mumbai,0.424,2679.07,379.11,13932.3
+L0274,"regular supply of circuit board scrap generated from our production line, available for pickup",E-Waste,High,Loose,1526.9,Bengaluru,0.537,820.23,91.61,3626.4
+L0275,"regular supply of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Loose,1463.4,Delhi NCR,0.063,92.43,87.8,834.1
+L0276,"surplus of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,2634.7,Pune,0.085,223.17,158.08,1567.6
+L0277,"steady stream of resin waste generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,4125.8,Delhi NCR,0.388,1602.19,247.55,9963.8
+L0278,"regular supply of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,961.1,Hyderabad,0.136,130.29,57.67,735.2
+L0279,"steady stream of cardboard offcuts generated from our production line, available for pickup",Paper & Cardboard,Low,Loose,2611.1,Ahmedabad,0.094,245.19,156.67,1240.3
+L0280,"large batch of copper wire ends generated from our production line, available for pickup",Metal Scrap,Low,Baled,2898.4,Delhi NCR,0.365,1057.23,173.9,5478.0
+L0281,"steady stream of industrial coolant residue generated from our production line, available for pickup",Chemical Residue,High,Loose,2082.6,Hyderabad,0.42,875.64,124.96,4154.8
+L0282,"large batch of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,1460.7,Mumbai,0.046,67.87,87.64,482.0
+L0283,"large batch of chemical sludge generated from our production line, available for pickup",Chemical Residue,High,Mixed / unsorted,2790.0,Kolkata,0.325,905.56,167.4,4980.1
+L0284,"one-time lot of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Clean / sorted,2099.7,Chennai,0.096,201.47,125.98,1448.8
+L0285,"surplus of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Loose,1559.5,Mumbai,0.082,128.22,93.57,888.9
+L0286,"large batch of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Mixed / unsorted,1476.4,Ahmedabad,0.303,447.71,88.58,2635.4
+L0287,"surplus of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,2743.6,Chennai,0.154,421.37,164.62,1577.6
+L0288,"surplus of cotton scrap generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,1252.0,Mumbai,0.139,174.61,75.12,957.8
+L0289,"regular supply of food processing residue generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,868.2,Pune,0.037,31.71,52.09,295.2
+L0290,"one-time lot of damaged PCB units generated from our production line, available for pickup",E-Waste,High,Baled,1920.6,Kolkata,0.644,1236.86,115.24,5041.6
+L0291,"large batch of resin waste generated from our production line, available for pickup",Chemical Residue,High,Contaminated,897.5,Pune,0.214,192.3,53.85,1036.6
+L0292,"one-time lot of used batteries generated from our production line, available for pickup",E-Waste,High,Baled,1477.7,Bengaluru,0.721,1065.66,88.66,3879.0
+L0293,"steady stream of scrap metal sheets generated from our production line, available for pickup",Metal Scrap,Low,Contaminated,1546.8,Mumbai,0.209,323.6,92.81,1531.3
+L0294,"surplus of used batteries generated from our production line, available for pickup",E-Waste,High,Clean / sorted,1647.5,Delhi NCR,0.696,1146.13,98.85,4736.6
+L0295,"one-time lot of polypropylene granules generated from our production line, available for pickup",Plastic Waste,Low,Clean / sorted,2764.3,Hyderabad,0.258,713.56,165.86,3814.7
+L0296,"regular supply of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,744.7,Kolkata,0.17,126.39,44.68,428.2
+L0297,"regular supply of industrial coolant residue generated from our production line, available for pickup",Chemical Residue,High,Loose,992.6,Kolkata,0.316,313.75,59.56,1980.2
+L0298,"large batch of scrap metal sheets generated from our production line, available for pickup",Metal Scrap,Low,Baled,216.9,Mumbai,0.352,76.36,13.01,409.9
+L0299,"steady stream of paper trimmings generated from our production line, available for pickup",Paper & Cardboard,Low,Mixed / unsorted,1063.0,Delhi NCR,0.092,97.52,63.78,451.8
+L0300,"surplus of used batteries generated from our production line, available for pickup",E-Waste,High,Loose,515.8,Pune,0.568,292.99,30.95,1225.0
+L0301,"one-time lot of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Baled,1590.2,Hyderabad,0.094,149.1,95.41,1168.8
+L0302,"large batch of scrap metal sheets generated from our production line, available for pickup",Metal Scrap,Low,Contaminated,2169.9,Mumbai,0.211,458.82,130.19,2148.2
+L0303,"one-time lot of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,1124.3,Bengaluru,0.155,174.38,67.46,590.3
+L0304,"regular supply of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Contaminated,758.5,Mumbai,0.084,63.62,45.51,375.5
+L0305,"one-time lot of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Contaminated,1909.3,Hyderabad,0.185,354.1,114.56,2205.2
+L0306,"regular supply of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Contaminated,1411.2,Hyderabad,0.103,145.56,84.67,931.4
+L0307,"surplus of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,838.0,Hyderabad,0.131,109.91,50.28,481.8
+L0308,"regular supply of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Contaminated,1167.1,Bengaluru,0.22,256.58,70.03,1155.4
+L0309,"regular supply of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Baled,826.5,Chennai,0.434,359.06,49.59,1822.4
+L0310,"one-time lot of fabric offcuts generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,981.0,Bengaluru,0.176,172.66,58.86,1015.3
+L0311,"one-time lot of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Loose,300.6,Delhi NCR,0.104,31.39,18.04,142.8
+L0312,"regular supply of cotton scrap generated from our production line, available for pickup",Textile Waste,Low,Loose,1510.8,Hyderabad,0.134,202.1,90.65,1291.7
+L0313,"large batch of yarn waste generated from our production line, available for pickup",Textile Waste,Low,Loose,971.7,Pune,0.15,145.99,58.3,830.8
+L0314,"one-time lot of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,2794.8,Chennai,0.043,120.8,167.69,922.3
+L0315,"regular supply of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Baled,667.1,Chennai,0.114,76.24,40.03,490.3
+L0316,"one-time lot of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Baled,572.8,Chennai,0.1,57.03,34.37,421.0
+L0317,"one-time lot of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Baled,1578.1,Bengaluru,0.411,648.14,94.69,4142.5
+L0318,"one-time lot of paper trimmings generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,621.4,Pune,0.12,74.46,37.28,326.2
+L0319,"surplus of yarn waste generated from our production line, available for pickup",Textile Waste,Low,Contaminated,2728.6,Delhi NCR,0.069,188.21,163.72,1350.7
+L0320,"large batch of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,1870.4,Mumbai,0.146,273.36,112.22,1075.5
+L0321,"regular supply of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Contaminated,2837.5,Kolkata,0.086,243.59,170.25,1404.6
+L0322,"surplus of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Clean / sorted,2216.5,Chennai,0.102,225.67,132.99,1529.4
+L0323,"one-time lot of copper wire ends generated from our production line, available for pickup",Metal Scrap,Low,Baled,2942.3,Delhi NCR,0.344,1011.1,176.54,5560.9
+L0324,"surplus of solvent residue generated from our production line, available for pickup",Chemical Residue,High,Mixed / unsorted,1893.8,Hyderabad,0.334,633.13,113.63,3380.4
+L0325,"surplus of food processing residue generated from our production line, available for pickup",Organic Waste,Low,Clean / sorted,1490.7,Ahmedabad,0.054,79.8,89.44,685.7
+L0326,"steady stream of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,1912.6,Delhi NCR,0.128,244.56,114.76,1463.1
+L0327,"large batch of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Baled,3137.5,Kolkata,0.17,534.57,188.25,2964.9
+L0328,"regular supply of PET bottle scrap generated from our production line, available for pickup",Plastic Waste,Low,Clean / sorted,364.3,Bengaluru,0.247,90.04,21.86,502.7
+L0329,"surplus of cardboard offcuts generated from our production line, available for pickup",Paper & Cardboard,Low,Loose,3550.3,Hyderabad,0.116,413.38,213.02,1686.4
+L0330,"regular supply of food processing residue generated from our production line, available for pickup",Organic Waste,Low,Contaminated,1607.8,Mumbai,0.032,51.19,96.47,353.7
+L0331,"large batch of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Loose,3012.3,Kolkata,0.065,195.93,180.74,1717.0
+L0332,"one-time lot of damaged PCB units generated from our production line, available for pickup",E-Waste,High,Loose,923.4,Delhi NCR,0.581,536.55,55.4,2193.1
+L0333,"large batch of spent grain generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,992.5,Bengaluru,0.043,42.92,59.55,337.4
+L0334,"steady stream of vulcanized rubber scrap generated from our production line, available for pickup",Rubber Waste,Medium,Contaminated,2987.6,Chennai,0.084,250.72,179.26,1643.2
+L0335,"one-time lot of fabric offcuts generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,1749.5,Ahmedabad,0.163,285.92,104.97,1810.7
+L0336,"steady stream of corrugated scrap generated from our production line, available for pickup",Paper & Cardboard,Low,Loose,3691.8,Delhi NCR,0.113,418.1,221.51,1753.6
+L0337,"large batch of scrap metal sheets generated from our production line, available for pickup",Metal Scrap,Low,Baled,956.0,Ahmedabad,0.322,308.12,57.36,1806.8
+L0338,"large batch of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,1158.1,Ahmedabad,0.413,478.32,69.49,2796.8
+L0339,"surplus of tire scrap generated from our production line, available for pickup",Rubber Waste,Medium,Contaminated,2206.9,Pune,0.11,242.99,132.41,1213.8
+L0340,"steady stream of corrugated scrap generated from our production line, available for pickup",Paper & Cardboard,Low,Contaminated,3196.5,Pune,0.07,224.69,191.79,879.0
+L0341,"large batch of yarn waste generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,1233.5,Mumbai,0.112,137.97,74.01,943.6
+L0342,"large batch of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,3887.9,Delhi NCR,0.085,328.97,233.27,2313.3
+L0343,"steady stream of industrial coolant residue generated from our production line, available for pickup",Chemical Residue,High,Contaminated,1600.8,Hyderabad,0.204,327.14,96.05,1848.9
+L0344,"surplus of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Clean / sorted,754.8,Chennai,0.101,75.94,45.29,607.6
+L0345,"surplus of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Contaminated,3449.4,Bengaluru,0.202,697.58,206.96,3414.9
+L0346,"surplus of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Baled,1303.7,Kolkata,0.087,113.26,78.22,821.3
+L0347,"one-time lot of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Baled,1862.9,Kolkata,0.165,306.9,111.77,1760.4
+L0348,"steady stream of sawdust generated from our production line, available for pickup",Wood Waste,Low,Clean / sorted,2064.3,Hyderabad,0.117,242.06,123.86,1661.8
+L0349,"large batch of conveyor belt waste generated from our production line, available for pickup",Rubber Waste,Medium,Mixed / unsorted,2207.8,Bengaluru,0.137,302.98,132.47,1876.6
+L0350,"steady stream of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Contaminated,1282.6,Bengaluru,0.103,131.54,76.96,846.5
+L0351,"surplus of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Baled,4192.3,Pune,0.175,733.65,251.54,4401.9
+L0352,"steady stream of damaged PCB units generated from our production line, available for pickup",E-Waste,High,Clean / sorted,1318.6,Ahmedabad,0.748,986.32,79.12,3791.0
+L0353,"surplus of plywood trimmings generated from our production line, available for pickup",Wood Waste,Low,Clean / sorted,766.5,Mumbai,0.112,85.71,45.99,617.0
+L0354,"one-time lot of paper trimmings generated from our production line, available for pickup",Paper & Cardboard,Low,Mixed / unsorted,1307.3,Delhi NCR,0.097,127.31,78.44,555.6
+L0355,"regular supply of circuit board scrap generated from our production line, available for pickup",E-Waste,High,Clean / sorted,69.8,Pune,0.761,53.09,4.19,200.7
+L0356,"large batch of industrial coolant residue generated from our production line, available for pickup",Chemical Residue,High,Contaminated,492.8,Hyderabad,0.199,97.93,29.57,569.2
+L0357,"surplus of conveyor belt waste generated from our production line, available for pickup",Rubber Waste,Medium,Mixed / unsorted,1284.7,Kolkata,0.19,243.77,77.08,1092.0
+L0358,"surplus of damaged PCB units generated from our production line, available for pickup",E-Waste,High,Clean / sorted,1310.1,Pune,0.675,883.99,78.61,3766.5
+L0359,"large batch of brick waste generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,1361.3,Bengaluru,0.04,54.65,81.68,449.2
+L0360,"steady stream of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,1372.6,Kolkata,0.268,367.45,82.36,2100.1
+L0361,"steady stream of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,1063.6,Bengaluru,0.152,161.29,63.82,611.6
+L0362,"regular supply of spent grain generated from our production line, available for pickup",Organic Waste,Low,Loose,2086.2,Bengaluru,0.054,112.96,125.17,792.8
+L0363,"regular supply of polypropylene granules generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,2534.4,Mumbai,0.201,508.92,152.06,2585.1
+L0364,"large batch of used batteries generated from our production line, available for pickup",E-Waste,High,Clean / sorted,1738.2,Ahmedabad,0.752,1306.72,104.29,4997.3
+L0365,"regular supply of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Loose,2102.8,Bengaluru,0.115,242.46,126.17,998.8
+L0366,"regular supply of fabric offcuts generated from our production line, available for pickup",Textile Waste,Low,Contaminated,2575.1,Chennai,0.1,256.53,154.51,1274.7
+L0367,"surplus of fabric offcuts generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,740.7,Kolkata,0.123,90.95,44.44,566.6
+L0368,"one-time lot of corrugated scrap generated from our production line, available for pickup",Paper & Cardboard,Low,Loose,1555.9,Ahmedabad,0.107,165.82,93.35,739.1
+L0369,"surplus of fabric offcuts generated from our production line, available for pickup",Textile Waste,Low,Loose,893.4,Mumbai,0.128,114.18,53.6,763.9
+L0370,"one-time lot of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Baled,858.0,Hyderabad,0.084,71.9,51.48,540.5
+L0371,"steady stream of HDPE offcuts generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,4995.3,Ahmedabad,0.154,769.95,299.72,5095.2
+L0372,"one-time lot of cable waste generated from our production line, available for pickup",E-Waste,High,Loose,2272.5,Ahmedabad,0.572,1300.25,136.35,5397.2
+L0373,"one-time lot of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Mixed / unsorted,1461.2,Pune,0.145,212.33,87.67,1242.0
+L0374,"regular supply of scrap metal sheets generated from our production line, available for pickup",Metal Scrap,Low,Clean / sorted,1564.0,Pune,0.392,613.31,93.84,3237.5
+L0375,"one-time lot of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Contaminated,245.9,Chennai,0.09,22.18,14.75,121.7
+L0376,"one-time lot of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Clean / sorted,2453.7,Bengaluru,0.101,247.59,147.22,1975.2
+L0377,"one-time lot of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,283.3,Bengaluru,0.102,28.9,17.0,168.6
+L0378,"one-time lot of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Loose,2786.5,Pune,0.189,527.4,167.19,3176.6
+L0379,"large batch of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,258.0,Ahmedabad,0.12,31.01,15.48,197.4
+L0380,"surplus of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Clean / sorted,3513.6,Delhi NCR,0.458,1609.4,210.82,7273.2
+L0381,"large batch of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Loose,1792.6,Hyderabad,0.044,79.31,107.56,681.2
+L0382,"steady stream of used batteries generated from our production line, available for pickup",E-Waste,High,Loose,841.9,Bengaluru,0.532,447.65,50.51,1999.5
+L0383,"large batch of spent grain generated from our production line, available for pickup",Organic Waste,Low,Baled,1696.5,Bengaluru,0.051,86.47,101.79,712.5
+L0384,"steady stream of copper wire ends generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,1977.2,Kolkata,0.286,566.42,118.63,3025.1
+L0385,"regular supply of damaged PCB units generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,101.0,Ahmedabad,0.522,52.72,6.06,214.6
+L0386,"regular supply of resin waste generated from our production line, available for pickup",Chemical Residue,High,Contaminated,992.9,Ahmedabad,0.195,193.98,59.57,1146.8
+L0387,"regular supply of chemical sludge generated from our production line, available for pickup",Chemical Residue,High,Loose,2353.0,Mumbai,0.333,782.75,141.18,4694.2
+L0388,"regular supply of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Clean / sorted,906.3,Bengaluru,0.714,647.02,54.38,2605.6
+L0389,"steady stream of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,285.5,Delhi NCR,0.168,47.91,17.13,295.5
+L0390,"surplus of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Baled,1414.3,Chennai,0.165,233.01,84.86,1485.0
+L0391,"steady stream of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Contaminated,1083.1,Chennai,0.111,120.46,64.99,595.7
+L0392,"steady stream of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,3561.5,Kolkata,0.137,486.9,213.69,1869.8
+L0393,"steady stream of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Clean / sorted,2413.5,Hyderabad,0.452,1090.19,144.81,4995.9
+L0394,"large batch of food processing residue generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,1768.0,Ahmedabad,0.044,78.37,106.08,601.1
+L0395,"one-time lot of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Baled,1044.0,Kolkata,0.109,113.78,62.64,767.3
+L0396,"surplus of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Clean / sorted,1260.7,Hyderabad,0.401,505.54,75.64,2609.6
+L0397,"steady stream of solvent residue generated from our production line, available for pickup",Chemical Residue,High,Baled,1202.6,Ahmedabad,0.377,452.82,72.16,2651.7
+L0398,"one-time lot of scrap metal sheets generated from our production line, available for pickup",Metal Scrap,Low,Loose,1416.2,Chennai,0.266,376.79,84.97,2421.7
+L0399,"steady stream of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Clean / sorted,1482.5,Hyderabad,0.12,178.2,88.95,1193.4
+L0400,"large batch of paper trimmings generated from our production line, available for pickup",Paper & Cardboard,Low,Contaminated,2652.5,Mumbai,0.047,124.36,159.15,729.4
+L0401,"surplus of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,620.8,Ahmedabad,0.046,28.42,37.25,204.9
+L0402,"large batch of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,2836.6,Hyderabad,0.114,324.06,170.2,2170.0
+L0403,"steady stream of scrap metal sheets generated from our production line, available for pickup",Metal Scrap,Low,Clean / sorted,1639.9,Pune,0.376,617.11,98.39,3394.6
+L0404,"one-time lot of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,1145.9,Pune,0.129,147.52,68.75,601.6
+L0405,"steady stream of cotton scrap generated from our production line, available for pickup",Textile Waste,Low,Contaminated,1301.7,Ahmedabad,0.099,128.9,78.1,644.3
+L0406,"one-time lot of vulcanized rubber scrap generated from our production line, available for pickup",Rubber Waste,Medium,Contaminated,1552.0,Ahmedabad,0.109,169.79,93.12,853.6
+L0407,"large batch of corrugated scrap generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,1548.0,Bengaluru,0.132,203.81,92.88,812.7
+L0408,"one-time lot of resin waste generated from our production line, available for pickup",Chemical Residue,High,Contaminated,2107.8,Mumbai,0.195,410.71,126.47,2434.5
+L0409,"one-time lot of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Clean / sorted,684.6,Kolkata,0.118,81.06,41.08,551.1
+L0410,"steady stream of vulcanized rubber scrap generated from our production line, available for pickup",Rubber Waste,Medium,Mixed / unsorted,1268.2,Delhi NCR,0.158,200.41,76.09,1078.0
+L0411,"regular supply of cotton scrap generated from our production line, available for pickup",Textile Waste,Low,Loose,1716.9,Hyderabad,0.163,279.77,103.01,1467.9
+L0412,"large batch of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Loose,1096.7,Mumbai,0.365,399.81,65.8,1875.4
+L0413,"steady stream of cable waste generated from our production line, available for pickup",E-Waste,High,Contaminated,2733.2,Hyderabad,0.349,953.36,163.99,3758.2
+L0414,"regular supply of food processing residue generated from our production line, available for pickup",Organic Waste,Low,Baled,1049.0,Kolkata,0.06,62.65,62.94,440.6
+L0415,"one-time lot of corrugated scrap generated from our production line, available for pickup",Paper & Cardboard,Low,Mixed / unsorted,1461.7,Ahmedabad,0.092,133.76,87.7,621.2
+L0416,"one-time lot of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,491.4,Pune,0.038,18.51,29.48,162.2
+L0417,"one-time lot of chemical sludge generated from our production line, available for pickup",Chemical Residue,High,Loose,612.2,Ahmedabad,0.439,268.75,36.73,1221.3
+L0418,"one-time lot of used batteries generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,776.3,Chennai,0.443,343.53,46.58,1649.6
+L0419,"regular supply of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,1516.4,Bengaluru,0.079,119.87,90.98,902.3
+L0420,"one-time lot of used batteries generated from our production line, available for pickup",E-Waste,High,Contaminated,741.4,Kolkata,0.404,299.77,44.48,1019.4
+L0421,"one-time lot of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Contaminated,1395.4,Mumbai,0.061,85.39,83.72,537.2
+L0422,"surplus of brick waste generated from our production line, available for pickup",Construction Debris,Medium,Baled,351.5,Ahmedabad,0.07,24.67,21.09,221.4
+L0423,"steady stream of scrap metal sheets generated from our production line, available for pickup",Metal Scrap,Low,Contaminated,5474.1,Mumbai,0.206,1130.18,328.45,5419.4
+L0424,"one-time lot of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Baled,2046.8,Chennai,0.114,233.26,122.81,1504.4
+L0425,"large batch of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Loose,1089.0,Bengaluru,0.099,107.51,65.34,724.2
+L0426,"large batch of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Loose,696.4,Chennai,0.166,115.74,41.78,661.6
+L0427,"large batch of cardboard offcuts generated from our production line, available for pickup",Paper & Cardboard,Low,Mixed / unsorted,621.2,Chennai,0.092,57.13,37.27,264.0
+L0428,"regular supply of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,1527.9,Kolkata,0.05,76.59,91.67,504.2
+L0429,"steady stream of copper wire ends generated from our production line, available for pickup",Metal Scrap,Low,Loose,3588.9,Pune,0.358,1285.56,215.33,6137.0
+L0430,"surplus of used batteries generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,554.3,Bengaluru,0.499,276.34,33.26,1177.9
+L0431,"large batch of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Clean / sorted,561.9,Chennai,0.425,238.63,33.71,1163.1
+L0432,"steady stream of fabric offcuts generated from our production line, available for pickup",Textile Waste,Low,Baled,803.7,Pune,0.163,130.63,48.22,759.5
+L0433,"large batch of circuit board scrap generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,3359.9,Bengaluru,0.506,1700.67,201.59,7139.8
+L0434,"surplus of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Loose,1466.9,Mumbai,0.091,133.37,88.01,975.5
+L0435,"one-time lot of cable waste generated from our production line, available for pickup",E-Waste,High,Loose,3007.3,Kolkata,0.592,1779.98,180.44,7142.3
+L0436,"surplus of circuit board scrap generated from our production line, available for pickup",E-Waste,High,Contaminated,731.8,Chennai,0.308,225.49,43.91,1006.2
+L0437,"large batch of cotton scrap generated from our production line, available for pickup",Textile Waste,Low,Baled,2907.6,Bengaluru,0.153,444.17,174.46,2747.7
+L0438,"one-time lot of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Contaminated,417.1,Chennai,0.205,85.4,25.03,481.8
+L0439,"steady stream of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Baled,2346.4,Ahmedabad,0.079,186.05,140.78,1478.2
+L0440,"surplus of polypropylene granules generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,751.7,Pune,0.175,131.35,45.1,766.7
+L0441,"regular supply of spent grain generated from our production line, available for pickup",Organic Waste,Low,Clean / sorted,5198.4,Bengaluru,0.05,261.91,311.9,2391.3
+L0442,"one-time lot of used batteries generated from our production line, available for pickup",E-Waste,High,Contaminated,2100.9,Ahmedabad,0.344,721.99,126.05,2888.7
+L0443,"regular supply of conveyor belt waste generated from our production line, available for pickup",Rubber Waste,Medium,Clean / sorted,3040.1,Bengaluru,0.241,731.46,182.41,3496.1
+L0444,"regular supply of scrap metal sheets generated from our production line, available for pickup",Metal Scrap,Low,Clean / sorted,836.5,Kolkata,0.347,290.57,50.19,1731.6
+L0445,"surplus of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Loose,1685.1,Bengaluru,0.076,128.04,101.11,960.5
+L0446,"regular supply of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Loose,663.6,Chennai,0.442,293.5,39.82,1323.9
+L0447,"surplus of damaged PCB units generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,2617.3,Kolkata,0.566,1482.19,157.04,5561.8
+L0448,"regular supply of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Loose,2011.5,Kolkata,0.088,177.77,120.69,1146.6
+L0449,"steady stream of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Loose,489.0,Mumbai,0.044,21.58,29.34,185.8
+L0450,"large batch of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Contaminated,1368.8,Mumbai,0.061,83.38,82.13,376.4
+L0451,"one-time lot of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Loose,788.7,Chennai,0.356,280.64,47.32,1348.7
+L0452,"steady stream of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,1705.1,Ahmedabad,0.138,235.52,102.31,1304.4
+L0453,"one-time lot of HDPE offcuts generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,451.9,Kolkata,0.149,67.35,27.11,460.9
+L0454,"one-time lot of cable waste generated from our production line, available for pickup",E-Waste,High,Clean / sorted,3914.1,Kolkata,0.719,2813.89,234.85,11253.0
+L0455,"steady stream of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Baled,1435.4,Delhi NCR,0.078,112.36,86.12,904.3
+L0456,"large batch of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Clean / sorted,1970.7,Hyderabad,0.104,205.77,118.24,1586.4
+L0457,"steady stream of food processing residue generated from our production line, available for pickup",Organic Waste,Low,Loose,594.0,Mumbai,0.048,28.44,35.64,225.7
+L0458,"steady stream of solvent residue generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,708.8,Delhi NCR,0.517,366.35,42.53,1711.8
+L0459,"regular supply of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Contaminated,854.4,Hyderabad,0.165,141.33,51.26,845.9
+L0460,"steady stream of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,3019.6,Hyderabad,0.045,134.75,181.18,996.5
+L0461,"large batch of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Clean / sorted,699.6,Pune,0.094,65.81,41.98,482.7
+L0462,"regular supply of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Loose,1476.1,Hyderabad,0.14,207.14,88.57,1262.1
+L0463,"steady stream of vegetable trimmings generated from our production line, available for pickup",Organic Waste,Low,Clean / sorted,505.1,Delhi NCR,0.052,26.46,30.31,232.3
+L0464,"regular supply of paper trimmings generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,193.9,Hyderabad,0.132,25.67,11.63,101.8
+L0465,"regular supply of used batteries generated from our production line, available for pickup",E-Waste,High,Contaminated,5029.0,Pune,0.293,1471.8,301.74,6914.9
+L0466,"large batch of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Clean / sorted,1327.1,Hyderabad,0.249,330.83,79.63,1831.4
+L0467,"one-time lot of food processing residue generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,974.1,Mumbai,0.044,43.32,58.45,331.2
+L0468,"large batch of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Baled,1419.6,Delhi NCR,0.364,516.54,85.18,2683.0
+L0469,"regular supply of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Baled,2010.8,Chennai,0.089,179.03,120.65,1266.8
+L0470,"one-time lot of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,1160.7,Bengaluru,0.275,319.21,69.64,1775.9
+L0471,"surplus of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Loose,523.7,Ahmedabad,0.43,225.14,31.42,1044.8
+L0472,"surplus of yarn waste generated from our production line, available for pickup",Textile Waste,Low,Loose,2798.7,Chennai,0.149,417.75,167.92,2392.9
+L0473,"one-time lot of plywood trimmings generated from our production line, available for pickup",Wood Waste,Low,Clean / sorted,5842.9,Pune,0.112,651.77,350.57,4703.5
+L0474,"one-time lot of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Clean / sorted,1344.1,Ahmedabad,0.599,805.77,80.65,3864.3
+L0475,"surplus of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Baled,985.1,Hyderabad,0.378,372.69,59.11,2172.1
+L0476,"regular supply of brick waste generated from our production line, available for pickup",Construction Debris,Medium,Mixed / unsorted,1392.7,Kolkata,0.072,99.72,83.56,710.3
+L0477,"one-time lot of sawdust generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,203.7,Kolkata,0.08,16.2,12.22,121.2
+L0478,"regular supply of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Baled,579.5,Pune,0.083,47.98,34.77,365.1
+L0479,"steady stream of sawdust generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,1972.6,Ahmedabad,0.074,146.17,118.36,1173.7
+L0480,"surplus of solvent residue generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,1124.8,Chennai,0.529,594.54,67.49,2716.4
+L0481,"regular supply of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Loose,831.8,Delhi NCR,0.073,60.62,49.91,474.1
+L0482,"regular supply of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Loose,794.9,Chennai,0.166,131.82,47.69,755.2
+L0483,"regular supply of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Contaminated,1349.6,Delhi NCR,0.204,275.28,80.98,1558.8
+L0484,"regular supply of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Baled,1837.4,Chennai,0.235,431.8,110.24,2315.1
+L0485,"steady stream of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Mixed / unsorted,1918.6,Ahmedabad,0.084,160.32,115.12,978.5
+L0486,"surplus of used batteries generated from our production line, available for pickup",E-Waste,High,Loose,361.2,Ahmedabad,0.557,201.26,21.67,857.8
+L0487,"large batch of resin waste generated from our production line, available for pickup",Chemical Residue,High,Loose,3010.2,Kolkata,0.368,1107.66,180.61,6005.3
+L0488,"surplus of used batteries generated from our production line, available for pickup",E-Waste,High,Contaminated,822.1,Chennai,0.244,201.0,49.33,1130.4
+L0489,"large batch of brick waste generated from our production line, available for pickup",Construction Debris,Medium,Clean / sorted,2438.1,Chennai,0.085,206.44,146.29,1682.3
+L0490,"regular supply of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Loose,314.9,Hyderabad,0.097,30.46,18.89,209.4
+L0491,"one-time lot of spent grain generated from our production line, available for pickup",Organic Waste,Low,Contaminated,547.6,Chennai,0.027,15.01,32.86,120.5
+L0492,"steady stream of vegetable trimmings generated from our production line, available for pickup",Organic Waste,Low,Baled,2990.3,Ahmedabad,0.052,154.5,179.42,1255.9
+L0493,"regular supply of used batteries generated from our production line, available for pickup",E-Waste,High,Baled,441.7,Pune,0.627,277.16,26.5,1159.5
+L0494,"one-time lot of cotton scrap generated from our production line, available for pickup",Textile Waste,Low,Loose,1162.6,Kolkata,0.167,194.03,69.76,994.0
+L0495,"large batch of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Loose,618.5,Delhi NCR,0.257,158.84,37.11,1057.6
+L0496,"large batch of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Baled,754.8,Pune,0.406,306.23,45.29,1426.6
+L0497,"steady stream of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,269.8,Chennai,0.165,44.65,16.19,279.2
+L0498,"large batch of resin waste generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,5032.9,Kolkata,0.432,2174.9,301.97,12154.5
+L0499,"large batch of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Loose,1639.8,Hyderabad,0.359,588.82,98.39,2804.1
+L0500,"one-time lot of cardboard offcuts generated from our production line, available for pickup",Paper & Cardboard,Low,Contaminated,1366.7,Bengaluru,0.061,83.41,82.0,375.8
+L0501,"one-time lot of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Mixed / unsorted,1427.0,Mumbai,0.08,113.75,85.62,727.8
+L0502,"one-time lot of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,990.5,Chennai,0.13,128.62,59.43,757.7
+L0503,"large batch of plywood trimmings generated from our production line, available for pickup",Wood Waste,Low,Contaminated,664.4,Bengaluru,0.062,41.29,39.86,255.8
+L0504,"regular supply of industrial coolant residue generated from our production line, available for pickup",Chemical Residue,High,Baled,2997.1,Kolkata,0.392,1176.09,179.83,6608.6
+L0505,"large batch of food processing residue generated from our production line, available for pickup",Organic Waste,Low,Contaminated,919.3,Mumbai,0.026,24.18,55.16,202.2
+L0506,"steady stream of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Baled,2971.1,Hyderabad,0.09,267.52,178.27,1871.8
+L0507,"steady stream of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Clean / sorted,2063.8,Pune,0.455,939.59,123.83,4272.1
+L0508,"large batch of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,1027.1,Mumbai,0.043,44.06,61.63,338.9
+L0509,"large batch of vegetable trimmings generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,2111.9,Kolkata,0.048,100.75,126.71,718.0
+L0510,"surplus of PET bottle scrap generated from our production line, available for pickup",Plastic Waste,Low,Contaminated,773.0,Delhi NCR,0.12,92.92,46.38,510.2
+L0511,"large batch of copper wire ends generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,3472.5,Pune,0.351,1218.95,208.35,5312.9
+L0512,"steady stream of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,1970.1,Chennai,0.094,185.42,118.21,1172.2
+L0513,"large batch of paper trimmings generated from our production line, available for pickup",Paper & Cardboard,Low,Contaminated,1995.1,Hyderabad,0.065,128.91,119.71,548.7
+L0514,"steady stream of cardboard offcuts generated from our production line, available for pickup",Paper & Cardboard,Low,Contaminated,519.2,Delhi NCR,0.053,27.53,31.15,142.8
+L0515,"one-time lot of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Clean / sorted,2025.8,Ahmedabad,0.058,118.2,121.55,931.9
+L0516,"surplus of tire scrap generated from our production line, available for pickup",Rubber Waste,Medium,Baled,1117.6,Ahmedabad,0.184,205.38,67.06,1173.5
+L0517,"one-time lot of used batteries generated from our production line, available for pickup",E-Waste,High,Baled,372.7,Chennai,0.688,256.24,22.36,978.3
+L0518,"steady stream of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Baled,1168.1,Pune,0.086,100.89,70.09,735.9
+L0519,"large batch of PET bottle scrap generated from our production line, available for pickup",Plastic Waste,Low,Loose,3020.7,Bengaluru,0.187,565.9,181.24,3443.6
+L0520,"regular supply of polypropylene granules generated from our production line, available for pickup",Plastic Waste,Low,Contaminated,2141.8,Pune,0.123,263.24,128.51,1413.6
+L0521,"large batch of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,1699.5,Ahmedabad,0.044,75.0,101.97,560.8
+L0522,"surplus of scrap metal sheets generated from our production line, available for pickup",Metal Scrap,Low,Contaminated,1790.2,Kolkata,0.18,322.17,107.41,1772.3
+L0523,"steady stream of PET bottle scrap generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,1365.1,Mumbai,0.145,197.44,81.91,1392.4
+L0524,"large batch of circuit board scrap generated from our production line, available for pickup",E-Waste,High,Loose,1678.4,Hyderabad,0.667,1119.54,100.7,3986.2
+L0525,"one-time lot of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Contaminated,176.5,Mumbai,0.111,19.57,10.59,116.5
+L0526,"steady stream of chemical sludge generated from our production line, available for pickup",Chemical Residue,High,Baled,2272.5,Delhi NCR,0.436,990.83,136.35,5010.9
+L0527,"one-time lot of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Clean / sorted,788.3,Chennai,0.096,75.99,47.3,543.9
+L0528,"surplus of cotton scrap generated from our production line, available for pickup",Textile Waste,Low,Baled,1128.9,Pune,0.144,162.68,67.73,1066.8
+L0529,"large batch of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Contaminated,1621.1,Kolkata,0.047,76.67,97.27,624.1
+L0530,"surplus of yarn waste generated from our production line, available for pickup",Textile Waste,Low,Baled,440.3,Bengaluru,0.165,72.43,26.42,416.1
+L0531,"regular supply of used batteries generated from our production line, available for pickup",E-Waste,High,Clean / sorted,1641.5,Ahmedabad,0.79,1297.41,98.49,4719.3
+L0532,"large batch of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Loose,675.9,Chennai,0.607,410.24,40.55,1605.3
+L0533,"surplus of yarn waste generated from our production line, available for pickup",Textile Waste,Low,Contaminated,326.5,Delhi NCR,0.073,23.96,19.59,161.6
+L0534,"surplus of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Baled,2227.2,Ahmedabad,0.182,405.25,133.63,2338.6
+L0535,"surplus of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Loose,654.9,Pune,0.06,39.35,39.29,373.3
+L0536,"regular supply of conveyor belt waste generated from our production line, available for pickup",Rubber Waste,Medium,Mixed / unsorted,1579.1,Kolkata,0.167,264.13,94.75,1342.2
+L0537,"one-time lot of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,3932.2,Bengaluru,0.041,160.02,235.93,1297.6
+L0538,"steady stream of vegetable trimmings generated from our production line, available for pickup",Organic Waste,Low,Contaminated,296.8,Hyderabad,0.031,9.19,17.81,65.3
+L0539,"one-time lot of industrial coolant residue generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,1529.3,Chennai,0.422,644.68,91.76,3693.3
+L0540,"regular supply of yarn waste generated from our production line, available for pickup",Textile Waste,Low,Loose,831.4,Delhi NCR,0.145,120.66,49.88,710.8
+L0541,"steady stream of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Contaminated,4327.6,Mumbai,0.392,1697.54,259.66,5950.5
+L0542,"regular supply of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Contaminated,2695.3,Chennai,0.087,235.54,161.72,1334.2
+L0543,"one-time lot of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Baled,1326.1,Mumbai,0.095,126.01,79.57,835.4
+L0544,"one-time lot of damaged PCB units generated from our production line, available for pickup",E-Waste,High,Loose,1165.2,Hyderabad,0.544,634.06,69.91,2767.3
+L0545,"one-time lot of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Loose,2571.4,Delhi NCR,0.081,208.76,154.28,1465.7
+L0546,"surplus of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Clean / sorted,467.6,Mumbai,0.203,94.92,28.06,537.7
+L0547,"steady stream of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Loose,638.3,Delhi NCR,0.141,89.73,38.3,545.7
+L0548,"large batch of solvent residue generated from our production line, available for pickup",Chemical Residue,High,Baled,2096.7,Mumbai,0.377,790.42,125.8,4623.2
+L0549,"surplus of plywood trimmings generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,4311.2,Chennai,0.082,353.64,258.67,2565.2
+L0550,"large batch of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Baled,1622.2,Pune,0.081,131.19,97.33,1022.0
+L0551,"large batch of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Clean / sorted,2803.5,Bengaluru,0.604,1691.97,168.21,8060.1
+L0552,"surplus of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,1726.8,Ahmedabad,0.172,297.69,103.61,1761.3
+L0553,"steady stream of used batteries generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,213.9,Kolkata,0.563,120.36,12.83,454.5
+L0554,"large batch of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Baled,1142.0,Kolkata,0.221,252.14,68.52,1438.9
+L0555,"surplus of sawdust generated from our production line, available for pickup",Wood Waste,Low,Clean / sorted,855.4,Mumbai,0.102,87.44,51.32,688.6
+L0556,"regular supply of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,1280.7,Chennai,0.17,217.12,76.84,1306.3
+L0557,"steady stream of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Mixed / unsorted,4129.0,Ahmedabad,0.111,459.07,247.74,1754.8
+L0558,"regular supply of cable waste generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,2309.2,Hyderabad,0.459,1060.11,138.55,4907.1
+L0559,"regular supply of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Baled,1669.9,Delhi NCR,0.087,145.23,100.19,1052.0
+L0560,"large batch of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Loose,1462.8,Hyderabad,0.564,825.45,87.77,3474.1
+L0561,"one-time lot of food processing residue generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,1133.8,Bengaluru,0.044,49.9,68.03,385.5
+L0562,"surplus of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Loose,1117.8,Pune,0.207,231.78,67.07,1274.3
+L0563,"steady stream of vegetable trimmings generated from our production line, available for pickup",Organic Waste,Low,Baled,663.9,Mumbai,0.05,33.02,39.83,278.8
+L0564,"steady stream of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Contaminated,1318.9,Hyderabad,0.05,65.95,79.13,362.7
+L0565,"steady stream of conveyor belt waste generated from our production line, available for pickup",Rubber Waste,Medium,Clean / sorted,2470.6,Ahmedabad,0.212,524.05,148.24,2841.2
+L0566,"one-time lot of vulcanized rubber scrap generated from our production line, available for pickup",Rubber Waste,Medium,Mixed / unsorted,1425.6,Bengaluru,0.129,184.04,85.54,1211.8
+L0567,"regular supply of HDPE offcuts generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,858.2,Ahmedabad,0.151,129.69,51.49,875.4
+L0568,"regular supply of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Clean / sorted,2008.9,Pune,0.12,241.8,120.53,1617.2
+L0569,"regular supply of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,1296.9,Hyderabad,0.116,150.2,77.81,680.9
+L0570,"steady stream of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Baled,1033.5,Hyderabad,0.175,180.98,62.01,1085.2
+L0571,"surplus of corrugated scrap generated from our production line, available for pickup",Paper & Cardboard,Low,Mixed / unsorted,659.4,Pune,0.112,74.1,39.56,280.2
+L0572,"one-time lot of yarn waste generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,6408.7,Ahmedabad,0.133,852.15,384.52,4902.7
+L0573,"regular supply of copper wire ends generated from our production line, available for pickup",Metal Scrap,Low,Contaminated,2184.9,Delhi NCR,0.2,436.55,131.09,2163.1
+L0574,"steady stream of spent grain generated from our production line, available for pickup",Organic Waste,Low,Baled,4215.8,Kolkata,0.047,197.6,252.95,1770.6
+L0575,"large batch of brick waste generated from our production line, available for pickup",Construction Debris,Medium,Baled,19.8,Kolkata,0.08,1.59,1.19,12.5
+L0576,"large batch of conveyor belt waste generated from our production line, available for pickup",Rubber Waste,Medium,Clean / sorted,4673.0,Chennai,0.22,1027.2,280.38,5373.9
+L0577,"steady stream of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,4787.1,Bengaluru,0.097,463.76,287.23,2848.3
+L0578,"large batch of vulcanized rubber scrap generated from our production line, available for pickup",Rubber Waste,Medium,Baled,1393.1,Mumbai,0.177,246.29,83.59,1462.8
+L0579,"large batch of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Loose,666.5,Ahmedabad,0.106,70.67,39.99,443.2
+L0580,"large batch of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Loose,686.8,Chennai,0.588,404.12,41.21,1631.1
+L0581,"surplus of spent grain generated from our production line, available for pickup",Organic Waste,Low,Contaminated,1089.3,Delhi NCR,0.027,28.88,65.36,239.6
+L0582,"regular supply of solvent residue generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,1934.3,Kolkata,0.501,968.36,116.06,4671.3
+L0583,"steady stream of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Loose,1254.5,Ahmedabad,0.043,53.79,75.27,476.7
+L0584,"regular supply of cotton scrap generated from our production line, available for pickup",Textile Waste,Low,Loose,1327.8,Pune,0.136,181.14,79.67,1135.3
+L0585,"surplus of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Loose,2905.9,Ahmedabad,0.272,789.32,174.35,4969.1
+L0586,"surplus of conveyor belt waste generated from our production line, available for pickup",Rubber Waste,Medium,Loose,1551.5,Pune,0.203,315.01,93.09,1473.9
+L0587,"large batch of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Loose,2788.8,Bengaluru,0.102,285.21,167.33,1854.6
+L0588,"regular supply of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Baled,1144.9,Delhi NCR,0.165,189.06,68.69,1081.9
+L0589,"regular supply of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,636.3,Pune,0.138,87.89,38.18,486.8
+L0590,"surplus of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Baled,938.5,Pune,0.081,76.19,56.31,591.3
+L0591,"large batch of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Baled,958.4,Kolkata,0.087,82.9,57.5,603.8
+L0592,"steady stream of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Loose,2283.7,Bengaluru,0.092,209.36,137.02,1301.7
+L0593,"steady stream of circuit board scrap generated from our production line, available for pickup",E-Waste,High,Contaminated,506.8,Delhi NCR,0.336,170.45,30.41,696.9
+L0594,"steady stream of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,1598.3,Hyderabad,0.456,729.36,95.9,3859.9
+L0595,"surplus of vegetable trimmings generated from our production line, available for pickup",Organic Waste,Low,Baled,1857.2,Bengaluru,0.059,108.7,111.43,780.0
+L0596,"steady stream of industrial coolant residue generated from our production line, available for pickup",Chemical Residue,High,Loose,3427.2,Pune,0.373,1277.96,205.63,6837.3
+L0597,"steady stream of solvent residue generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,2632.5,Delhi NCR,0.462,1214.91,157.95,6357.5
+L0598,"steady stream of copper wire ends generated from our production line, available for pickup",Metal Scrap,Low,Clean / sorted,1076.2,Pune,0.426,458.28,64.57,2227.7
+L0599,"surplus of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Baled,1698.9,Chennai,0.338,574.06,101.93,3210.9
+L0600,"surplus of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Contaminated,2049.1,Mumbai,0.084,171.9,122.95,1014.3
+L0601,"steady stream of HDPE offcuts generated from our production line, available for pickup",Plastic Waste,Low,Contaminated,3209.6,Pune,0.107,342.34,192.58,2118.3
+L0602,"large batch of sawdust generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,161.9,Hyderabad,0.067,10.84,9.71,96.3
+L0603,"regular supply of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,798.9,Kolkata,0.283,225.83,47.93,1222.3
+L0604,"large batch of tire scrap generated from our production line, available for pickup",Rubber Waste,Medium,Mixed / unsorted,2643.8,Kolkata,0.166,438.5,158.63,2247.2
+L0605,"steady stream of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,1981.5,Hyderabad,0.434,859.96,118.89,4785.3
+L0606,"large batch of HDPE offcuts generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,952.5,Hyderabad,0.197,188.08,57.15,971.5
+L0607,"regular supply of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Contaminated,1027.4,Ahmedabad,0.093,95.85,61.64,678.1
+L0608,"one-time lot of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Mixed / unsorted,3074.7,Pune,0.071,217.52,184.48,1568.1
+L0609,"surplus of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Clean / sorted,1308.5,Pune,0.215,280.95,78.51,1504.8
+L0610,"steady stream of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,672.5,Hyderabad,0.041,27.25,40.35,228.7
+L0611,"large batch of fruit pulp waste generated from our production line, available for pickup",Organic Waste,Low,Clean / sorted,1552.1,Mumbai,0.055,85.66,93.13,714.0
+L0612,"surplus of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Baled,1951.4,Ahmedabad,0.205,400.95,117.08,2049.0
+L0613,"regular supply of fabric offcuts generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,370.4,Bengaluru,0.103,38.08,22.22,283.4
+L0614,"surplus of cardboard offcuts generated from our production line, available for pickup",Paper & Cardboard,Low,Loose,1467.6,Bengaluru,0.12,175.9,88.06,697.1
+L0615,"surplus of spent grain generated from our production line, available for pickup",Organic Waste,Low,Loose,1527.5,Chennai,0.051,77.81,91.65,580.4
+L0616,"large batch of copper wire ends generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,2148.3,Kolkata,0.31,665.31,128.9,3286.9
+L0617,"large batch of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Baled,1099.4,Mumbai,0.047,52.14,65.96,461.7
+L0618,"one-time lot of resin waste generated from our production line, available for pickup",Chemical Residue,High,Contaminated,1494.5,Pune,0.244,365.19,89.67,1726.1
+L0619,"large batch of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,1212.8,Pune,0.045,54.71,72.77,400.2
+L0620,"surplus of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Loose,1268.9,Mumbai,0.315,399.32,76.13,2169.8
+L0621,"one-time lot of spent grain generated from our production line, available for pickup",Organic Waste,Low,Clean / sorted,1242.0,Delhi NCR,0.056,69.83,74.52,571.3
+L0622,"steady stream of plywood trimmings generated from our production line, available for pickup",Wood Waste,Low,Loose,1818.0,Hyderabad,0.1,181.57,109.08,1209.0
+L0623,"large batch of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Loose,1082.8,Pune,0.207,224.01,64.97,1234.4
+L0624,"one-time lot of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Clean / sorted,859.9,Chennai,0.119,102.52,51.59,692.2
+L0625,"steady stream of chemical sludge generated from our production line, available for pickup",Chemical Residue,High,Baled,4275.4,Mumbai,0.341,1457.15,256.52,9427.3
+L0626,"steady stream of food processing residue generated from our production line, available for pickup",Organic Waste,Low,Clean / sorted,1050.2,Chennai,0.051,54.02,63.01,483.1
+L0627,"regular supply of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Baled,506.6,Delhi NCR,0.219,110.94,30.4,638.3
+L0628,"regular supply of HDPE offcuts generated from our production line, available for pickup",Plastic Waste,Low,Clean / sorted,2494.2,Pune,0.228,567.67,149.65,3442.0
+L0629,"surplus of cable waste generated from our production line, available for pickup",E-Waste,High,Contaminated,1166.5,Bengaluru,0.333,388.14,69.99,1603.9
+L0630,"surplus of fabric offcuts generated from our production line, available for pickup",Textile Waste,Low,Contaminated,906.8,Mumbai,0.083,75.34,54.41,448.9
+L0631,"one-time lot of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,2929.3,Mumbai,0.046,133.37,175.76,966.7
+L0632,"surplus of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Baled,2932.2,Kolkata,0.23,675.81,175.93,3694.6
+L0633,"regular supply of scrap metal sheets generated from our production line, available for pickup",Metal Scrap,Low,Baled,1920.7,Pune,0.392,751.97,115.24,3630.1
+L0634,"one-time lot of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Clean / sorted,6480.6,Mumbai,0.107,696.52,388.84,5216.9
+L0635,"large batch of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Clean / sorted,195.5,Delhi NCR,0.438,85.66,11.73,404.7
+L0636,"regular supply of cable waste generated from our production line, available for pickup",E-Waste,High,Contaminated,1585.3,Hyderabad,0.383,607.5,95.12,2179.8
+L0637,"surplus of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Loose,3204.6,Hyderabad,0.299,957.44,192.28,5479.9
+L0638,"large batch of vegetable trimmings generated from our production line, available for pickup",Organic Waste,Low,Baled,2316.3,Ahmedabad,0.051,118.61,138.98,972.8
+L0639,"large batch of vulcanized rubber scrap generated from our production line, available for pickup",Rubber Waste,Medium,Contaminated,638.3,Mumbai,0.103,65.87,38.3,351.1
+L0640,"large batch of yarn waste generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,1486.9,Delhi NCR,0.128,190.41,89.21,1137.5
+L0641,"large batch of used batteries generated from our production line, available for pickup",E-Waste,High,Contaminated,3961.9,Bengaluru,0.327,1293.63,237.71,5447.6
+L0642,"regular supply of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,1151.9,Delhi NCR,0.118,136.26,69.11,604.7
+L0643,"regular supply of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Loose,1295.4,Bengaluru,0.093,120.35,77.72,861.4
+L0644,"one-time lot of cable waste generated from our production line, available for pickup",E-Waste,High,Contaminated,135.0,Kolkata,0.28,37.85,8.1,185.6
+L0645,"large batch of spent grain generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,2282.4,Delhi NCR,0.042,95.01,136.94,776.0
+L0646,"surplus of food processing residue generated from our production line, available for pickup",Organic Waste,Low,Loose,1340.4,Ahmedabad,0.046,61.7,80.42,509.4
+L0647,"regular supply of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Baled,697.6,Bengaluru,0.385,268.68,41.86,1318.5
+L0648,"large batch of corrugated scrap generated from our production line, available for pickup",Paper & Cardboard,Low,Mixed / unsorted,6609.9,Hyderabad,0.1,663.41,396.59,2809.2
+L0649,"regular supply of fabric offcuts generated from our production line, available for pickup",Textile Waste,Low,Contaminated,2153.8,Mumbai,0.075,161.94,129.23,1066.1
+L0650,"large batch of corrugated scrap generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,1630.5,Ahmedabad,0.14,227.55,97.83,856.0
+L0651,"large batch of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Clean / sorted,1355.5,Pune,0.199,269.39,81.33,1558.8
+L0652,"regular supply of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Loose,766.3,Delhi NCR,0.14,107.41,45.98,728.0
+L0653,"steady stream of vegetable trimmings generated from our production line, available for pickup",Organic Waste,Low,Contaminated,275.2,Bengaluru,0.03,8.15,16.51,60.5
+L0654,"regular supply of chemical sludge generated from our production line, available for pickup",Chemical Residue,High,Contaminated,3622.6,Kolkata,0.209,758.47,217.36,4184.1
+L0655,"large batch of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,1490.8,Pune,0.172,257.11,89.45,1520.6
+L0656,"steady stream of yarn waste generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,793.9,Pune,0.168,133.27,47.63,821.7
+L0657,"surplus of industrial coolant residue generated from our production line, available for pickup",Chemical Residue,High,Baled,608.5,Mumbai,0.383,232.87,36.51,1341.7
+L0658,"surplus of spent grain generated from our production line, available for pickup",Organic Waste,Low,Baled,1040.8,Bengaluru,0.052,53.92,62.45,437.1
+L0659,"one-time lot of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Clean / sorted,1414.3,Pune,0.242,341.94,84.86,1951.7
+L0660,"large batch of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,1166.9,Ahmedabad,0.265,309.3,70.01,1785.4
+L0661,"large batch of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Contaminated,3385.9,Hyderabad,0.028,95.04,203.15,744.9
+L0662,"steady stream of sawdust generated from our production line, available for pickup",Wood Waste,Low,Contaminated,2280.8,Pune,0.052,117.76,136.85,878.1
+L0663,"steady stream of circuit board scrap generated from our production line, available for pickup",E-Waste,High,Loose,1742.6,Chennai,0.573,999.08,104.56,4138.7
+L0664,"large batch of HDPE offcuts generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,702.6,Mumbai,0.169,119.05,42.16,716.7
+L0665,"surplus of spent grain generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,1129.7,Chennai,0.054,60.87,67.78,384.1
+L0666,"large batch of HDPE offcuts generated from our production line, available for pickup",Plastic Waste,Low,Loose,892.0,Bengaluru,0.193,172.19,53.52,1016.9
+L0667,"large batch of PET bottle scrap generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,528.7,Kolkata,0.185,97.57,31.72,539.3
+L0668,"large batch of resin waste generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,3153.8,Delhi NCR,0.43,1357.0,189.23,7616.4
+L0669,"steady stream of yarn waste generated from our production line, available for pickup",Textile Waste,Low,Loose,4135.7,Hyderabad,0.129,533.71,248.14,3536.0
+L0670,"surplus of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Baled,492.2,Hyderabad,0.419,206.07,29.53,930.3
+L0671,"steady stream of vegetable trimmings generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,1091.4,Bengaluru,0.035,37.95,65.48,371.1
+L0672,"steady stream of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,737.9,Chennai,0.195,143.89,44.27,763.7
+L0673,"large batch of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Loose,247.9,Kolkata,0.069,16.98,14.87,141.3
+L0674,"regular supply of plywood trimmings generated from our production line, available for pickup",Wood Waste,Low,Baled,3524.4,Pune,0.093,329.14,211.46,2590.4
+L0675,"surplus of corrugated scrap generated from our production line, available for pickup",Paper & Cardboard,Low,Mixed / unsorted,1123.5,Delhi NCR,0.092,103.55,67.41,477.5
+L0676,"one-time lot of used batteries generated from our production line, available for pickup",E-Waste,High,Loose,936.6,Kolkata,0.645,603.81,56.2,2224.4
+L0677,"regular supply of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Contaminated,3356.6,Hyderabad,0.065,218.2,201.4,923.1
+L0678,"surplus of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Contaminated,723.7,Chennai,0.211,152.75,43.42,716.5
+L0679,"regular supply of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Baled,3794.7,Ahmedabad,0.437,1658.32,227.68,7172.0
+L0680,"surplus of cotton scrap generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,910.8,Chennai,0.164,149.67,54.65,942.7
+L0681,"steady stream of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,1318.5,Chennai,0.137,180.09,79.11,758.1
+L0682,"one-time lot of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Mixed / unsorted,1802.3,Pune,0.337,607.37,108.14,3217.1
+L0683,"one-time lot of chemical sludge generated from our production line, available for pickup",Chemical Residue,High,Contaminated,986.5,Delhi NCR,0.18,177.88,59.19,1139.4
+L0684,"one-time lot of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Mixed / unsorted,999.3,Chennai,0.164,163.55,59.96,849.4
+L0685,"large batch of sawdust generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,1017.4,Kolkata,0.072,73.16,61.04,605.4
+L0686,"one-time lot of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,312.0,Chennai,0.262,81.74,18.72,477.4
+L0687,"regular supply of damaged PCB units generated from our production line, available for pickup",E-Waste,High,Clean / sorted,1486.5,Ahmedabad,0.799,1187.01,89.19,4273.7
+L0688,"large batch of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Contaminated,1609.1,Pune,0.068,108.84,96.55,796.5
+L0689,"one-time lot of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,847.7,Pune,0.26,220.38,50.86,1297.0
+L0690,"one-time lot of resin waste generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,624.6,Ahmedabad,0.369,230.45,37.48,1508.4
+L0691,"regular supply of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Contaminated,2264.5,Bengaluru,0.108,244.81,135.87,1494.6
+L0692,"regular supply of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Baled,485.1,Kolkata,0.118,57.07,29.11,458.4
+L0693,"one-time lot of paper trimmings generated from our production line, available for pickup",Paper & Cardboard,Low,Loose,1059.2,Ahmedabad,0.117,124.27,63.55,503.1
+L0694,"regular supply of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Baled,2494.7,Bengaluru,0.138,344.6,149.68,2357.5
+L0695,"large batch of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,1914.9,Hyderabad,0.172,329.32,114.89,1981.9
+L0696,"regular supply of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Loose,828.8,Ahmedabad,0.146,121.1,49.73,708.6
+L0697,"surplus of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Clean / sorted,1877.0,Kolkata,0.2,374.48,112.62,2158.5
+L0698,"regular supply of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,1644.1,Ahmedabad,0.181,296.87,98.65,1677.0
+L0699,"surplus of HDPE offcuts generated from our production line, available for pickup",Plastic Waste,Low,Contaminated,986.9,Kolkata,0.109,107.21,59.21,651.4
+L0700,"surplus of vegetable trimmings generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,451.9,Mumbai,0.047,21.37,27.11,153.6
+L0701,"steady stream of polypropylene granules generated from our production line, available for pickup",Plastic Waste,Low,Clean / sorted,1281.0,Delhi NCR,0.197,251.97,76.86,1767.8
+L0702,"steady stream of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Mixed / unsorted,638.6,Hyderabad,0.064,40.84,38.32,325.7
+L0703,"steady stream of solvent residue generated from our production line, available for pickup",Chemical Residue,High,Loose,3316.2,Hyderabad,0.483,1602.41,198.97,6615.8
+L0704,"large batch of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Mixed / unsorted,1073.7,Pune,0.152,163.37,64.42,912.6
+L0705,"surplus of scrap metal sheets generated from our production line, available for pickup",Metal Scrap,Low,Contaminated,1650.5,Delhi NCR,0.2,330.9,99.03,1634.0
+L0706,"steady stream of PET bottle scrap generated from our production line, available for pickup",Plastic Waste,Low,Clean / sorted,3543.9,Ahmedabad,0.225,799.01,212.63,4890.6
+L0707,"one-time lot of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,1183.1,Mumbai,0.193,227.88,70.99,1224.5
+L0708,"regular supply of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Baled,1133.1,Delhi NCR,0.2,226.87,67.99,1189.8
+L0709,"large batch of tire scrap generated from our production line, available for pickup",Rubber Waste,Medium,Baled,4548.0,Pune,0.184,838.82,272.88,4775.4
+L0710,"one-time lot of resin waste generated from our production line, available for pickup",Chemical Residue,High,Mixed / unsorted,683.8,Chennai,0.354,241.96,41.03,1220.6
+L0711,"regular supply of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Contaminated,2900.6,Bengaluru,0.062,181.26,174.04,797.7
+L0712,"one-time lot of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Clean / sorted,2579.8,Hyderabad,0.242,623.8,154.79,3560.1
+L0713,"large batch of used batteries generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,1939.1,Delhi NCR,0.546,1059.72,116.35,4120.6
+L0714,"steady stream of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Clean / sorted,2342.6,Bengaluru,0.099,231.78,140.56,1616.4
+L0715,"regular supply of fruit pulp waste generated from our production line, available for pickup",Organic Waste,Low,Clean / sorted,2032.7,Delhi NCR,0.06,122.14,121.96,935.0
+L0716,"surplus of sawdust generated from our production line, available for pickup",Wood Waste,Low,Clean / sorted,1306.1,Kolkata,0.105,136.96,78.37,1051.4
+L0717,"large batch of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Baled,255.4,Kolkata,0.07,17.95,15.32,160.9
+L0718,"steady stream of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,671.0,Pune,0.122,81.94,40.26,352.3
+L0719,"surplus of solvent residue generated from our production line, available for pickup",Chemical Residue,High,Mixed / unsorted,1364.8,Kolkata,0.361,492.27,81.89,2436.2
+L0720,"surplus of cable waste generated from our production line, available for pickup",E-Waste,High,Baled,1334.6,Bengaluru,0.579,772.1,80.08,3503.3
+L0721,"large batch of tire scrap generated from our production line, available for pickup",Rubber Waste,Medium,Clean / sorted,1156.7,Pune,0.209,241.41,69.4,1330.2
+L0722,"regular supply of industrial coolant residue generated from our production line, available for pickup",Chemical Residue,High,Loose,266.8,Hyderabad,0.351,93.65,16.01,532.3
+L0723,"steady stream of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,2453.3,Hyderabad,0.129,317.23,147.2,1410.6
+L0724,"surplus of corrugated scrap generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,2386.6,Chennai,0.124,294.88,143.2,1253.0
+L0725,"one-time lot of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Baled,291.1,Delhi NCR,0.207,60.32,17.47,366.8
+L0726,"steady stream of cardboard offcuts generated from our production line, available for pickup",Paper & Cardboard,Low,Loose,1396.2,Pune,0.117,163.58,83.77,663.2
+L0727,"regular supply of cotton scrap generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,631.1,Chennai,0.132,83.16,37.87,482.8
+L0728,"regular supply of copper wire ends generated from our production line, available for pickup",Metal Scrap,Low,Baled,1532.4,Mumbai,0.375,574.96,91.94,2896.2
+L0729,"large batch of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Loose,887.3,Bengaluru,0.155,137.1,53.24,758.6
+L0730,"surplus of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Baled,1998.6,Hyderabad,0.232,464.2,119.92,2518.2
+L0731,"one-time lot of sawdust generated from our production line, available for pickup",Wood Waste,Low,Loose,6696.7,Kolkata,0.088,589.18,401.8,4453.3
+L0732,"steady stream of tire scrap generated from our production line, available for pickup",Rubber Waste,Medium,Loose,2479.8,Hyderabad,0.159,394.59,148.79,2355.8
+L0733,"one-time lot of fabric offcuts generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,953.7,Mumbai,0.12,113.98,57.22,729.6
+L0734,"surplus of polypropylene granules generated from our production line, available for pickup",Plastic Waste,Low,Contaminated,1349.3,Ahmedabad,0.106,143.56,80.96,890.5
+L0735,"regular supply of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Baled,1500.1,Kolkata,0.077,115.19,90.01,945.1
+L0736,"one-time lot of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Baled,2866.4,Pune,0.091,260.47,171.98,2106.8
+L0737,"regular supply of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Clean / sorted,653.6,Hyderabad,0.101,66.31,39.22,451.0
+L0738,"large batch of scrap metal sheets generated from our production line, available for pickup",Metal Scrap,Low,Baled,758.6,Bengaluru,0.399,302.51,45.52,1433.8
+L0739,"steady stream of chemical sludge generated from our production line, available for pickup",Chemical Residue,High,Contaminated,1196.4,Bengaluru,0.219,261.48,71.78,1381.8
+L0740,"steady stream of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,4605.9,Pune,0.194,894.4,276.35,4698.0
+L0741,"large batch of industrial coolant residue generated from our production line, available for pickup",Chemical Residue,High,Contaminated,2536.9,Hyderabad,0.231,587.27,152.21,2930.1
+L0742,"steady stream of spent grain generated from our production line, available for pickup",Organic Waste,Low,Baled,655.4,Chennai,0.053,34.71,39.32,275.3
+L0743,"regular supply of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Contaminated,1547.7,Delhi NCR,0.067,104.22,92.86,425.6
+L0744,"one-time lot of PET bottle scrap generated from our production line, available for pickup",Plastic Waste,Low,Contaminated,1060.4,Hyderabad,0.108,115.02,63.62,699.9
+L0745,"regular supply of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Clean / sorted,920.3,Pune,0.148,136.54,55.22,1058.3
+L0746,"large batch of copper wire ends generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,1350.9,Delhi NCR,0.281,379.77,81.05,2066.9
+L0747,"steady stream of chemical sludge generated from our production line, available for pickup",Chemical Residue,High,Mixed / unsorted,428.2,Bengaluru,0.382,163.57,25.69,764.3
+L0748,"regular supply of cardboard offcuts generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,1029.3,Mumbai,0.134,137.76,61.76,540.4
+L0749,"steady stream of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Baled,469.1,Kolkata,0.409,191.64,28.15,1034.4
+L0750,"regular supply of conveyor belt waste generated from our production line, available for pickup",Rubber Waste,Medium,Loose,1747.1,Ahmedabad,0.144,252.33,104.83,1659.7
+L0751,"steady stream of sawdust generated from our production line, available for pickup",Wood Waste,Low,Clean / sorted,2369.0,Bengaluru,0.13,307.16,142.14,1907.0
+L0752,"regular supply of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,2357.1,Chennai,0.262,617.83,141.43,3606.4
+L0753,"large batch of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Contaminated,3851.2,Hyderabad,0.028,107.94,231.07,847.3
+L0754,"one-time lot of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Baled,1186.0,Pune,0.348,412.14,71.16,2241.5
+L0755,"surplus of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,1172.2,Bengaluru,0.246,287.92,70.33,1793.5
+L0756,"steady stream of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Baled,1460.1,Hyderabad,0.103,149.81,87.61,1073.2
+L0757,"one-time lot of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,547.5,Kolkata,0.092,50.16,32.85,325.8
+L0758,"one-time lot of tire scrap generated from our production line, available for pickup",Rubber Waste,Medium,Baled,71.9,Mumbai,0.189,13.56,4.31,75.5
+L0759,"large batch of chemical sludge generated from our production line, available for pickup",Chemical Residue,High,Loose,1079.8,Bengaluru,0.457,493.12,64.79,2154.2
+L0760,"surplus of used batteries generated from our production line, available for pickup",E-Waste,High,Clean / sorted,1569.5,Ahmedabad,0.739,1160.43,94.17,4512.3
+L0761,"regular supply of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Contaminated,2221.1,Bengaluru,0.054,119.26,133.27,855.1
+L0762,"steady stream of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Mixed / unsorted,1541.9,Delhi NCR,0.103,158.88,92.51,655.3
+L0763,"surplus of resin waste generated from our production line, available for pickup",Chemical Residue,High,Mixed / unsorted,3658.3,Delhi NCR,0.374,1366.79,219.5,6530.1
+L0764,"large batch of plywood trimmings generated from our production line, available for pickup",Wood Waste,Low,Baled,368.0,Hyderabad,0.107,39.31,22.08,270.5
+L0765,"regular supply of conveyor belt waste generated from our production line, available for pickup",Rubber Waste,Medium,Loose,1601.5,Chennai,0.132,211.6,96.09,1521.4
+L0766,"surplus of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,581.3,Ahmedabad,0.125,72.49,34.88,305.2
+L0767,"large batch of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Loose,254.4,Pune,0.133,33.73,15.26,217.5
+L0768,"regular supply of damaged PCB units generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,1291.3,Bengaluru,0.511,659.94,77.48,2744.0
+L0769,"regular supply of chemical sludge generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,1586.1,Chennai,0.451,714.6,95.17,3830.4
+L0770,"surplus of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Baled,768.4,Ahmedabad,0.101,77.65,46.1,564.8
+L0771,"steady stream of tire scrap generated from our production line, available for pickup",Rubber Waste,Medium,Contaminated,1031.4,Kolkata,0.103,106.12,61.88,567.3
+L0772,"regular supply of copper wire ends generated from our production line, available for pickup",Metal Scrap,Low,Loose,3389.8,Mumbai,0.349,1183.26,203.39,5796.6
+L0773,"surplus of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,2891.5,Hyderabad,0.122,352.34,173.49,1662.6
+L0774,"regular supply of brick waste generated from our production line, available for pickup",Construction Debris,Medium,Clean / sorted,2415.8,Pune,0.09,217.05,144.95,1666.9
+L0775,"surplus of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Baled,1875.3,Kolkata,0.434,813.62,112.52,4135.0
+L0776,"regular supply of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,2081.5,Kolkata,0.158,329.07,124.89,2154.4
+L0777,"surplus of resin waste generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,4865.1,Delhi NCR,0.462,2246.42,291.91,11749.2
+L0778,"large batch of spent grain generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,2032.8,Pune,0.051,103.88,121.97,691.2
+L0779,"steady stream of yarn waste generated from our production line, available for pickup",Textile Waste,Low,Loose,1340.4,Hyderabad,0.154,207.08,80.42,1146.0
+L0780,"large batch of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Baled,791.8,Hyderabad,0.065,51.8,47.51,498.8
+L0781,"surplus of cardboard offcuts generated from our production line, available for pickup",Paper & Cardboard,Low,Mixed / unsorted,3626.9,Ahmedabad,0.1,362.52,217.61,1541.4
+L0782,"regular supply of cardboard offcuts generated from our production line, available for pickup",Paper & Cardboard,Low,Mixed / unsorted,422.7,Delhi NCR,0.098,41.26,25.36,179.6
+L0783,"large batch of fruit pulp waste generated from our production line, available for pickup",Organic Waste,Low,Contaminated,2038.2,Bengaluru,0.028,56.32,122.29,448.4
+L0784,"large batch of brick waste generated from our production line, available for pickup",Construction Debris,Medium,Loose,1706.3,Bengaluru,0.091,155.93,102.38,972.6
+L0785,"one-time lot of copper wire ends generated from our production line, available for pickup",Metal Scrap,Low,Contaminated,362.8,Bengaluru,0.196,70.98,21.77,359.2
+L0786,"regular supply of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Loose,1376.5,Ahmedabad,0.178,245.41,82.59,1307.7
+L0787,"regular supply of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Baled,1353.2,Ahmedabad,0.416,563.52,81.19,2983.8
+L0788,"regular supply of brick waste generated from our production line, available for pickup",Construction Debris,Medium,Clean / sorted,417.3,Chennai,0.099,41.15,25.04,287.9
+L0789,"surplus of food processing residue generated from our production line, available for pickup",Organic Waste,Low,Clean / sorted,394.0,Pune,0.059,23.18,23.64,181.2
+L0790,"one-time lot of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Baled,436.8,Bengaluru,0.356,155.5,26.21,825.6
+L0791,"large batch of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Loose,1332.6,Delhi NCR,0.353,470.49,79.96,2278.7
+L0792,"steady stream of copper wire ends generated from our production line, available for pickup",Metal Scrap,Low,Clean / sorted,1130.3,Hyderabad,0.352,398.06,67.82,2339.7
+L0793,"regular supply of polypropylene granules generated from our production line, available for pickup",Plastic Waste,Low,Loose,2060.2,Bengaluru,0.199,409.82,123.61,2348.6
+L0794,"large batch of spent grain generated from our production line, available for pickup",Organic Waste,Low,Clean / sorted,2215.2,Bengaluru,0.055,121.81,132.91,1019.0
+L0795,"large batch of corrugated scrap generated from our production line, available for pickup",Paper & Cardboard,Low,Contaminated,1266.2,Pune,0.061,76.92,75.97,348.2
+L0796,"large batch of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Loose,1715.0,Mumbai,0.122,210.06,102.9,814.6
+L0797,"regular supply of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Baled,1154.8,Chennai,0.182,209.91,69.29,1455.0
+L0798,"steady stream of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Loose,268.4,Chennai,0.077,20.74,16.1,178.5
+L0799,"steady stream of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,2668.1,Delhi NCR,0.088,236.01,160.09,1587.5
+L0800,"large batch of fruit pulp waste generated from our production line, available for pickup",Organic Waste,Low,Baled,276.8,Ahmedabad,0.046,12.77,16.61,116.3
+L0801,"steady stream of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Clean / sorted,2239.4,Mumbai,0.341,763.79,134.36,4635.6
+L0802,"surplus of fabric offcuts generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,1367.3,Mumbai,0.165,226.26,82.04,1415.2
+L0803,"steady stream of vegetable trimmings generated from our production line, available for pickup",Organic Waste,Low,Baled,2175.2,Bengaluru,0.044,96.61,130.51,913.6
+L0804,"surplus of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Clean / sorted,4609.9,Pune,0.468,2155.56,276.59,9542.5
+L0805,"large batch of solvent residue generated from our production line, available for pickup",Chemical Residue,High,Contaminated,1444.0,Hyderabad,0.237,342.44,86.64,1667.8
+L0806,"surplus of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Clean / sorted,1055.2,Pune,0.395,416.69,63.31,2184.3
+L0807,"surplus of solvent residue generated from our production line, available for pickup",Chemical Residue,High,Baled,2529.7,Bengaluru,0.405,1024.13,151.78,5578.0
+L0808,"steady stream of resin waste generated from our production line, available for pickup",Chemical Residue,High,Mixed / unsorted,413.0,Mumbai,0.352,145.53,24.78,737.2
+L0809,"steady stream of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Contaminated,989.7,Hyderabad,0.345,341.1,59.38,1360.8
+L0810,"regular supply of fabric offcuts generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,1549.5,Pune,0.194,300.32,92.97,1603.7
+L0811,"steady stream of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Baled,504.9,Kolkata,0.19,95.93,30.29,636.2
+L0812,"one-time lot of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Loose,1819.2,Hyderabad,0.117,213.13,109.15,1555.4
+L0813,"large batch of copper wire ends generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,1691.5,Kolkata,0.318,537.96,101.49,2588.0
+L0814,"surplus of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Baled,52.1,Delhi NCR,0.075,3.9,3.13,32.8
+L0815,"one-time lot of chemical sludge generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,496.9,Chennai,0.516,256.4,29.81,1200.0
+L0816,"regular supply of corrugated scrap generated from our production line, available for pickup",Paper & Cardboard,Low,Loose,2373.0,Mumbai,0.094,223.84,142.38,1127.2
+L0817,"one-time lot of cable waste generated from our production line, available for pickup",E-Waste,High,Contaminated,748.8,Hyderabad,0.358,268.44,44.93,1029.6
+L0818,"one-time lot of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Clean / sorted,2026.1,Delhi NCR,0.223,452.26,121.57,2330.0
+L0819,"steady stream of circuit board scrap generated from our production line, available for pickup",E-Waste,High,Baled,1090.1,Pune,0.722,787.01,65.41,2861.5
+L0820,"large batch of chemical sludge generated from our production line, available for pickup",Chemical Residue,High,Mixed / unsorted,229.0,Ahmedabad,0.343,78.52,13.74,408.8
+L0821,"regular supply of corrugated scrap generated from our production line, available for pickup",Paper & Cardboard,Low,Mixed / unsorted,660.7,Hyderabad,0.107,70.63,39.64,280.8
+L0822,"steady stream of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Baled,827.5,Kolkata,0.224,185.08,49.65,1042.7
+L0823,"large batch of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Baled,305.5,Kolkata,0.23,70.38,18.33,384.9
+L0824,"steady stream of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Clean / sorted,2347.1,Mumbai,0.828,1942.7,140.83,6747.9
+L0825,"one-time lot of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Loose,7814.7,Delhi NCR,0.368,2879.52,468.88,13363.1
+L0826,"surplus of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Contaminated,2648.4,Chennai,0.101,268.22,158.9,1456.6
+L0827,"surplus of resin waste generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,1916.3,Chennai,0.441,844.24,114.98,4627.9
+L0828,"steady stream of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Loose,2161.3,Kolkata,0.108,232.63,129.68,1026.6
+L0829,"surplus of HDPE offcuts generated from our production line, available for pickup",Plastic Waste,Low,Clean / sorted,489.3,Chennai,0.254,124.45,29.36,675.2
+L0830,"large batch of solvent residue generated from our production line, available for pickup",Chemical Residue,High,Contaminated,2555.0,Ahmedabad,0.22,561.79,153.3,2951.0
+L0831,"large batch of yarn waste generated from our production line, available for pickup",Textile Waste,Low,Baled,2150.1,Pune,0.165,354.02,129.01,2031.8
+L0832,"large batch of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Loose,853.8,Chennai,0.092,78.73,51.23,567.8
+L0833,"surplus of brick waste generated from our production line, available for pickup",Construction Debris,Medium,Mixed / unsorted,1260.7,Kolkata,0.068,85.21,75.64,643.0
+L0834,"large batch of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Baled,1860.4,Delhi NCR,0.229,425.47,111.62,2344.1
+L0835,"large batch of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Baled,2020.0,Pune,0.745,1504.11,121.2,5302.5
+L0836,"steady stream of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,1375.0,Hyderabad,0.145,199.09,82.5,790.6
+L0837,"large batch of paper trimmings generated from our production line, available for pickup",Paper & Cardboard,Low,Mixed / unsorted,860.5,Pune,0.092,79.03,51.63,365.7
+L0838,"steady stream of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Loose,1064.7,Ahmedabad,0.072,77.04,63.88,606.9
+L0839,"steady stream of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Loose,626.0,Chennai,0.079,49.37,37.56,356.8
+L0840,"regular supply of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Contaminated,2356.8,Kolkata,0.235,553.94,141.41,2722.1
+L0841,"surplus of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Loose,361.6,Bengaluru,0.077,27.67,21.7,206.1
+L0842,"one-time lot of paper trimmings generated from our production line, available for pickup",Paper & Cardboard,Low,Mixed / unsorted,775.7,Chennai,0.092,70.98,46.54,329.7
+L0843,"one-time lot of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Contaminated,367.4,Pune,0.062,22.67,22.04,141.4
+L0844,"one-time lot of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Contaminated,622.5,Mumbai,0.062,38.88,37.35,171.2
+L0845,"surplus of damaged PCB units generated from our production line, available for pickup",E-Waste,High,Loose,233.1,Hyderabad,0.545,127.12,13.99,553.6
+L0846,"steady stream of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Clean / sorted,1171.7,Mumbai,0.093,109.52,70.3,808.5
+L0847,"surplus of cotton scrap generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,1921.6,Delhi NCR,0.152,292.18,115.3,1988.9
+L0848,"large batch of cotton scrap generated from our production line, available for pickup",Textile Waste,Low,Contaminated,1947.0,Bengaluru,0.079,153.99,116.82,963.8
+L0849,"steady stream of pallet scrap generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,1620.6,Delhi NCR,0.081,130.77,97.24,964.3
+L0850,"steady stream of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Loose,1367.5,Chennai,0.176,240.12,82.05,1558.9
+L0851,"steady stream of food processing residue generated from our production line, available for pickup",Organic Waste,Low,Loose,3587.1,Bengaluru,0.045,159.94,215.23,1363.1
+L0852,"large batch of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Baled,191.1,Ahmedabad,0.076,14.56,11.47,120.4
+L0853,"steady stream of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Contaminated,647.6,Chennai,0.18,116.4,38.86,641.1
+L0854,"surplus of fruit pulp waste generated from our production line, available for pickup",Organic Waste,Low,Contaminated,589.9,Chennai,0.025,14.59,35.39,129.8
+L0855,"regular supply of cable waste generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,1425.8,Mumbai,0.53,755.95,85.55,3029.8
+L0856,"steady stream of cardboard offcuts generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,844.7,Hyderabad,0.134,113.4,50.68,485.7
+L0857,"regular supply of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Loose,3557.2,Bengaluru,0.107,380.1,213.43,2365.5
+L0858,"steady stream of conveyor belt waste generated from our production line, available for pickup",Rubber Waste,Medium,Contaminated,2359.2,Delhi NCR,0.088,206.74,141.55,1297.6
+L0859,"one-time lot of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,278.5,Pune,0.188,52.49,16.71,288.2
+L0860,"one-time lot of copper wire ends generated from our production line, available for pickup",Metal Scrap,Low,Loose,2684.7,Bengaluru,0.342,916.9,161.08,4590.8
+L0861,"one-time lot of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Contaminated,1123.5,Mumbai,0.068,76.2,67.41,309.0
+L0862,"regular supply of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,2733.9,Mumbai,0.047,129.78,164.03,929.5
+L0863,"surplus of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Loose,1379.1,Hyderabad,0.074,102.13,82.75,786.1
+L0864,"surplus of vegetable trimmings generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,2015.7,Ahmedabad,0.042,85.13,120.94,685.3
+L0865,"large batch of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,973.6,Kolkata,0.089,86.24,58.42,579.3
+L0866,"one-time lot of PET bottle scrap generated from our production line, available for pickup",Plastic Waste,Low,Contaminated,1309.2,Kolkata,0.108,141.5,78.55,864.1
+L0867,"steady stream of conveyor belt waste generated from our production line, available for pickup",Rubber Waste,Medium,Mixed / unsorted,1687.7,Delhi NCR,0.156,263.12,101.26,1434.5
+L0868,"surplus of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Baled,931.2,Bengaluru,0.176,164.14,55.87,1173.3
+L0869,"one-time lot of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Loose,1349.7,Ahmedabad,0.33,444.88,80.98,2308.0
+L0870,"regular supply of used batteries generated from our production line, available for pickup",E-Waste,High,Baled,394.5,Delhi NCR,0.673,265.68,23.67,1035.6
+L0871,"regular supply of solvent residue generated from our production line, available for pickup",Chemical Residue,High,Loose,1739.8,Mumbai,0.402,698.67,104.39,3470.9
+L0872,"regular supply of cardboard offcuts generated from our production line, available for pickup",Paper & Cardboard,Low,Loose,676.6,Delhi NCR,0.106,71.81,40.6,321.4
+L0873,"one-time lot of fruit pulp waste generated from our production line, available for pickup",Organic Waste,Low,Baled,3983.2,Mumbai,0.051,202.83,238.99,1672.9
+L0874,"steady stream of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Clean / sorted,819.5,Pune,0.094,77.2,49.17,565.5
+L0875,"large batch of solvent residue generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,1800.5,Mumbai,0.481,865.71,108.03,4348.2
+L0876,"regular supply of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Contaminated,1413.3,Mumbai,0.089,125.26,84.8,699.6
+L0877,"steady stream of plywood trimmings generated from our production line, available for pickup",Wood Waste,Low,Baled,3397.6,Hyderabad,0.112,381.05,203.86,2497.2
+L0878,"large batch of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,690.2,Delhi NCR,0.044,30.48,41.41,227.8
+L0879,"large batch of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,1498.6,Mumbai,0.149,222.66,89.92,861.7
+L0880,"surplus of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Contaminated,675.2,Mumbai,0.095,64.01,40.51,445.6
+L0881,"steady stream of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Clean / sorted,2834.5,Bengaluru,0.22,624.36,170.07,3259.7
+L0882,"one-time lot of brick waste generated from our production line, available for pickup",Construction Debris,Medium,Clean / sorted,373.6,Kolkata,0.098,36.75,22.42,257.8
+L0883,"surplus of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,264.1,Hyderabad,0.034,8.94,15.85,89.8
+L0884,"one-time lot of fabric offcuts generated from our production line, available for pickup",Textile Waste,Low,Contaminated,842.5,Ahmedabad,0.09,75.48,50.55,417.0
+L0885,"large batch of cardboard offcuts generated from our production line, available for pickup",Paper & Cardboard,Low,Mixed / unsorted,739.9,Mumbai,0.102,75.5,44.39,314.5
+L0886,"one-time lot of vulcanized rubber scrap generated from our production line, available for pickup",Rubber Waste,Medium,Loose,886.1,Hyderabad,0.196,173.4,53.17,841.8
+L0887,"regular supply of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Contaminated,733.7,Chennai,0.105,76.73,44.02,484.2
+L0888,"regular supply of brick waste generated from our production line, available for pickup",Construction Debris,Medium,Loose,2327.5,Pune,0.079,182.91,139.65,1326.7
+L0889,"large batch of fruit pulp waste generated from our production line, available for pickup",Organic Waste,Low,Loose,737.1,Bengaluru,0.049,36.17,44.23,280.1
+L0890,"steady stream of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Loose,497.3,Delhi NCR,0.131,65.02,29.84,425.2
+L0891,"surplus of cardboard offcuts generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,118.5,Bengaluru,0.145,17.22,7.11,68.1
+L0892,"surplus of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,1895.5,Kolkata,0.179,339.87,113.73,1933.4
+L0893,"one-time lot of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,465.7,Mumbai,0.11,51.28,27.94,356.3
+L0894,"steady stream of polypropylene granules generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,1109.8,Ahmedabad,0.156,172.6,66.59,1132.0
+L0895,"regular supply of industrial coolant residue generated from our production line, available for pickup",Chemical Residue,High,Loose,346.8,Bengaluru,0.381,131.97,20.81,691.9
+L0896,"steady stream of conveyor belt waste generated from our production line, available for pickup",Rubber Waste,Medium,Loose,2529.9,Ahmedabad,0.179,453.49,151.79,2403.4
+L0897,"regular supply of cotton scrap generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,970.2,Ahmedabad,0.2,193.98,58.21,1004.2
+L0898,"surplus of brick waste generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,1884.8,Ahmedabad,0.04,75.25,113.09,622.0
+L0899,"surplus of used batteries generated from our production line, available for pickup",E-Waste,High,Baled,523.5,Kolkata,0.677,354.34,31.41,1374.2
+L0900,"one-time lot of cable waste generated from our production line, available for pickup",E-Waste,High,Loose,2616.4,Mumbai,0.622,1628.32,156.98,6213.9
+L0901,"regular supply of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Contaminated,1063.6,Pune,0.115,121.97,63.82,702.0
+L0902,"one-time lot of sawdust generated from our production line, available for pickup",Wood Waste,Low,Clean / sorted,1121.5,Mumbai,0.111,124.99,67.29,902.8
+L0903,"regular supply of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Loose,339.7,Hyderabad,0.352,119.73,20.38,580.9
+L0904,"one-time lot of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Loose,356.6,Bengaluru,0.314,111.87,21.4,609.8
+L0905,"regular supply of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,1453.0,Ahmedabad,0.533,774.01,87.18,3087.6
+L0906,"one-time lot of rubber gasket trimmings generated from our production line, available for pickup",Rubber Waste,Medium,Contaminated,274.5,Pune,0.08,22.07,16.47,151.0
+L0907,"one-time lot of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,2798.7,Hyderabad,0.153,426.98,167.92,1609.3
+L0908,"regular supply of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,1336.8,Pune,0.267,357.38,80.21,2045.3
+L0909,"one-time lot of damaged PCB units generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,1423.8,Pune,0.493,701.76,85.43,3025.6
+L0910,"regular supply of fabric offcuts generated from our production line, available for pickup",Textile Waste,Low,Baled,672.9,Ahmedabad,0.142,95.43,40.37,635.9
+L0911,"surplus of used batteries generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,2125.2,Mumbai,0.503,1069.54,127.51,4516.1
+L0912,"surplus of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Clean / sorted,1524.3,Chennai,0.056,85.02,91.46,701.2
+L0913,"large batch of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Baled,1282.2,Kolkata,0.084,107.21,76.93,807.8
+L0914,"one-time lot of chemical sludge generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,689.0,Bengaluru,0.527,363.35,41.34,1663.9
+L0915,"steady stream of corrugated scrap generated from our production line, available for pickup",Paper & Cardboard,Low,Loose,2650.6,Pune,0.128,339.77,159.04,1259.0
+L0916,"surplus of industrial coolant residue generated from our production line, available for pickup",Chemical Residue,High,Loose,1474.4,Mumbai,0.378,557.3,88.46,2941.4
+L0917,"surplus of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Mixed / unsorted,3038.3,Hyderabad,0.066,201.67,182.3,1549.5
+L0918,"regular supply of damaged PCB units generated from our production line, available for pickup",E-Waste,High,Baled,3423.0,Delhi NCR,0.58,1983.96,205.38,8985.4
+L0919,"one-time lot of circuit board scrap generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,1268.8,Chennai,0.496,629.25,76.13,2696.2
+L0920,"regular supply of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,2560.0,Pune,0.08,204.4,153.6,1523.2
+L0921,"steady stream of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Loose,1563.7,Mumbai,0.369,576.69,93.82,3119.6
+L0922,"steady stream of resin waste generated from our production line, available for pickup",Chemical Residue,High,Clean / sorted,182.6,Kolkata,0.489,89.2,10.96,441.0
+L0923,"large batch of spent grain generated from our production line, available for pickup",Organic Waste,Low,Loose,412.1,Pune,0.041,16.7,24.73,156.6
+L0924,"one-time lot of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Clean / sorted,801.2,Pune,0.045,35.91,48.07,368.6
+L0925,"regular supply of dye-stained textile rolls generated from our production line, available for pickup",Textile Waste,Low,Mixed / unsorted,3157.6,Delhi NCR,0.14,441.57,189.46,2415.6
+L0926,"one-time lot of aluminum shavings generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,2125.8,Bengaluru,0.264,560.48,127.55,3252.5
+L0927,"large batch of drywall offcuts generated from our production line, available for pickup",Construction Debris,Medium,Loose,1630.3,Delhi NCR,0.087,142.65,97.82,929.3
+L0928,"regular supply of spent grain generated from our production line, available for pickup",Organic Waste,Low,Baled,1863.6,Kolkata,0.06,112.08,111.82,782.7
+L0929,"regular supply of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Baled,2269.3,Pune,0.056,126.57,136.16,953.1
+L0930,"surplus of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Loose,1802.9,Bengaluru,0.156,281.75,108.17,1712.8
+L0931,"steady stream of cable waste generated from our production line, available for pickup",E-Waste,High,Loose,719.0,Mumbai,0.6,431.5,43.14,1707.6
+L0932,"regular supply of concrete rubble generated from our production line, available for pickup",Construction Debris,Medium,Mixed / unsorted,1663.7,Mumbai,0.071,118.37,99.82,848.5
+L0933,"one-time lot of paper trimmings generated from our production line, available for pickup",Paper & Cardboard,Low,Loose,1974.3,Hyderabad,0.13,257.52,118.46,937.8
+L0934,"one-time lot of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,1540.1,Kolkata,0.186,286.46,92.41,1570.9
+L0935,"steady stream of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Loose,1240.2,Mumbai,0.292,362.18,74.41,2120.7
+L0936,"one-time lot of yarn waste generated from our production line, available for pickup",Textile Waste,Low,Loose,635.5,Delhi NCR,0.133,84.65,38.13,543.4
+L0937,"steady stream of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,693.6,Delhi NCR,0.041,28.42,41.62,228.9
+L0938,"one-time lot of vegetable trimmings generated from our production line, available for pickup",Organic Waste,Low,Baled,1349.5,Hyderabad,0.057,77.24,80.97,566.8
+L0939,"surplus of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Clean / sorted,1576.3,Hyderabad,0.197,310.65,94.58,1812.7
+L0940,"one-time lot of used batteries generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,1933.5,Mumbai,0.563,1087.71,116.01,4108.7
+L0941,"large batch of paper trimmings generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,2537.5,Bengaluru,0.112,284.6,152.25,1332.2
+L0942,"large batch of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Loose,1518.8,Mumbai,0.351,532.94,91.13,2597.1
+L0943,"surplus of tile fragments generated from our production line, available for pickup",Construction Debris,Medium,Mixed / unsorted,654.8,Ahmedabad,0.064,41.81,39.29,333.9
+L0944,"surplus of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Mixed / unsorted,1871.2,Hyderabad,0.147,274.61,112.27,1908.6
+L0945,"surplus of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Loose,2729.2,Hyderabad,0.1,273.2,163.75,1814.9
+L0946,"steady stream of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Contaminated,735.4,Hyderabad,0.105,77.04,44.12,404.5
+L0947,"surplus of paper trimmings generated from our production line, available for pickup",Paper & Cardboard,Low,Loose,573.5,Kolkata,0.13,74.76,34.41,272.4
+L0948,"surplus of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Loose,1728.0,Kolkata,0.096,166.17,103.68,820.8
+L0949,"large batch of rubber sheet offcuts generated from our production line, available for pickup",Rubber Waste,Medium,Contaminated,421.2,Hyderabad,0.111,46.56,25.27,231.7
+L0950,"regular supply of food processing residue generated from our production line, available for pickup",Organic Waste,Low,Baled,1021.2,Pune,0.056,57.54,61.27,428.9
+L0951,"one-time lot of shredded paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,905.1,Ahmedabad,0.134,121.39,54.31,475.2
+L0952,"large batch of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,2277.6,Hyderabad,0.316,719.09,136.66,3484.7
+L0953,"large batch of fabric offcuts generated from our production line, available for pickup",Textile Waste,Low,Baled,1235.3,Hyderabad,0.15,184.76,74.12,1167.4
+L0954,"one-time lot of sawdust generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,1293.1,Ahmedabad,0.084,108.44,77.59,769.4
+L0955,"one-time lot of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Baled,200.9,Hyderabad,0.391,78.56,12.05,379.7
+L0956,"steady stream of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Loose,2084.5,Delhi NCR,0.108,224.34,125.07,1386.2
+L0957,"surplus of damaged PCB units generated from our production line, available for pickup",E-Waste,High,Clean / sorted,2774.2,Chennai,0.829,2300.88,166.45,7975.8
+L0958,"regular supply of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Clean / sorted,1607.7,Chennai,0.064,102.1,96.46,739.5
+L0959,"regular supply of steel offcuts generated from our production line, available for pickup",Metal Scrap,Low,Contaminated,4121.4,Chennai,0.183,754.32,247.28,4080.2
+L0960,"steady stream of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Contaminated,1919.1,Hyderabad,0.095,181.56,115.15,1266.6
+L0961,"large batch of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Loose,1131.2,Chennai,0.08,90.79,67.87,644.8
+L0962,"one-time lot of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Clean / sorted,2089.3,Bengaluru,0.25,523.08,125.36,2883.2
+L0963,"one-time lot of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Contaminated,1266.2,Bengaluru,0.206,260.37,75.97,1462.5
+L0964,"large batch of agricultural byproduct generated from our production line, available for pickup",Organic Waste,Low,Baled,511.5,Hyderabad,0.06,30.83,30.69,214.8
+L0965,"large batch of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,1334.8,Hyderabad,0.074,98.97,80.09,794.2
+L0966,"large batch of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,2674.5,Bengaluru,0.157,418.59,160.47,1537.8
+L0967,"steady stream of corrugated scrap generated from our production line, available for pickup",Paper & Cardboard,Low,Contaminated,1795.7,Bengaluru,0.059,106.4,107.74,493.8
+L0968,"steady stream of conveyor belt waste generated from our production line, available for pickup",Rubber Waste,Medium,Baled,2003.3,Chennai,0.172,345.31,120.2,2103.5
+L0969,"large batch of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Loose,2579.0,Delhi NCR,0.597,1539.66,154.74,6125.1
+L0970,"regular supply of wood offcuts generated from our production line, available for pickup",Wood Waste,Low,Clean / sorted,3668.7,Hyderabad,0.125,457.93,220.12,2953.3
+L0971,"one-time lot of industrial coolant residue generated from our production line, available for pickup",Chemical Residue,High,Baled,555.5,Ahmedabad,0.549,304.75,33.33,1224.9
+L0972,"large batch of scrap metal sheets generated from our production line, available for pickup",Metal Scrap,Low,Contaminated,1598.4,Chennai,0.17,272.28,95.9,1582.4
+L0973,"regular supply of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Contaminated,1495.6,Mumbai,0.047,70.84,89.74,493.5
+L0974,"one-time lot of cable waste generated from our production line, available for pickup",E-Waste,High,Contaminated,907.8,Ahmedabad,0.325,295.06,54.47,1248.2
+L0975,"regular supply of plywood trimmings generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,661.2,Chennai,0.084,55.36,39.67,393.4
+L0976,"regular supply of fruit pulp waste generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,473.3,Bengaluru,0.045,21.37,28.4,160.9
+L0977,"large batch of fruit pulp waste generated from our production line, available for pickup",Organic Waste,Low,Mixed / unsorted,1168.7,Ahmedabad,0.043,50.72,70.12,397.4
+L0978,"large batch of mixed plastic trims generated from our production line, available for pickup",Plastic Waste,Low,Clean / sorted,781.6,Kolkata,0.236,184.32,46.9,1078.6
+L0979,"one-time lot of packaging paper waste generated from our production line, available for pickup",Paper & Cardboard,Low,Clean / sorted,2372.7,Kolkata,0.154,366.48,142.36,1364.3
+L0980,"regular supply of resin waste generated from our production line, available for pickup",Chemical Residue,High,Baled,1213.1,Bengaluru,0.398,483.19,72.79,2674.9
+L0981,"one-time lot of paper trimmings generated from our production line, available for pickup",Paper & Cardboard,Low,Contaminated,1140.5,Hyderabad,0.068,77.86,68.43,313.6
+L0982,"one-time lot of yarn waste generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,1677.9,Hyderabad,0.169,283.48,100.67,1736.6
+L0983,"regular supply of copper wire ends generated from our production line, available for pickup",Metal Scrap,Low,Loose,701.4,Ahmedabad,0.311,217.83,42.08,1199.4
+L0984,"large batch of used batteries generated from our production line, available for pickup",E-Waste,High,Clean / sorted,729.8,Kolkata,0.656,478.83,43.79,2098.2
+L0985,"large batch of iron filings generated from our production line, available for pickup",Metal Scrap,Low,Mixed / unsorted,1060.2,Hyderabad,0.247,261.72,63.61,1622.1
+L0986,"one-time lot of spent catalyst generated from our production line, available for pickup",Chemical Residue,High,Contaminated,910.2,Bengaluru,0.194,176.15,54.61,1051.3
+L0987,"one-time lot of plywood trimmings generated from our production line, available for pickup",Wood Waste,Low,Mixed / unsorted,520.7,Bengaluru,0.082,42.57,31.24,309.8
+L0988,"steady stream of resin waste generated from our production line, available for pickup",Chemical Residue,High,Contaminated,819.4,Pune,0.21,172.05,49.16,946.4
+L0989,"steady stream of vegetable trimmings generated from our production line, available for pickup",Organic Waste,Low,Baled,1529.6,Ahmedabad,0.051,77.26,91.78,642.4
+L0990,"regular supply of timber shavings generated from our production line, available for pickup",Wood Waste,Low,Baled,1706.5,Pune,0.105,178.62,102.39,1254.3
+L0991,"regular supply of conveyor belt waste generated from our production line, available for pickup",Rubber Waste,Medium,Mixed / unsorted,635.0,Mumbai,0.174,110.29,38.1,539.8
+L0992,"regular supply of paper trimmings generated from our production line, available for pickup",Paper & Cardboard,Low,Baled,1646.5,Hyderabad,0.128,211.27,98.79,864.4
+L0993,"steady stream of cotton scrap generated from our production line, available for pickup",Textile Waste,Low,Baled,6496.9,Delhi NCR,0.135,877.31,389.81,6139.6
+L0994,"surplus of electronic component offcuts generated from our production line, available for pickup",E-Waste,High,Mixed / unsorted,2314.1,Ahmedabad,0.506,1170.68,138.85,4917.5
+L0995,"large batch of plywood trimmings generated from our production line, available for pickup",Wood Waste,Low,Loose,644.8,Delhi NCR,0.084,53.99,38.69,428.8
+L0996,"steady stream of denim trimmings generated from our production line, available for pickup",Textile Waste,Low,Clean / sorted,85.6,Chennai,0.204,17.47,5.14,88.6
+L0997,"surplus of plastic packaging waste generated from our production line, available for pickup",Plastic Waste,Low,Baled,2363.3,Ahmedabad,0.201,475.74,141.8,2977.8
+L0998,"large batch of chemical sludge generated from our production line, available for pickup",Chemical Residue,High,Loose,2350.9,Bengaluru,0.369,868.43,141.05,4690.0
+L0999,"regular supply of mixed construction debris generated from our production line, available for pickup",Construction Debris,Medium,Clean / sorted,2410.5,Ahmedabad,0.108,259.53,144.63,1663.2
