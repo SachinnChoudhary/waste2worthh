@@ -70,12 +70,12 @@ app.use('/api/admin', adminRouter)
 if (hasDist) {
   app.use(express.static(distPath))
 
-  // For SPA client routing, return index.html for non-API routes
-  app.get('*', (req, res, next) => {
-    if (req.path.startsWith('/api')) {
-      return next()
+  // For SPA client routing, return index.html for non-API GET requests
+  app.use((req, res, next) => {
+    if (req.method === 'GET' && !req.path.startsWith('/api')) {
+      return res.sendFile(path.join(distPath, 'index.html'))
     }
-    res.sendFile(path.join(distPath, 'index.html'))
+    next()
   })
 } else {
   // If running standalone without built UI
