@@ -36,7 +36,7 @@ const roles = [
   {
     value: 'both',
     label: 'Dual Enterprise',
-    desc: 'Buy, process & resell recycled materials',
+    desc: 'Buy, process & resell materials',
     icon: Repeat,
   },
 ]
@@ -56,20 +56,20 @@ export default function Signup() {
 
   const update = field => e => setForm(prev => ({ ...prev, [field]: e.target.value }))
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
     setIsLoading(true)
     setGlobalRole(role)
-    login({
+
+    await login({
       name: form.name || 'Industrial Leader',
       company: form.company || 'Enterprise Partner',
       email: form.email,
       role: role
     })
-    setTimeout(() => {
-      setIsLoading(false)
-      navigate(role === 'buyer' ? '/buyer' : '/seller')
-    }, 400)
+
+    setIsLoading(false)
+    navigate(role === 'buyer' ? '/buyer' : '/seller')
   }
 
   return (

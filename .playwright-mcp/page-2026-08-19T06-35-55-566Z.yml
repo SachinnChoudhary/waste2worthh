@@ -1,0 +1,165 @@
+- generic [ref=f2e3]:
+  - banner [ref=f2e4]:
+    - generic [ref=f2e6]:
+      - generic [ref=f2e7]:
+        - link "Waste2Worth Circular SaaS" [ref=f2e8] [cursor=pointer]:
+          - /url: /
+          - generic [ref=f2e16]:
+            - generic [ref=f2e17]: Waste2Worth
+            - generic [ref=f2e18]: Circular SaaS
+        - navigation [ref=f2e19]:
+          - link "Marketplace" [ref=f2e20] [cursor=pointer]:
+            - /url: /marketplace
+          - link "Seller Dashboard" [ref=f2e26] [cursor=pointer]:
+            - /url: /seller
+          - link "Buyer Dashboard" [ref=f2e31] [cursor=pointer]:
+            - /url: /buyer
+      - link "Search 450+ materials, categories... ⌘K" [ref=f2e38] [cursor=pointer]:
+        - /url: /marketplace
+        - generic [ref=f2e39]: Search 450+ materials, categories...
+        - generic [ref=f2e44]: ⌘K
+      - generic [ref=f2e46]:
+        - link [ref=f2e47] [cursor=pointer]:
+          - /url: /login
+          - button "Sign In" [ref=f2e48]
+        - link [ref=f2e50] [cursor=pointer]:
+          - /url: /signup
+          - button "Get Started Free" [ref=f2e51]
+  - main [ref=f2e53]:
+    - generic [ref=f2e54]:
+      - generic [ref=f2e55]:
+        - link "Back to Marketplace" [ref=f2e56] [cursor=pointer]:
+          - /url: /marketplace
+        - generic [ref=f2e60]:
+          - button "Share Lot" [ref=f2e61] [cursor=pointer]
+          - button "Save" [ref=f2e70] [cursor=pointer]
+      - generic [ref=f2e75]:
+        - generic [ref=f2e77]:
+          - generic [ref=f2e78]:
+            - generic [ref=f2e79]: 🔩
+            - generic [ref=f2e80]:
+              - generic [ref=f2e81]: Non-hazardous
+              - generic [ref=f2e85]: Metal Scrap
+            - generic [ref=f2e87]: 7 Active Offers
+            - generic [ref=f2e94]:
+              - generic [ref=f2e95]: "Lot ID: #109-CPCB"
+              - generic [ref=f2e96]: 2 days ago
+          - generic [ref=f2e97]:
+            - generic [ref=f2e98]:
+              - heading "Steel Mill Slag — Grade A" [level=1] [ref=f2e99]
+              - generic [ref=f2e100]:
+                - generic [ref=f2e101]: Tata Steel Ltd.
+                - generic [ref=f2e106]: •
+                - generic [ref=f2e107]: Jamshedpur, Jharkhand
+            - generic [ref=f2e111]:
+              - generic [ref=f2e112]: ₹8,200/tonne
+              - generic [ref=f2e113]: "Available: 450 tonnes"
+          - generic [ref=f2e114]:
+            - generic [ref=f2e115]:
+              - generic [ref=f2e116]: Category
+              - generic [ref=f2e117]: Metal Scrap
+            - generic [ref=f2e118]:
+              - generic [ref=f2e119]: Condition
+              - generic [ref=f2e120]: Unprocessed
+            - generic [ref=f2e121]:
+              - generic [ref=f2e122]: Total Lot
+              - generic [ref=f2e123]: 450 tonnes
+            - generic [ref=f2e124]:
+              - generic [ref=f2e125]: Hazard Class
+              - generic [ref=f2e126]: Non-hazardous
+          - generic [ref=f2e127]:
+            - heading "Material Composition & Specifications" [level=3] [ref=f2e128]
+            - paragraph [ref=f2e129]: High-calcium steel slag from blast furnace operations. Ideal for cement manufacturing, road construction aggregate, or soil conditioning. Consistent chemical composition with monthly test reports available. Regular supply of 200+ tonnes/month guaranteed.
+          - generic [ref=f2e130]:
+            - heading "Dispatch & Loading Facility" [level=3] [ref=f2e131]
+            - generic [ref=f2e137]:
+              - generic [ref=f2e138]:
+                - generic [ref=f2e139]: "Dispatch Address:"
+                - generic [ref=f2e140]: Jamshedpur, Jharkhand
+              - generic [ref=f2e141]:
+                - generic [ref=f2e142]: "Weighbridge on site:"
+                - generic [ref=f2e143]: Available (Certified Calibrated)
+              - generic [ref=f2e144]:
+                - generic [ref=f2e145]: "Loading assistance:"
+                - generic [ref=f2e146]: Overhead crane / forklift available on dock
+        - generic [ref=f2e147]:
+          - generic [ref=f2e148]:
+            - generic [ref=f2e149]:
+              - generic [ref=f2e150]: AI Material Intelligence
+              - generic [ref=f2e155]: 92% Confidence
+            - generic [ref=f2e157]:
+              - generic [ref=f2e158]:
+                - generic [ref=f2e159]: Classification & CAS Ref
+                - generic [ref=f2e160]: "Calcium Silicate Slag (CAS: 65997-17-3)"
+              - generic [ref=f2e161]:
+                - generic [ref=f2e162]: Fair Spot Valuation Range
+                - generic [ref=f2e163]: ₹7,800 – ₹9,100/tonne
+              - generic [ref=f2e164]:
+                - generic [ref=f2e165]: Environmental Abatement Score
+                - generic [ref=f2e166]: 1,240 kg CO₂e per tonne reused
+          - generic [ref=f2e170]:
+            - heading "Procurement & Tender Offer" [level=3] [ref=f2e171]
+            - generic [ref=f2e172]:
+              - paragraph [ref=f2e173]: Submit a formal bid against this industrial stream with Escrow settlement protection.
+              - button "Place Competitive Tender Bid" [ref=f2e174] [cursor=pointer]
+  - contentinfo [ref=f2e176]:
+    - generic [ref=f2e177]:
+      - generic [ref=f2e178]:
+        - generic [ref=f2e179]:
+          - link "Waste2Worth Circular SaaS" [ref=f2e180] [cursor=pointer]:
+            - /url: /
+            - generic [ref=f2e188]:
+              - generic [ref=f2e189]: Waste2Worth
+              - generic [ref=f2e190]: Circular SaaS
+          - paragraph [ref=f2e191]: The next-generation circular economy marketplace connecting industrial manufacturers, refineries, and recyclers to monetize secondary waste streams and cut scope 3 carbon footprints.
+        - generic [ref=f2e192]:
+          - heading "Platform" [level=4] [ref=f2e193]
+          - list [ref=f2e194]:
+            - listitem [ref=f2e195]:
+              - link "Browse All Materials" [ref=f2e196] [cursor=pointer]:
+                - /url: /marketplace
+            - listitem [ref=f2e197]:
+              - link "Seller Command Center" [ref=f2e198] [cursor=pointer]:
+                - /url: /seller
+            - listitem [ref=f2e199]:
+              - link "Buyer Procurement" [ref=f2e200] [cursor=pointer]:
+                - /url: /buyer
+            - listitem [ref=f2e201]:
+              - link "AI Listing Engine" [ref=f2e202] [cursor=pointer]:
+                - /url: /listing/new
+        - generic [ref=f2e203]:
+          - heading "Governance" [level=4] [ref=f2e204]
+          - list [ref=f2e205]:
+            - listitem [ref=f2e206]:
+              - link "CPCB / SPCB Guidelines" [ref=f2e207] [cursor=pointer]:
+                - /url: "#compliance"
+            - listitem [ref=f2e208]:
+              - link "CO₂ Carbon Credits" [ref=f2e209] [cursor=pointer]:
+                - /url: "#audit"
+            - listitem [ref=f2e210]:
+              - link "Hazmat Transport MSDS" [ref=f2e211] [cursor=pointer]:
+                - /url: "#hazmat"
+            - listitem [ref=f2e212]:
+              - link "Smart Escrow Settlement" [ref=f2e213] [cursor=pointer]:
+                - /url: "#escrow"
+        - generic [ref=f2e214]:
+          - heading "Company" [level=4] [ref=f2e215]
+          - list [ref=f2e216]:
+            - listitem [ref=f2e217]:
+              - link "Security & Trust" [ref=f2e218] [cursor=pointer]:
+                - /url: "#security"
+            - listitem [ref=f2e219]:
+              - link "Privacy Policy" [ref=f2e220] [cursor=pointer]:
+                - /url: "#privacy"
+            - listitem [ref=f2e221]:
+              - link "Terms of Service" [ref=f2e222] [cursor=pointer]:
+                - /url: "#terms"
+            - listitem [ref=f2e223]:
+              - link "Developer API Docs" [ref=f2e224] [cursor=pointer]:
+                - /url: "#api"
+      - generic [ref=f2e225]:
+        - generic [ref=f2e226]: © 2026 Waste2Worth | All rights reserved.
+        - generic [ref=f2e228]:
+          - generic [ref=f2e229]: B2B Platform
+          - generic [ref=f2e230]: •
+          - generic [ref=f2e231]: Encrypted & Verified

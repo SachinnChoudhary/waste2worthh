@@ -3,7 +3,48 @@ import { supabase, isSupabaseConfigured, mockDb } from '../config/supabase.js'
 
 const router = Router()
 
-// GET /api/bids/listing/:listingId - Retrieve all bids for a listing
+// GET /api/bids - Retrieve all bids or filter by buyer_id or seller_id
+router.get('/', async (req, res) => {
+  try {
+    const { buyer_id, seller_id } = req.query
+
+    if (isSupabaseConfigured) {
+      try {
+        let query = supabase
+          .from('bids')
+          .select('*, profiles:buyer_id (company_name, full_name, email, credit_score, city, phone), listings:listing_id (id, title, category, quantity, unit, price_display, price_inr, seller_id, profiles:seller_id (company_name, city))')
+          .order('created_at', { ascending: false })
+
+        if (buyer_id) query = query.eq('buyer_id', buyer_id)
+
+        const { data, error } = await query
+        if (!error && data) {
+          let results = data.map(b => ({
+            ...b,
+            buyer_company: b.profiles?.company_name || 'Verified Material Buyer',
+            listingTitle: b.listings?.title || `Lot #${b.listing_id}`,
+            sellerCompany: b.listings?.profiles?.company_name || 'Enterprise Seller',
+            price_per_unit: b.price_per_unit || `₹${Math.round((b.bid_amount_inr || 0) / (b.bid_quantity || 1)).toLocaleString('en-IN')}/${b.unit || 'tonnes'}`
+          }))
+
+          if (seller_id) {
+            results = results.filter(b => b.listings?.seller_id === seller_id)
+          }
+
+          return res.json({ success: true, count: results.length, bids: results })
+        }
+      } catch (e) {
+        console.warn('⚡ Supabase bids query notice:', e.message)
+      }
+    }
+
+    return res.json({ success: true, count: mockDb.bids.length, bids: mockDb.bids })
+  } catch (err) {
+    return res.status(500).json({ error: 'Failed to retrieve bids' })
+  }
+})
+
+// GET /api/bids/listing/:listingId - Retrieve all bids for a specific listing
 router.get('/listing/:listingId', async (req, res) => {
   try {
     const { listingId } = req.params
@@ -15,7 +56,14 @@ router.get('/listing/:listingId', async (req, res) => {
           .select('*, profiles:buyer_id (company_name, verified, credit_score, city)')
           .eq('listing_id', listingId)
           .order('created_at', { ascending: false })
-        if (!error && data) return res.json({ success: true, bids: data })
+        if (!error && data) {
+          const formatted = data.map(b => ({
+            ...b,
+            buyer_company: b.profiles?.company_name || 'Verified Buyer',
+            price_per_unit: `₹${Math.round((b.bid_amount_inr || 0) / (b.bid_quantity || 1)).toLocaleString('en-IN')}/${b.unit || 'tonnes'}`
+          }))
+          return res.json({ success: true, bids: formatted })
+        }
       } catch (e) {
         console.warn('⚡ Supabase bids query notice:', e.message)
       }
@@ -28,12 +76,12 @@ router.get('/listing/:listingId', async (req, res) => {
   }
 })
 
-// POST /api/bids - Place a new procurement bid
+// POST /api/bids - Place a new procurement tender bid
 router.post('/', async (req, res) => {
   try {
     const {
       listing_id,
-      buyer_id = 'a0000000-0000-0000-0000-000000000005',
+      buyer_id,
       buyer_company = 'Verified Material Buyer',
       bid_amount_inr,
       bid_quantity,
@@ -46,15 +94,19 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ error: 'Listing ID and Bid Amount are required' })
     }
 
-    const newBid = {
-      id: `bid-${Date.now()}`,
+    let realBuyerId = buyer_id
+    if (isSupabaseConfigured && (!realBuyerId || !realBuyerId.includes('-'))) {
+      // Find a valid buyer UUID
+      const { data: firstBuyer } = await supabase.from('profiles').select('id').eq('role', 'buyer').limit(1).single()
+      if (firstBuyer) realBuyerId = firstBuyer.id
+    }
+
+    const insertBid = {
       listing_id,
-      buyer_id,
-      buyer_company,
+      buyer_id: realBuyerId || 'a0000000-0000-0000-0000-000000000005',
       bid_amount_inr: Number(bid_amount_inr),
       bid_quantity: Number(bid_quantity) || 1,
       unit,
-      price_per_unit: `₹${Math.round(Number(bid_amount_inr) / (Number(bid_quantity) || 1)).toLocaleString('en-IN')}/${unit}`,
       proposed_logistics,
       message,
       status: 'pending',
@@ -63,25 +115,45 @@ router.post('/', async (req, res) => {
 
     if (isSupabaseConfigured) {
       try {
-        const { data, error } = await supabase.from('bids').insert([{ ...newBid, id: undefined }]).select().single()
+        const { data, error } = await supabase.from('bids').insert([insertBid]).select().single()
         if (!error && data) {
-          // Increment listing total_bids
-          await supabase.rpc('increment_listing_bids', { x: 1, row_id: listing_id }).catch(() => {})
-          return res.status(201).json({ success: true, bid: data })
+          // Increment listing total_bids count
+          const { data: listData } = await supabase.from('listings').select('total_bids, title').eq('id', listing_id).single()
+          if (listData) {
+            await supabase.from('listings').update({ total_bids: (listData.total_bids || 0) + 1 }).eq('id', listing_id)
+            
+            // Log audit event
+            await supabase.from('admin_audit_logs').insert([{
+              action: 'BID_PLACED',
+              entity: listData.title || `Listing #${listing_id}`,
+              details: `Bid placed of ₹${Number(bid_amount_inr).toLocaleString('en-IN')} by ${buyer_company}`,
+              performed_by: buyer_company,
+              type: 'bid'
+            }]).catch(() => {})
+          }
+
+          return res.status(201).json({
+            success: true,
+            bid: {
+              ...data,
+              buyer_company,
+              price_per_unit: `₹${Math.round(Number(bid_amount_inr) / (Number(bid_quantity) || 1)).toLocaleString('en-IN')}/${unit}`
+            }
+          })
         }
       } catch (e) {
         console.warn('⚡ Supabase bid insert notice:', e.message)
       }
     }
 
-    mockDb.bids.unshift(newBid)
-    
-    // Update listing bid count in mock DB
-    const targetListing = mockDb.listings.find(l => String(l.id) === String(listing_id))
-    if (targetListing) {
-      targetListing.bids = (targetListing.bids || 0) + 1
+    const newBid = {
+      id: `bid-${Date.now()}`,
+      ...insertBid,
+      buyer_company,
+      price_per_unit: `₹${Math.round(Number(bid_amount_inr) / (Number(bid_quantity) || 1)).toLocaleString('en-IN')}/${unit}`
     }
 
+    mockDb.bids.unshift(newBid)
     return res.status(201).json({ success: true, bid: newBid })
   } catch (err) {
     console.error('Error placing bid:', err)
@@ -89,13 +161,13 @@ router.post('/', async (req, res) => {
   }
 })
 
-// PATCH /api/bids/:id/status - Accept or Reject a bid
+// PATCH /api/bids/:id/status - Accept or Reject a bid in Supabase
 router.patch('/:id/status', async (req, res) => {
   try {
     const { id } = req.params
-    const { status } = req.body // 'accepted' | 'rejected'
+    const { status } = req.body // 'accepted' | 'rejected' | 'countered'
 
-    if (!['accepted', 'rejected', 'countered'].includes(status)) {
+    if (!['accepted', 'rejected', 'countered', 'pending'].includes(status)) {
       return res.status(400).json({ error: 'Invalid status' })
     }
 
@@ -107,7 +179,19 @@ router.patch('/:id/status', async (req, res) => {
           .eq('id', id)
           .select()
           .single()
-        if (!error && data) return res.json({ success: true, bid: data })
+
+        if (!error && data) {
+          // Log audit action
+          await supabase.from('admin_audit_logs').insert([{
+            action: status === 'accepted' ? 'BID_ACCEPTED' : 'BID_REJECTED',
+            entity: `Bid #${id}`,
+            details: `Bid status updated to '${status}'`,
+            performed_by: 'Authorized Enterprise Partner',
+            type: 'bid'
+          }]).catch(() => {})
+
+          return res.json({ success: true, bid: data })
+        }
       } catch (e) {
         console.warn('⚡ Supabase bid status notice:', e.message)
       }

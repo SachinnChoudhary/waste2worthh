@@ -1,0 +1,274 @@
+- generic [ref=f1e3]:
+  - banner [ref=f1e4]:
+    - generic [ref=f1e6]:
+      - generic [ref=f1e7]:
+        - link "Waste2Worth Circular SaaS" [ref=f1e8] [cursor=pointer]:
+          - /url: /
+          - generic [ref=f1e16]:
+            - generic [ref=f1e17]: Waste2Worth
+            - generic [ref=f1e18]: Circular SaaS
+        - navigation [ref=f1e19]:
+          - link "Marketplace" [ref=f1e20] [cursor=pointer]:
+            - /url: /marketplace
+          - link "Seller Dashboard" [ref=f1e26] [cursor=pointer]:
+            - /url: /seller
+          - link "Buyer Dashboard" [ref=f1e31] [cursor=pointer]:
+            - /url: /buyer
+      - link "Search 450+ materials, categories... ⌘K" [ref=f1e38] [cursor=pointer]:
+        - /url: /marketplace
+        - generic [ref=f1e39]: Search 450+ materials, categories...
+        - generic [ref=f1e44]: ⌘K
+      - generic [ref=f1e46]:
+        - link [ref=f1e47] [cursor=pointer]:
+          - /url: /login
+          - button "Sign In" [ref=f1e48]
+        - link [ref=f1e50] [cursor=pointer]:
+          - /url: /signup
+          - button "Get Started Free" [ref=f1e51]
+  - main [ref=f1e53]:
+    - generic [ref=f1e54]:
+      - generic [ref=f1e55]:
+        - generic [ref=f1e56]:
+          - generic [ref=f1e57]:
+            - heading "Industrial Byproduct Exchange" [level=1] [ref=f1e58]
+            - generic [ref=f1e59]: Live Market Tenders
+          - paragraph [ref=f1e63]: Browse verified post-industrial waste streams, chemical byproducts, and secondary raw materials.
+        - link [ref=f1e65] [cursor=pointer]:
+          - /url: /listing/new
+          - button "+ Post New Lot" [ref=f1e66]
+      - generic [ref=f1e68]:
+        - textbox "Search material type, chemical CAS, city, or seller..." [ref=f1e73]
+        - generic [ref=f1e74]:
+          - combobox [ref=f1e75] [cursor=pointer]:
+            - option "All Categories" [selected]
+            - option "Metal Scrap"
+            - option "Plastic Waste"
+            - option "Chemical Byproducts"
+            - option "Textile Waste"
+            - option "Wood & Paper"
+            - option "Glass"
+            - option "Electronic Waste"
+            - option "Organic Waste"
+            - option "Construction Debris"
+            - option "Rubber & Tires"
+          - combobox [ref=f1e76] [cursor=pointer]:
+            - option "All Hazards" [selected]
+            - option "Non-hazardous"
+            - option "Low"
+            - option "Moderate"
+            - option "High"
+          - generic [ref=f1e77]:
+            - button "Grid View" [ref=f1e78] [cursor=pointer]
+            - button "List View" [ref=f1e84] [cursor=pointer]
+      - generic [ref=f1e86]:
+        - 'link "🔩 Metal Scrap Non-hazardous 7 Bids Tata Steel Ltd. Jamshedpur Steel Mill Slag — Grade A High-calcium steel slag from blast furnace operations. Ideal for cement manufacturing, road construction aggregate, or soil conditioning. Consistent chemical composition with monthly test reports available. Regular supply of 200+ tonnes/month guaranteed. AI Valued 2 days ago ₹8,200/tonne Lot: 450 tonnes View Lot" [ref=f1e87] [cursor=pointer]':
+          - /url: /listing/1
+          - generic [ref=f1e88]:
+            - generic [ref=f1e89]:
+              - generic [ref=f1e90]:
+                - generic [ref=f1e91]:
+                  - generic [ref=f1e92]: 🔩
+                  - generic [ref=f1e93]:
+                    - generic [ref=f1e94]: Metal Scrap
+                    - generic [ref=f1e95]: Non-hazardous
+                - generic [ref=f1e99]: 7 Bids
+              - generic [ref=f1e105]:
+                - generic [ref=f1e106]: Tata Steel Ltd.
+                - generic [ref=f1e111]: Jamshedpur
+              - generic [ref=f1e115]:
+                - heading "Steel Mill Slag — Grade A" [level=3] [ref=f1e116]
+                - paragraph [ref=f1e117]: High-calcium steel slag from blast furnace operations. Ideal for cement manufacturing, road construction aggregate, or soil conditioning. Consistent chemical composition with monthly test reports available. Regular supply of 200+ tonnes/month guaranteed.
+              - generic [ref=f1e118]:
+                - generic [ref=f1e119]: AI Valued
+                - generic [ref=f1e123]: 2 days ago
+            - generic [ref=f1e124]:
+              - generic [ref=f1e125]:
+                - generic [ref=f1e126]: ₹8,200/tonne
+                - generic [ref=f1e127]: "Lot: 450 tonnes"
+              - button "View Lot" [ref=f1e128]
+        - 'link "♳ Plastic Waste Non-hazardous 3 Bids Reliance Petrochemicals Vadodara HDPE Drum Regrind — Clean, Single-Source Clean HDPE regrind from food-grade chemical drums. Single polymer source — no mixed plastics. Washed and granulated to 8-12mm flake. Melt flow index: 7.5 g/10min. Perfect for pipe extrusion or blow molding. AI Valued 5 hours ago ₹42,000/tonne Lot: 12 tonnes View Lot" [ref=f1e133] [cursor=pointer]':
+          - /url: /listing/2
+          - generic [ref=f1e134]:
+            - generic [ref=f1e135]:
+              - generic [ref=f1e136]:
+                - generic [ref=f1e137]:
+                  - generic [ref=f1e138]: ♳
+                  - generic [ref=f1e139]:
+                    - generic [ref=f1e140]: Plastic Waste
+                    - generic [ref=f1e141]: Non-hazardous
+                - generic [ref=f1e145]: 3 Bids
+              - generic [ref=f1e151]:
+                - generic [ref=f1e152]: Reliance Petrochemicals
+                - generic [ref=f1e157]: Vadodara
+              - generic [ref=f1e161]:
+                - heading "HDPE Drum Regrind — Clean, Single-Source" [level=3] [ref=f1e162]
+                - paragraph [ref=f1e163]: "Clean HDPE regrind from food-grade chemical drums. Single polymer source — no mixed plastics. Washed and granulated to 8-12mm flake. Melt flow index: 7.5 g/10min. Perfect for pipe extrusion or blow molding."
+              - generic [ref=f1e164]:
+                - generic [ref=f1e165]: AI Valued
+                - generic [ref=f1e169]: 5 hours ago
+            - generic [ref=f1e170]:
+              - generic [ref=f1e171]:
+                - generic [ref=f1e172]: ₹42,000/tonne
+                - generic [ref=f1e173]: "Lot: 12 tonnes"
+              - button "View Lot" [ref=f1e174]
+        - 'link "🧪 Chemical Byproducts Moderate 2 Bids IOCL Refinery Mathura Spent Caustic Soda — Recoverable NaOH Spent caustic from crude desulfurization. NaOH concentration 8-12%. Contains mercaptides and sulfides. Suitable for caustic recovery units or wastewater neutralization. MSDS and transport documentation provided. AI Valued 1 day ago ₹6,500/KL Lot: 80 KL View Lot" [ref=f1e179] [cursor=pointer]':
+          - /url: /listing/3
+          - generic [ref=f1e180]:
+            - generic [ref=f1e181]:
+              - generic [ref=f1e182]:
+                - generic [ref=f1e183]:
+                  - generic [ref=f1e184]: 🧪
+                  - generic [ref=f1e185]:
+                    - generic [ref=f1e186]: Chemical Byproducts
+                    - generic [ref=f1e187]: Moderate
+                - generic [ref=f1e191]: 2 Bids
+              - generic [ref=f1e197]:
+                - generic [ref=f1e198]: IOCL Refinery
+                - generic [ref=f1e203]: Mathura
+              - generic [ref=f1e207]:
+                - heading "Spent Caustic Soda — Recoverable NaOH" [level=3] [ref=f1e208]
+                - paragraph [ref=f1e209]: Spent caustic from crude desulfurization. NaOH concentration 8-12%. Contains mercaptides and sulfides. Suitable for caustic recovery units or wastewater neutralization. MSDS and transport documentation provided.
+              - generic [ref=f1e210]:
+                - generic [ref=f1e211]: AI Valued
+                - generic [ref=f1e215]: 1 day ago
+            - generic [ref=f1e216]:
+              - generic [ref=f1e217]:
+                - generic [ref=f1e218]: ₹6,500/KL
+                - generic [ref=f1e219]: "Lot: 80 KL"
+              - button "View Lot" [ref=f1e220]
+        - 'link "🧵 Textile Waste Non-hazardous 11 Bids Arvind Mills Ahmedabad Cotton Selvedge & Cutting Waste Clean cotton selvedge waste from denim weaving. 100% cotton, undyed edges and cutting room scraps. Baled in 200kg blocks. Consistent quality — same mill, same raw material. Ideal for recycled yarn spinning or industrial wiping cloth. AI Valued 3 days ago ₹15,000/tonne Lot: 6 tonnes/month View Lot" [ref=f1e225] [cursor=pointer]':
+          - /url: /listing/4
+          - generic [ref=f1e226]:
+            - generic [ref=f1e227]:
+              - generic [ref=f1e228]:
+                - generic [ref=f1e229]:
+                  - generic [ref=f1e230]: 🧵
+                  - generic [ref=f1e231]:
+                    - generic [ref=f1e232]: Textile Waste
+                    - generic [ref=f1e233]: Non-hazardous
+                - generic [ref=f1e237]: 11 Bids
+              - generic [ref=f1e243]:
+                - generic [ref=f1e244]: Arvind Mills
+                - generic [ref=f1e249]: Ahmedabad
+              - generic [ref=f1e253]:
+                - heading "Cotton Selvedge & Cutting Waste" [level=3] [ref=f1e254]
+                - paragraph [ref=f1e255]: Clean cotton selvedge waste from denim weaving. 100% cotton, undyed edges and cutting room scraps. Baled in 200kg blocks. Consistent quality — same mill, same raw material. Ideal for recycled yarn spinning or industrial wiping cloth.
+              - generic [ref=f1e256]:
+                - generic [ref=f1e257]: AI Valued
+                - generic [ref=f1e261]: 3 days ago
+            - generic [ref=f1e262]:
+              - generic [ref=f1e263]:
+                - generic [ref=f1e264]: ₹15,000/tonne
+                - generic [ref=f1e265]: "Lot: 6 tonnes/month"
+              - button "View Lot" [ref=f1e266]
+        - 'link "🏭 Construction Debris Low 15 Bids NTPC Dadri Dadri Fly Ash — Class F, Dry Class F fly ash from coal-fired thermal power generation. Low calcium (<5%), high silica. Meets IS 3812 Part 1 standards. Available for bulk pickup or rail transport. Excellent pozzolanic properties for concrete and brick manufacturing. AI Valued 6 hours ago ₹800/tonne Lot: 2,000 tonnes View Lot" [ref=f1e271] [cursor=pointer]':
+          - /url: /listing/5
+          - generic [ref=f1e272]:
+            - generic [ref=f1e273]:
+              - generic [ref=f1e274]:
+                - generic [ref=f1e275]:
+                  - generic [ref=f1e276]: 🏭
+                  - generic [ref=f1e277]:
+                    - generic [ref=f1e278]: Construction Debris
+                    - generic [ref=f1e279]: Low
+                - generic [ref=f1e283]: 15 Bids
+              - generic [ref=f1e289]:
+                - generic [ref=f1e290]: NTPC Dadri
+                - generic [ref=f1e295]: Dadri
+              - generic [ref=f1e299]:
+                - heading "Fly Ash — Class F, Dry" [level=3] [ref=f1e300]
+                - paragraph [ref=f1e301]: Class F fly ash from coal-fired thermal power generation. Low calcium (<5%), high silica. Meets IS 3812 Part 1 standards. Available for bulk pickup or rail transport. Excellent pozzolanic properties for concrete and brick manufacturing.
+              - generic [ref=f1e302]:
+                - generic [ref=f1e303]: AI Valued
+                - generic [ref=f1e307]: 6 hours ago
+            - generic [ref=f1e308]:
+              - generic [ref=f1e309]:
+                - generic [ref=f1e310]: ₹800/tonne
+                - generic [ref=f1e311]: "Lot: 2,000 tonnes"
+              - button "View Lot" [ref=f1e312]
+        - 'link "💻 Electronic Waste Moderate 9 Bids Infosys BPM (IT Asset Disposal) Bangalore E-Waste PCB Boards — Mixed Grade Mixed PCB boards from end-of-life server and desktop equipment. Contains recoverable copper, gold, palladium, and tin. R2-certified chain of custody documentation available. Quarterly batches of 500-1000 kg. AI Valued 4 days ago ₹280/kg Lot: 800 kg View Lot" [ref=f1e317] [cursor=pointer]':
+          - /url: /listing/6
+          - generic [ref=f1e318]:
+            - generic [ref=f1e319]:
+              - generic [ref=f1e320]:
+                - generic [ref=f1e321]:
+                  - generic [ref=f1e322]: 💻
+                  - generic [ref=f1e323]:
+                    - generic [ref=f1e324]: Electronic Waste
+                    - generic [ref=f1e325]: Moderate
+                - generic [ref=f1e329]: 9 Bids
+              - generic [ref=f1e335]:
+                - generic [ref=f1e336]: Infosys BPM (IT Asset Disposal)
+                - generic [ref=f1e341]: Bangalore
+              - generic [ref=f1e345]:
+                - heading "E-Waste PCB Boards — Mixed Grade" [level=3] [ref=f1e346]
+                - paragraph [ref=f1e347]: Mixed PCB boards from end-of-life server and desktop equipment. Contains recoverable copper, gold, palladium, and tin. R2-certified chain of custody documentation available. Quarterly batches of 500-1000 kg.
+              - generic [ref=f1e348]:
+                - generic [ref=f1e349]: AI Valued
+                - generic [ref=f1e353]: 4 days ago
+            - generic [ref=f1e354]:
+              - generic [ref=f1e355]:
+                - generic [ref=f1e356]: ₹280/kg
+                - generic [ref=f1e357]: "Lot: 800 kg"
+              - button "View Lot" [ref=f1e358]
+  - contentinfo [ref=f1e363]:
+    - generic [ref=f1e364]:
+      - generic [ref=f1e365]:
+        - generic [ref=f1e366]:
+          - link "Waste2Worth Circular SaaS" [ref=f1e367] [cursor=pointer]:
+            - /url: /
+            - generic [ref=f1e375]:
+              - generic [ref=f1e376]: Waste2Worth
+              - generic [ref=f1e377]: Circular SaaS
+          - paragraph [ref=f1e378]: The next-generation circular economy marketplace connecting industrial manufacturers, refineries, and recyclers to monetize secondary waste streams and cut scope 3 carbon footprints.
+        - generic [ref=f1e379]:
+          - heading "Platform" [level=4] [ref=f1e380]
+          - list [ref=f1e381]:
+            - listitem [ref=f1e382]:
+              - link "Browse All Materials" [ref=f1e383] [cursor=pointer]:
+                - /url: /marketplace
+            - listitem [ref=f1e384]:
+              - link "Seller Command Center" [ref=f1e385] [cursor=pointer]:
+                - /url: /seller
+            - listitem [ref=f1e386]:
+              - link "Buyer Procurement" [ref=f1e387] [cursor=pointer]:
+                - /url: /buyer
+            - listitem [ref=f1e388]:
+              - link "AI Listing Engine" [ref=f1e389] [cursor=pointer]:
+                - /url: /listing/new
+        - generic [ref=f1e390]:
+          - heading "Governance" [level=4] [ref=f1e391]
+          - list [ref=f1e392]:
+            - listitem [ref=f1e393]:
+              - link "CPCB / SPCB Guidelines" [ref=f1e394] [cursor=pointer]:
+                - /url: "#compliance"
+            - listitem [ref=f1e395]:
+              - link "CO₂ Carbon Credits" [ref=f1e396] [cursor=pointer]:
+                - /url: "#audit"
+            - listitem [ref=f1e397]:
+              - link "Hazmat Transport MSDS" [ref=f1e398] [cursor=pointer]:
+                - /url: "#hazmat"
+            - listitem [ref=f1e399]:
+              - link "Smart Escrow Settlement" [ref=f1e400] [cursor=pointer]:
+                - /url: "#escrow"
+        - generic [ref=f1e401]:
+          - heading "Company" [level=4] [ref=f1e402]
+          - list [ref=f1e403]:
+            - listitem [ref=f1e404]:
+              - link "Security & Trust" [ref=f1e405] [cursor=pointer]:
+                - /url: "#security"
+            - listitem [ref=f1e406]:
+              - link "Privacy Policy" [ref=f1e407] [cursor=pointer]:
+                - /url: "#privacy"
+            - listitem [ref=f1e408]:
+              - link "Terms of Service" [ref=f1e409] [cursor=pointer]:
+                - /url: "#terms"
+            - listitem [ref=f1e410]:
+              - link "Developer API Docs" [ref=f1e411] [cursor=pointer]:
+                - /url: "#api"
+      - generic [ref=f1e412]:
+        - generic [ref=f1e413]: © 2026 Waste2Worth | All rights reserved.
+        - generic [ref=f1e415]:
+          - generic [ref=f1e416]: B2B Platform
+          - generic [ref=f1e417]: •
+          - generic [ref=f1e418]: Encrypted & Verified

@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import { Badge } from '../components/Badge'
 import { Button } from '../components/Button'
 import { Input, Textarea } from '../components/Input'
-import { listings as defaultListings } from '../data'
 import { api } from '../lib/api'
 import { useWasteAuth } from '../lib/auth'
 import {
@@ -18,12 +17,14 @@ import {
   CheckCircle2,
   Share2,
   Bookmark,
+  RefreshCw,
 } from 'lucide-react'
 
 export default function ListingDetail() {
   const { id } = useParams()
   const { user } = useWasteAuth()
-  const [listing, setListing] = useState(defaultListings.find(l => l.id === id) || defaultListings[0])
+  const [listing, setListing] = useState(null)
+  const [loading, setLoading] = useState(true)
   const [bidAmount, setBidAmount] = useState('')
   const [bidQuantity, setBidQuantity] = useState('100')
   const [bidNote, setBidNote] = useState('')
@@ -35,14 +36,17 @@ export default function ListingDetail() {
 
   useEffect(() => {
     async function load() {
+      setLoading(true)
       const res = await api.getListingById(id)
       if (res && res.listing) {
         setListing(res.listing)
+        setBidAmount(String(res.listing.price_inr || ''))
       }
       const bidsRes = await api.getBidsForListing(id)
       if (bidsRes && bidsRes.bids) {
         setBidsList(bidsRes.bids)
       }
+      setLoading(false)
     }
     load()
   }, [id])
@@ -51,7 +55,7 @@ export default function ListingDetail() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    const numAmount = parseFloat(bidAmount.replace(/[^0-9.]/g, '')) || 50000
+    const numAmount = parseFloat(bidAmount.replace(/[^0-9.]/g, '')) || (listing?.price_inr || 50000)
 
     try {
       await api.placeBid({
@@ -60,7 +64,7 @@ export default function ListingDetail() {
         buyer_company: user?.company || 'Verified Material Buyer',
         bid_amount_inr: numAmount,
         bid_quantity: parseFloat(bidQuantity) || 10,
-        unit: listing.unit || 'tonnes',
+        unit: listing?.unit || 'tonnes',
         proposed_logistics: logistics,
         message: bidNote,
       })
@@ -68,6 +72,11 @@ export default function ListingDetail() {
       setBidSubmitted(true)
       setIsSubmitting(false)
       setShowBidForm(false)
+      // Refresh bids
+      const bidsRes = await api.getBidsForListing(id)
+      if (bidsRes && bidsRes.bids) {
+        setBidsList(bidsRes.bids)
+      }
     } catch (err) {
       setBidSubmitted(true)
       setIsSubmitting(false)
@@ -81,7 +90,28 @@ export default function ListingDetail() {
     Moderate: 'amber',
     High: 'rose',
   }
-  const hazardVal = listing.hazard || listing.hazard_level || 'Low'
+
+  if (loading) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full border-2 border-emerald-400 border-t-transparent animate-spin" />
+      </div>
+    )
+  }
+
+  if (!listing) {
+    return (
+      <div className="max-w-4xl mx-auto px-4 py-20 text-center space-y-4">
+        <h2 className="text-xl font-bold text-fg-primary">Listing Not Found</h2>
+        <p className="text-xs text-fg-secondary">This byproduct stream may have been completed or archived.</p>
+        <Link to="/marketplace" className="no-underline inline-block">
+          <Button variant="primary" size="sm">Back to Marketplace</Button>
+        </Link>
+      </div>
+    )
+  }
+
+  const hazardVal = listing.hazard || listing.hazard_level || 'Non-hazardous'
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col gap-8">
@@ -132,13 +162,13 @@ export default function ListingDetail() {
 
               <div className="absolute top-4 right-4">
                 <Badge variant="cyan" size="md" icon={<TrendingUp className="w-3.5 h-3.5" />}>
-                  {listing.bids || bidsList.length} Active Offers
+                  {bidsList.length} Active Offers
                 </Badge>
               </div>
 
               <div className="absolute bottom-3 left-4 right-4 bg-zinc-950/90 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/[0.08] flex items-center justify-between text-xs text-zinc-400 font-mono">
-                <span>Lot ID: #{listing.id}09-CPCB</span>
-                <span>{listing.postedAt || 'Active'}</span>
+                <span>Lot ID: #{String(listing.id).slice(0, 8)}</span>
+                <span>Live on Supabase</span>
               </div>
             </div>
 
@@ -151,7 +181,7 @@ export default function ListingDetail() {
                 <div className="flex items-center gap-2 text-xs text-zinc-400">
                   <span className="font-semibold text-zinc-200 flex items-center gap-1">
                     <Building2 className="w-3.5 h-3.5 text-emerald-400" />
-                    {listing.company || listing.profiles?.company_name || 'Enterprise Seller'}
+                    {listing.company || 'Enterprise Seller'}
                   </span>
                   <span className="text-zinc-600">•</span>
                   <span className="flex items-center gap-1">
@@ -175,7 +205,7 @@ export default function ListingDetail() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
                 { label: 'Category', value: listing.category },
-                { label: 'Condition', value: listing.condition || 'Sorted' },
+                { label: 'Condition', value: listing.condition || 'Clean / sorted' },
                 { label: 'Total Lot', value: listing.quantity },
                 { label: 'Hazard Class', value: hazardVal },
               ].map(spec => (
@@ -265,7 +295,7 @@ export default function ListingDetail() {
                 </span>
                 <span className="text-xs font-semibold text-cyan-400 flex items-center gap-1.5 mt-0.5">
                   <Leaf className="w-3.5 h-3.5 shrink-0" />
-                  {listing.co2Saved || `${((listing.co2_reduction_kg || 1500) / 1000).toFixed(1)} tonnes CO₂e prevented`}
+                  {listing.co2Saved || 'Scope-3 Monitored'}
                 </span>
               </div>
             </div>
@@ -281,8 +311,8 @@ export default function ListingDetail() {
               <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-3">
                 <CheckCircle2 className="w-6 h-6 text-emerald-400 shrink-0" />
                 <div className="flex flex-col">
-                  <span className="text-xs font-bold text-emerald-300">Bid Submitted to Seller</span>
-                  <span className="text-[11px] text-zinc-400">The seller will review terms via smart escrow notification.</span>
+                  <span className="text-xs font-bold text-emerald-300">Bid Recorded in Supabase</span>
+                  <span className="text-[11px] text-zinc-400">The seller has been notified via smart escrow channel.</span>
                 </div>
               </div>
             ) : showBidForm ? (
@@ -298,7 +328,7 @@ export default function ListingDetail() {
                 <Input
                   label="Target Volume"
                   id="bid-qty"
-                  placeholder="Quantity in tonnes/kg"
+                  placeholder={`Quantity in ${listing.unit || 'tonnes'}`}
                   value={bidQuantity}
                   onChange={e => setBidQuantity(e.target.value)}
                   required

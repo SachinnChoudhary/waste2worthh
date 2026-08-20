@@ -109,6 +109,41 @@ CREATE TABLE IF NOT EXISTS public.transactions (
     settled_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- 6. Admin Audit Trail & Security Event Logs
+CREATE TABLE IF NOT EXISTS public.admin_audit_logs (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    action TEXT NOT NULL,
+    entity TEXT NOT NULL,
+    details TEXT,
+    performed_by TEXT DEFAULT 'SuperAdmin',
+    type TEXT DEFAULT 'system' CHECK (type IN ('system', 'user', 'listing', 'bid', 'security', 'compliance')),
+    metadata JSONB DEFAULT '{}'::jsonb,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 7. Master System Configuration & Global Switches
+CREATE TABLE IF NOT EXISTS public.system_settings (
+    key TEXT PRIMARY KEY,
+    value JSONB NOT NULL,
+    description TEXT,
+    updated_by TEXT DEFAULT 'SuperAdmin',
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 8. Historical KPI Snapshot Registry
+CREATE TABLE IF NOT EXISTS public.admin_kpi_snapshots (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    total_listings INTEGER DEFAULT 0,
+    active_listings INTEGER DEFAULT 0,
+    total_bids INTEGER DEFAULT 0,
+    accepted_bids INTEGER DEFAULT 0,
+    total_gmv_inr NUMERIC DEFAULT 0,
+    diverted_tonnes NUMERIC DEFAULT 0,
+    co2_saved_tonnes NUMERIC DEFAULT 0,
+    verified_enterprises INTEGER DEFAULT 0,
+    recorded_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 -- ====================================================================
 -- Performance Indexes
 -- ====================================================================
@@ -120,6 +155,9 @@ CREATE INDEX IF NOT EXISTS idx_listings_seller ON public.listings(seller_id);
 CREATE INDEX IF NOT EXISTS idx_bids_listing ON public.bids(listing_id);
 CREATE INDEX IF NOT EXISTS idx_bids_buyer ON public.bids(buyer_id);
 CREATE INDEX IF NOT EXISTS idx_profiles_clerk ON public.profiles(clerk_user_id);
+CREATE INDEX IF NOT EXISTS idx_admin_audit_created_at ON public.admin_audit_logs(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_admin_audit_type ON public.admin_audit_logs(type);
+CREATE INDEX IF NOT EXISTS idx_kpi_recorded_at ON public.admin_kpi_snapshots(recorded_at DESC);
 
 -- ====================================================================
 -- Row Level Security (RLS) Policies
@@ -129,6 +167,9 @@ ALTER TABLE public.listings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.bids ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.buyer_preferences ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.transactions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.admin_audit_logs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.system_settings ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.admin_kpi_snapshots ENABLE ROW LEVEL SECURITY;
 
 -- Profiles: Public read, Self update
 CREATE POLICY "Public profiles are readable by anyone" ON public.profiles
@@ -168,6 +209,13 @@ CREATE POLICY "Buyer preferences access" ON public.buyer_preferences
 CREATE POLICY "Transactions readable by participants" ON public.transactions
     FOR SELECT USING (true);
 
+-- Admin & System Policies
+CREATE POLICY "Admin audit logs viewable by all" ON public.admin_audit_logs FOR SELECT USING (true);
+CREATE POLICY "Admin audit logs insertable" ON public.admin_audit_logs FOR INSERT WITH CHECK (true);
+CREATE POLICY "System settings readable" ON public.system_settings FOR SELECT USING (true);
+CREATE POLICY "System settings updatable" ON public.system_settings FOR ALL USING (true);
+CREATE POLICY "KPI snapshots readable" ON public.admin_kpi_snapshots FOR ALL USING (true);
+
 -- ====================================================================
 -- Auto-update updated_at timestamp trigger
 -- ====================================================================
@@ -186,4 +234,7 @@ CREATE TRIGGER on_listings_update BEFORE UPDATE ON public.listings
     FOR EACH ROW EXECUTE PROCEDURE public.handle_updated_at();
 
 CREATE TRIGGER on_bids_update BEFORE UPDATE ON public.bids
+    FOR EACH ROW EXECUTE PROCEDURE public.handle_updated_at();
+
+CREATE TRIGGER on_system_settings_update BEFORE UPDATE ON public.system_settings
     FOR EACH ROW EXECUTE PROCEDURE public.handle_updated_at();

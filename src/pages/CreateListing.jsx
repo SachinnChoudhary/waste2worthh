@@ -105,7 +105,7 @@ export default function CreateListing() {
       await api.createListing({
         ...form,
         seller_id: user?.id,
-        company_name: user?.company || 'Enterprise Seller',
+        company_name: user?.company || 'Tata Steel Ltd.',
       })
       setTimeout(() => {
         setIsSubmitting(false)
@@ -116,8 +116,6 @@ export default function CreateListing() {
       navigate('/seller')
     }
   }
-
-  const hasInput = form.title.length > 3 || form.description.length > 5
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
@@ -136,7 +134,7 @@ export default function CreateListing() {
               Post Industrial Byproduct Lot
             </h1>
             <p className="text-xs sm:text-sm text-fg-secondary mt-0.5">
-              Publish secondary raw materials to 340+ verified buyers with real-time AI valuation and carbon audit scoring.
+              Publish secondary raw materials to verified buyers with live Supabase persistence and carbon audit scoring.
             </p>
           </div>
           <Badge variant="purple" size="md" icon={<Sparkles className="w-3.5 h-3.5" />}>
@@ -245,7 +243,7 @@ export default function CreateListing() {
               label="Technical Composition & Extraction Details"
               id="description"
               rows={4}
-              placeholder="Detail the chemical composition, moisture percentage, ash content, testing reports available on request, and pickup terms (e.g. regular supply of PET bottle scrap generated from our bottling line)..."
+              placeholder="Detail the chemical composition, moisture percentage, ash content, testing reports available on request, and pickup terms..."
               value={form.description}
               onChange={update('description')}
               helperText="The ML model extracts chemical descriptors in real-time to benchmark pricing."
@@ -364,7 +362,7 @@ export default function CreateListing() {
                 variant="primary"
                 isLoading={isSubmitting}
               >
-                Publish Lot to Marketplace
+                Publish Lot to Supabase Marketplace
               </Button>
 
               <Button

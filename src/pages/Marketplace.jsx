@@ -5,7 +5,7 @@ import { Badge } from '../components/Badge'
 import { Button } from '../components/Button'
 import { Input } from '../components/Input'
 import { EmptyState } from '../components/EmptyState'
-import { listings as defaultListings, wasteCategories, hazardLevels } from '../data'
+import { wasteCategories, hazardLevels } from '../data'
 import { api } from '../lib/api'
 import {
   Search,
@@ -18,6 +18,7 @@ import {
   Sparkles,
   ArrowRight,
   RotateCcw,
+  RefreshCw
 } from 'lucide-react'
 
 function ListingCard({ listing, viewMode = 'grid' }) {
@@ -28,8 +29,8 @@ function ListingCard({ listing, viewMode = 'grid' }) {
     High: 'rose',
   }
 
-  const hazardVal = listing.hazard || listing.hazard_level || 'Low'
-  const companyName = listing.company || listing.profiles?.company_name || 'Industrial Plant'
+  const hazardVal = listing.hazard || listing.hazard_level || 'Non-hazardous'
+  const companyName = listing.company || 'Industrial Plant'
 
   if (viewMode === 'list') {
     return (
@@ -73,7 +74,7 @@ function ListingCard({ listing, viewMode = 'grid' }) {
                 {listing.price}
               </span>
               <span className="text-xs text-zinc-400 font-mono block">
-                {listing.quantity} available
+                {listing.quantity}
               </span>
             </div>
             <div className="flex items-center gap-2.5">
@@ -146,7 +147,7 @@ function ListingCard({ listing, viewMode = 'grid' }) {
             <span className="flex items-center gap-1 text-emerald-400 font-semibold">
               <Sparkles className="w-3 h-3" /> AI Valued
             </span>
-            <span>{listing.postedAt || 'Live'}</span>
+            <span>{listing.co2Saved || 'Scope-3 Monitored'}</span>
           </div>
         </div>
 
@@ -174,35 +175,22 @@ export default function Marketplace() {
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('')
   const [hazard, setHazard] = useState('')
-  const [sortBy, setSortBy] = useState('newest')
   const [viewMode, setViewMode] = useState('grid')
-  const [allListings, setAllListings] = useState(defaultListings)
-  const [isLoading, setIsLoading] = useState(false)
+  const [allListings, setAllListings] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  const loadListings = async () => {
+    setIsLoading(true)
+    const res = await api.getListings({ category, hazard, search })
+    if (res && res.listings) {
+      setAllListings(res.listings)
+    }
+    setIsLoading(false)
+  }
 
   useEffect(() => {
-    async function load() {
-      setIsLoading(true)
-      const res = await api.getListings({ category, hazard, search })
-      if (res && res.listings && res.listings.length > 0) {
-        setAllListings(res.listings)
-      }
-      setIsLoading(false)
-    }
-    load()
+    loadListings()
   }, [category, hazard, search])
-
-  const filtered = allListings.filter(l => {
-    if (
-      search &&
-      !l.title.toLowerCase().includes(search.toLowerCase()) &&
-      !(l.company || '').toLowerCase().includes(search.toLowerCase()) &&
-      !(l.location || '').toLowerCase().includes(search.toLowerCase())
-    )
-      return false
-    if (category && l.category !== category) return false
-    if (hazard && (l.hazard !== hazard && l.hazard_level !== hazard)) return false
-    return true
-  })
 
   const handleReset = () => {
     setSearch('')
@@ -220,15 +208,24 @@ export default function Marketplace() {
               Industrial Byproduct Exchange
             </h1>
             <Badge variant="emerald" size="sm" dot>
-              Live Market Tenders
+              Live Supabase Marketplace
             </Badge>
           </div>
           <p className="text-xs sm:text-sm text-zinc-400">
-            Browse verified post-industrial waste streams, chemical byproducts, and secondary raw materials.
+            Browse verified post-industrial byproduct streams, chemical residues, and secondary raw materials.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={loadListings}
+            leftIcon={<RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />}
+          >
+            Sync
+          </Button>
+
           <Link to="/listing/new" className="no-underline">
             <Button size="sm" variant="primary">
               + Post New Lot
@@ -302,7 +299,7 @@ export default function Marketplace() {
       </div>
 
       {/* ─── Listings Grid/List View ─── */}
-      {filtered.length === 0 ? (
+      {allListings.length === 0 ? (
         <EmptyState
           icon={<Search className="w-8 h-8" />}
           title="No Matching Industrial Lots Found"
@@ -312,7 +309,7 @@ export default function Marketplace() {
         />
       ) : (
         <div className={viewMode === 'grid' ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6' : 'flex flex-col gap-4'}>
-          {filtered.map(listing => (
+          {allListings.map(listing => (
             <ListingCard key={listing.id} listing={listing} viewMode={viewMode} />
           ))}
         </div>
