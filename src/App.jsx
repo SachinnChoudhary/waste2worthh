@@ -10,7 +10,8 @@ import CreateListing from './pages/CreateListing'
 import ListingDetail from './pages/ListingDetail'
 import Profile from './pages/Profile'
 import AdminDashboard from './pages/AdminDashboard'
-import { useWasteAuth } from './lib/auth'
+import { AuthenticateWithRedirectCallback } from '@clerk/clerk-react'
+import { useWasteAuth, isClerkConfigured } from './lib/auth'
 
 function RoleBasedRedirect() {
   const { role, isLoggedIn } = useWasteAuth()
@@ -18,6 +19,13 @@ function RoleBasedRedirect() {
   if (role === 'buyer') return <Navigate to="/buyer" replace />
   if (role === 'admin') return <Navigate to="/admin" replace />
   return <Navigate to="/seller" replace />
+}
+
+function SSOCallbackHandler() {
+  if (isClerkConfigured) {
+    return <AuthenticateWithRedirectCallback signUpForceRedirectUrl="/dashboard" signInForceRedirectUrl="/dashboard" />
+  }
+  return <Navigate to="/dashboard" replace />
 }
 
 function ProtectedRoute({ children, allowedRoles }) {
@@ -62,6 +70,10 @@ export default function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/marketplace" element={<Marketplace />} />
         <Route path="/listing/:id" element={<ListingDetail />} />
+
+        {/* SSO OAuth Callbacks */}
+        <Route path="/login/sso-callback" element={<SSOCallbackHandler />} />
+        <Route path="/sso-callback" element={<SSOCallbackHandler />} />
 
         {/* Auth Routes with Auto-Redirect if Already Authenticated */}
         <Route path="/login/*" element={<AuthRouteGuard><Login /></AuthRouteGuard>} />
