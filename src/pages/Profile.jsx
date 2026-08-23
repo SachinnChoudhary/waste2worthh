@@ -4,6 +4,7 @@ import { Button } from '../components/Button'
 import { Input, Textarea } from '../components/Input'
 import { Badge } from '../components/Badge'
 import { useWasteAuth } from '../lib/auth'
+import { api } from '../lib/api'
 import { supabase, isSupabaseLive } from '../lib/supabaseClient'
 import {
   Building2,
@@ -30,14 +31,14 @@ export default function Profile() {
   const [savedSuccess, setSavedSuccess] = useState(false)
   const [profileForm, setProfileForm] = useState({
     full_name: user?.fullName || 'Rajesh Sharma',
-    company_name: user?.company || 'Tata Steel Ltd.',
-    email: user?.email || 'procurement@tatasteel.com',
+    company_name: user?.company || 'Northgate Steelworks Ltd.',
+    email: user?.email || 'procurement@northgatesteel.demo',
     role: role || 'seller',
-    gstin: '20AAACT2727Q1ZU',
-    phone: '+91 657 664 1234',
+    gstin: '20AAAAA0000A1Z1',
+    phone: '+91 657 555 0101',
     city: 'Jamshedpur',
     state: 'Jharkhand',
-    address: 'Tata Steel Jamshedpur Works, Jamshedpur, Jharkhand 831001',
+    address: 'Northgate Steelworks Plant Complex, Jamshedpur, Jharkhand 831001',
     credit_score: 890,
   })
 
@@ -84,22 +85,18 @@ export default function Profile() {
     e.preventDefault()
     setIsSaving(true)
 
-    if (isSupabaseLive && user?.id) {
+    // Save profile via Express API (service role key handles the Supabase write)
+    if (user?.id) {
       try {
-        await supabase
-          .from('profiles')
-          .update({
-            full_name: profileForm.full_name,
-            company_name: profileForm.company_name,
-            role: profileForm.role,
-            gstin: profileForm.gstin,
-            phone: profileForm.phone,
-            city: profileForm.city,
-            state: profileForm.state,
-            address: profileForm.address,
-            updated_at: new Date().toISOString()
-          })
-          .eq('id', user.id)
+        await api.syncUser({
+          clerk_user_id: user.clerk_user_id || user.id,
+          email: profileForm.email,
+          full_name: profileForm.full_name,
+          company_name: profileForm.company_name,
+          role: profileForm.role,
+          gstin: profileForm.gstin,
+          phone: profileForm.phone,
+        })
       } catch (err) {
         console.warn('Profile save notice:', err.message)
       }
@@ -123,7 +120,7 @@ export default function Profile() {
             Organization Profile & Credentials
           </h1>
           <Badge variant="emerald" size="sm" dot>
-            Live Supabase Account
+            Verified Enterprise Account
           </Badge>
         </div>
         <p className="text-xs sm:text-sm text-fg-secondary">
@@ -192,7 +189,7 @@ export default function Profile() {
           {/* Form */}
           <form onSubmit={handleSave} className="surface-card rounded-2xl p-6 border border-white/[0.08] space-y-5">
             <h3 className="text-sm font-bold text-fg-primary uppercase tracking-wider">
-              Legal Entity & Factory Info (Synced to Supabase)
+              Legal Entity & Factory Info (Synced to Live Database)
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -282,14 +279,14 @@ export default function Profile() {
             <div className="flex items-center justify-between pt-3 border-t border-white/[0.06]">
               {savedSuccess ? (
                 <span className="text-xs font-semibold text-emerald-400 flex items-center gap-1.5 animate-in fade-in">
-                  <CheckCircle2 className="w-4 h-4" /> Profile credentials updated in Supabase.
+                  <CheckCircle2 className="w-4 h-4" /> Profile credentials updated in database.
                 </span>
               ) : (
                 <span className="text-xs text-fg-muted">Changes persist across the entire Waste2Worth exchange.</span>
               )}
 
               <Button type="submit" size="md" variant="primary" isLoading={isSaving} leftIcon={<Save className="w-4 h-4" />}>
-                Save Profile to Supabase
+                Save Profile Changes
               </Button>
             </div>
           </form>
@@ -373,7 +370,7 @@ export default function Profile() {
         <div className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle className="text-sm">Account Security & Supabase Auth Link</CardTitle>
+              <CardTitle className="text-sm">Account Security & Authentication Link</CardTitle>
               <CardDescription>Update your enterprise login password and 2FA credentials.</CardDescription>
             </CardHeader>
             <CardBody className="space-y-4">

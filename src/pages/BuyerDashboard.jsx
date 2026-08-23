@@ -105,7 +105,7 @@ export default function BuyerDashboard() {
       await api.placeBid({
         listing_id: quickBidListing.id,
         buyer_id: user?.id,
-        buyer_company: user?.company || 'UltraTech Cement Ltd.',
+        buyer_company: user?.company || 'Apex Matrix Materials Ltd.',
         bid_amount_inr: parseFloat(bidAmount.replace(/[^0-9.]/g, '')) || 50000,
         bid_quantity: parseFloat(bidQuantity) || 10,
         unit: quickBidListing.unit || 'tonnes',
@@ -207,7 +207,7 @@ export default function BuyerDashboard() {
             </Badge>
           </div>
           <p className="text-xs sm:text-sm text-zinc-400">
-            Real-time material procurement for {user?.company || 'UltraTech Cement Ltd.'} with cosine similarity matching and verified factory lots.
+            Real-time material procurement for {user?.company || 'Apex Matrix Materials Ltd.'} with cosine similarity matching and verified factory lots.
           </p>
         </div>
 

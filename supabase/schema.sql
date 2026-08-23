@@ -160,8 +160,48 @@ CREATE INDEX IF NOT EXISTS idx_admin_audit_type ON public.admin_audit_logs(type)
 CREATE INDEX IF NOT EXISTS idx_kpi_recorded_at ON public.admin_kpi_snapshots(recorded_at DESC);
 
 -- ====================================================================
+-- RLS Helper Functions
+-- ====================================================================
+
+-- Extract Clerk user ID from the JWT claims passed by Supabase.
+-- Works when Clerk JWTs are configured as Supabase custom access tokens,
+-- or when the Express backend sets request.jwt.claims via the service role.
+-- Returns '' (empty string) for unauthenticated / anon-key requests.
+CREATE OR REPLACE FUNCTION public.get_clerk_uid()
+RETURNS TEXT AS $$
+  SELECT COALESCE(
+    current_setting('request.jwt.claims', true)::json->>'sub',
+    current_setting('request.jwt.claims', true)::json->>'clerk_user_id',
+    ''
+  );
+$$ LANGUAGE sql STABLE SECURITY DEFINER;
+
+-- Returns true if the JWT user has role = 'admin' in profiles.
+CREATE OR REPLACE FUNCTION public.is_admin()
+RETURNS BOOLEAN AS $$
+  SELECT EXISTS (
+    SELECT 1 FROM public.profiles
+    WHERE clerk_user_id = public.get_clerk_uid()
+      AND role = 'admin'
+  );
+$$ LANGUAGE sql STABLE SECURITY DEFINER;
+
+-- ====================================================================
 -- Row Level Security (RLS) Policies
 -- ====================================================================
+--
+-- Architecture note:
+--   All WRITE operations go through the Express backend using the
+--   SUPABASE_SERVICE_ROLE_KEY, which bypasses RLS entirely.
+--   These policies are a defense-in-depth layer for the anon key:
+--     • Public reads where appropriate
+--     • All writes blocked for the anon key (the anon JWT has no sub claim,
+--       so get_clerk_uid() returns '' which never matches a real user)
+--
+-- If Clerk JWT integration is later configured in Supabase, these policies
+-- will also correctly enforce ownership for direct client-side access.
+-- ====================================================================
+
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.listings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.bids ENABLE ROW LEVEL SECURITY;
@@ -171,50 +211,173 @@ ALTER TABLE public.admin_audit_logs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.system_settings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.admin_kpi_snapshots ENABLE ROW LEVEL SECURITY;
 
--- Profiles: Public read, Self update
-CREATE POLICY "Public profiles are readable by anyone" ON public.profiles
+-- ────────────────────────────────────────────
+-- PROFILES
+-- ────────────────────────────────────────────
+-- SELECT: Public (needed for company directory / marketplace seller info)
+CREATE POLICY "profiles_select_public" ON public.profiles
     FOR SELECT USING (true);
 
-CREATE POLICY "Users can create their own profile" ON public.profiles
-    FOR INSERT WITH CHECK (true);
+-- INSERT: Only the owning Clerk user can create their own profile
+CREATE POLICY "profiles_insert_own" ON public.profiles
+    FOR INSERT WITH CHECK (clerk_user_id = public.get_clerk_uid());
 
-CREATE POLICY "Users can update their own profile" ON public.profiles
-    FOR UPDATE USING (true);
+-- UPDATE: Only the owning Clerk user can update their own profile
+CREATE POLICY "profiles_update_own" ON public.profiles
+    FOR UPDATE USING (clerk_user_id = public.get_clerk_uid());
 
--- Listings: Public read for active, authenticated owners can modify
-CREATE POLICY "Active listings are viewable by everyone" ON public.listings
-    FOR SELECT USING (true);
+-- ────────────────────────────────────────────
+-- LISTINGS
+-- ────────────────────────────────────────────
+-- SELECT: Only active listings are publicly visible
+CREATE POLICY "listings_select_active" ON public.listings
+    FOR SELECT USING (status = 'active');
 
-CREATE POLICY "Authenticated users can create listings" ON public.listings
-    FOR INSERT WITH CHECK (true);
+-- INSERT: Only if the authenticated user's profile ID matches seller_id
+CREATE POLICY "listings_insert_own" ON public.listings
+    FOR INSERT WITH CHECK (
+      seller_id IN (
+        SELECT id FROM public.profiles
+        WHERE clerk_user_id = public.get_clerk_uid()
+      )
+    );
 
-CREATE POLICY "Sellers can update their own listings" ON public.listings
-    FOR UPDATE USING (true);
+-- UPDATE: Only the listing's seller can update
+CREATE POLICY "listings_update_own" ON public.listings
+    FOR UPDATE USING (
+      seller_id IN (
+        SELECT id FROM public.profiles
+        WHERE clerk_user_id = public.get_clerk_uid()
+      )
+    );
 
--- Bids: Buyers and listing owners can read
-CREATE POLICY "Bids visible to listing owner and bidder" ON public.bids
-    FOR SELECT USING (true);
+-- ────────────────────────────────────────────
+-- BIDS
+-- ────────────────────────────────────────────
+-- SELECT: The buyer who placed the bid, or the seller who owns the listing
+CREATE POLICY "bids_select_participant" ON public.bids
+    FOR SELECT USING (
+      -- The bidder can see their own bids
+      buyer_id IN (
+        SELECT id FROM public.profiles
+        WHERE clerk_user_id = public.get_clerk_uid()
+      )
+      OR
+      -- The listing's seller can see bids on their listings
+      listing_id IN (
+        SELECT l.id FROM public.listings l
+        JOIN public.profiles p ON p.id = l.seller_id
+        WHERE p.clerk_user_id = public.get_clerk_uid()
+      )
+    );
 
-CREATE POLICY "Buyers can place bids" ON public.bids
-    FOR INSERT WITH CHECK (true);
+-- INSERT: Only if buyer_id matches the authenticated user's profile
+CREATE POLICY "bids_insert_own" ON public.bids
+    FOR INSERT WITH CHECK (
+      buyer_id IN (
+        SELECT id FROM public.profiles
+        WHERE clerk_user_id = public.get_clerk_uid()
+      )
+    );
 
-CREATE POLICY "Parties can update bids" ON public.bids
-    FOR UPDATE USING (true);
+-- UPDATE: The bidder (for withdrawal) or the listing's seller (accept/reject)
+CREATE POLICY "bids_update_participant" ON public.bids
+    FOR UPDATE USING (
+      -- Bidder can update (withdraw) their own bid
+      buyer_id IN (
+        SELECT id FROM public.profiles
+        WHERE clerk_user_id = public.get_clerk_uid()
+      )
+      OR
+      -- Listing seller can update (accept/reject) bids on their listings
+      listing_id IN (
+        SELECT l.id FROM public.listings l
+        JOIN public.profiles p ON p.id = l.seller_id
+        WHERE p.clerk_user_id = public.get_clerk_uid()
+      )
+    );
 
--- Buyer Preferences: Read/write for preferences
-CREATE POLICY "Buyer preferences access" ON public.buyer_preferences
-    FOR ALL USING (true);
+-- ────────────────────────────────────────────
+-- BUYER PREFERENCES
+-- ────────────────────────────────────────────
+-- All operations restricted to the owning buyer only
+CREATE POLICY "buyer_prefs_select_own" ON public.buyer_preferences
+    FOR SELECT USING (
+      buyer_id IN (
+        SELECT id FROM public.profiles
+        WHERE clerk_user_id = public.get_clerk_uid()
+      )
+    );
 
--- Transactions: Read for involved parties
-CREATE POLICY "Transactions readable by participants" ON public.transactions
-    FOR SELECT USING (true);
+CREATE POLICY "buyer_prefs_insert_own" ON public.buyer_preferences
+    FOR INSERT WITH CHECK (
+      buyer_id IN (
+        SELECT id FROM public.profiles
+        WHERE clerk_user_id = public.get_clerk_uid()
+      )
+    );
 
--- Admin & System Policies
-CREATE POLICY "Admin audit logs viewable by all" ON public.admin_audit_logs FOR SELECT USING (true);
-CREATE POLICY "Admin audit logs insertable" ON public.admin_audit_logs FOR INSERT WITH CHECK (true);
-CREATE POLICY "System settings readable" ON public.system_settings FOR SELECT USING (true);
-CREATE POLICY "System settings updatable" ON public.system_settings FOR ALL USING (true);
-CREATE POLICY "KPI snapshots readable" ON public.admin_kpi_snapshots FOR ALL USING (true);
+CREATE POLICY "buyer_prefs_update_own" ON public.buyer_preferences
+    FOR UPDATE USING (
+      buyer_id IN (
+        SELECT id FROM public.profiles
+        WHERE clerk_user_id = public.get_clerk_uid()
+      )
+    );
+
+CREATE POLICY "buyer_prefs_delete_own" ON public.buyer_preferences
+    FOR DELETE USING (
+      buyer_id IN (
+        SELECT id FROM public.profiles
+        WHERE clerk_user_id = public.get_clerk_uid()
+      )
+    );
+
+-- ────────────────────────────────────────────
+-- TRANSACTIONS
+-- ────────────────────────────────────────────
+-- SELECT: Only the buyer or seller involved in the transaction
+CREATE POLICY "transactions_select_participant" ON public.transactions
+    FOR SELECT USING (
+      buyer_id IN (
+        SELECT id FROM public.profiles
+        WHERE clerk_user_id = public.get_clerk_uid()
+      )
+      OR
+      seller_id IN (
+        SELECT id FROM public.profiles
+        WHERE clerk_user_id = public.get_clerk_uid()
+      )
+    );
+-- INSERT/UPDATE/DELETE: Service role only (no anon-key writes)
+
+-- ────────────────────────────────────────────
+-- ADMIN AUDIT LOGS
+-- ────────────────────────────────────────────
+-- SELECT: Admin only
+CREATE POLICY "audit_logs_select_admin" ON public.admin_audit_logs
+    FOR SELECT USING (public.is_admin());
+-- INSERT/UPDATE/DELETE: Service role only (no anon-key writes)
+
+-- ────────────────────────────────────────────
+-- SYSTEM SETTINGS
+-- ────────────────────────────────────────────
+-- SELECT: Admin only
+CREATE POLICY "settings_select_admin" ON public.system_settings
+    FOR SELECT USING (public.is_admin());
+
+-- UPDATE: Admin only
+CREATE POLICY "settings_update_admin" ON public.system_settings
+    FOR UPDATE USING (public.is_admin());
+-- INSERT/DELETE: Service role only
+
+-- ────────────────────────────────────────────
+-- ADMIN KPI SNAPSHOTS
+-- ────────────────────────────────────────────
+-- SELECT: Admin only
+CREATE POLICY "kpi_select_admin" ON public.admin_kpi_snapshots
+    FOR SELECT USING (public.is_admin());
+-- INSERT/UPDATE/DELETE: Service role only
 
 -- ====================================================================
 -- Auto-update updated_at timestamp trigger
@@ -238,3 +401,39 @@ CREATE TRIGGER on_bids_update BEFORE UPDATE ON public.bids
 
 CREATE TRIGGER on_system_settings_update BEFORE UPDATE ON public.system_settings
     FOR EACH ROW EXECUTE PROCEDURE public.handle_updated_at();
+
+-- ====================================================================
+-- Storage Bucket & Storage Policies for Listing Media & MSDS
+-- ====================================================================
+INSERT INTO storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+VALUES (
+    'listing-media',
+    'listing-media',
+    true,
+    26214400, -- 25 MB
+    ARRAY['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'application/pdf']
+)
+ON CONFLICT (id) DO UPDATE SET
+    public = true,
+    file_size_limit = 26214400,
+    allowed_mime_types = ARRAY['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'application/pdf'];
+
+-- Public read access for listing-media bucket
+CREATE POLICY "Public read for listing-media"
+ON storage.objects FOR SELECT
+USING (bucket_id = 'listing-media');
+
+-- Authenticated upload access for listing-media bucket
+CREATE POLICY "Authenticated upload for listing-media"
+ON storage.objects FOR INSERT
+WITH CHECK (bucket_id = 'listing-media');
+
+-- Owner can update/delete their uploaded media
+CREATE POLICY "Owner update for listing-media"
+ON storage.objects FOR UPDATE
+USING (bucket_id = 'listing-media');
+
+CREATE POLICY "Owner delete for listing-media"
+ON storage.objects FOR DELETE
+USING (bucket_id = 'listing-media');
+

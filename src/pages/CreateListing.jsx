@@ -7,6 +7,7 @@ import { Input, Textarea, Select } from '../components/Input'
 import { wasteCategories, hazardLevels } from '../data'
 import { api } from '../lib/api'
 import { useWasteAuth } from '../lib/auth'
+import { supabase, isSupabaseLive } from '../lib/supabaseClient'
 import {
   ArrowLeft,
   Sparkles,
@@ -20,11 +21,21 @@ import {
   Leaf,
   Scale,
   Cpu,
+  X,
+  Image as ImageIcon,
+  AlertCircle,
+  FileCheck,
 } from 'lucide-react'
+
+const MAX_FILES = 8
+const MAX_FILE_SIZE_BYTES = 25 * 1024 * 1024 // 25 MB
+const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'application/pdf']
 
 export default function CreateListing() {
   const navigate = useNavigate()
   const { user } = useWasteAuth()
+  const fileInputRef = useRef(null)
+
   const [form, setForm] = useState({
     title: '',
     category: '',
@@ -48,8 +59,23 @@ export default function CreateListing() {
     isAnalyzing: false,
   })
 
+  // File upload states
+  const [selectedFiles, setSelectedFiles] = useState([])
+  const [isDragging, setIsDragging] = useState(false)
+  const [fileError, setFileError] = useState('')
+  const [uploadProgress, setUploadProgress] = useState(0)
+  const [uploadStatus, setUploadStatus] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const debounceTimer = useRef(null)
+
+  // Clean up object URLs on unmount
+  useEffect(() => {
+    return () => {
+      selectedFiles.forEach(f => {
+        if (f.previewUrl) URL.revokeObjectURL(f.previewUrl)
+      })
+    }
+  }, [selectedFiles])
 
   const update = field => e => {
     const val = e.target.value
@@ -80,40 +106,184 @@ export default function CreateListing() {
           estimated_value_usd: res.estimated_value_usd || 0,
           disposal_cost_saved_usd: res.disposal_cost_saved_usd || 0,
           co2_reduction_kg: res.co2_reduction_kg || 0,
-          pricing_model: res.pricing_model || 'Random Forest ML',
+          pricing_model: res.pricing_model || 'ML Active',
           isAnalyzing: false,
         })
 
-        // Auto-select category and hazard if empty
-        setForm(prev => ({
-          ...prev,
-          category: prev.category || res.category,
-          hazard: prev.hazard === 'Non-hazardous' && res.hazard_level ? res.hazard_level : prev.hazard,
-          price: prev.price || `₹${Math.round(res.estimated_value_usd * 83).toLocaleString('en-IN')}`,
-        }))
+        if (!form.category && res.category) {
+          setForm(prev => ({ ...prev, category: res.category }))
+        }
+      } else {
+        setAiData(prev => ({ ...prev, isAnalyzing: false }))
       }
-    }, 600)
+    }, 450)
+  }, [form.title, form.description, form.quantity, form.unit, form.condition])
 
-    return () => clearTimeout(debounceTimer.current)
-  }, [form.title, form.description, form.condition, form.quantity, form.unit])
+  // File handling helpers
+  const validateFile = (file) => {
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      return `Invalid format for "${file.name}". Allowed types: PNG, JPG, WEBP, PDF.`
+    }
+    if (file.size > MAX_FILE_SIZE_BYTES) {
+      return `"${file.name}" exceeds 25 MB limit (${(file.size / (1024 * 1024)).toFixed(1)} MB).`
+    }
+    return null
+  }
+
+  const handleFiles = (incomingFileList) => {
+    setFileError('')
+    const incoming = Array.from(incomingFileList)
+
+    if (selectedFiles.length + incoming.length > MAX_FILES) {
+      setFileError(`You can upload a maximum of ${MAX_FILES} files.`)
+      return
+    }
+
+    const validNewItems = []
+    for (const file of incoming) {
+      const err = validateFile(file)
+      if (err) {
+        setFileError(err)
+        return
+      }
+
+      const isImage = file.type.startsWith('image/')
+      const isPdf = file.type === 'application/pdf'
+      const previewUrl = isImage ? URL.createObjectURL(file) : null
+
+      validNewItems.push({
+        id: `${file.name}-${Date.now()}-${Math.random()}`,
+        file,
+        name: file.name,
+        size: file.size,
+        sizeFormatted: file.size > 1024 * 1024
+          ? `${(file.size / (1024 * 1024)).toFixed(1)} MB`
+          : `${Math.round(file.size / 1024)} KB`,
+        isImage,
+        isPdf,
+        previewUrl,
+      })
+    }
+
+    setSelectedFiles(prev => [...prev, ...validNewItems])
+  }
+
+  const removeFile = (id, e) => {
+    e.stopPropagation()
+    setSelectedFiles(prev => {
+      const item = prev.find(f => f.id === id)
+      if (item?.previewUrl) URL.revokeObjectURL(item.previewUrl)
+      return prev.filter(f => f.id !== id)
+    })
+  }
+
+  const handleDragOver = e => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragging(true)
+  }
+
+  const handleDragLeave = e => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragging(false)
+  }
+
+  const handleDrop = e => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragging(false)
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      handleFiles(e.dataTransfer.files)
+    }
+  }
+
+  // Upload files to Supabase Storage
+  const uploadAllFiles = async () => {
+    const images = []
+    let msds_document_url = null
+    const total = selectedFiles.length
+
+    if (total === 0) return { images, msds_document_url }
+
+    for (let i = 0; i < total; i++) {
+      const item = selectedFiles[i]
+      const progressPercent = Math.round(((i + 1) / total) * 100)
+      setUploadProgress(progressPercent)
+      setUploadStatus(`Uploading ${item.name} (${i + 1}/${total})...`)
+
+      if (isSupabaseLive && supabase) {
+        try {
+          const userId = user?.id || 'anon'
+          const fileExt = item.name.split('.').pop()
+          const sanitizedBase = item.name.replace(/[^a-zA-Z0-9_-]/g, '_')
+          const storagePath = `listings/${userId}/${Date.now()}_${sanitizedBase}`
+
+          const { data, error } = await supabase.storage
+            .from('listing-media')
+            .upload(storagePath, item.file, {
+              cacheControl: '3600',
+              upsert: false,
+            })
+
+          if (error) {
+            console.warn(`Storage upload failed for ${item.name}:`, error.message)
+          } else if (data?.path) {
+            const { data: pubData } = supabase.storage
+              .from('listing-media')
+              .getPublicUrl(data.path)
+
+            const publicUrl = pubData?.publicUrl || ''
+            if (item.isImage) {
+              images.push(publicUrl)
+            } else if (item.isPdf && !msds_document_url) {
+              msds_document_url = publicUrl
+            }
+          }
+        } catch (err) {
+          console.warn(`Upload error for ${item.name}:`, err.message)
+        }
+      } else {
+        // Mock / local mode fallback
+        await new Promise(r => setTimeout(r, 120))
+        if (item.isImage) {
+          images.push(item.previewUrl || `https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=600&q=80`)
+        }
+        if (item.isPdf && !msds_document_url) {
+          msds_document_url = `https://waste2worth.internal/docs/msds_${Date.now()}.pdf`
+        }
+      }
+    }
+
+    return { images, msds_document_url }
+  }
 
   const handleSubmit = async e => {
     e.preventDefault()
     setIsSubmitting(true)
+    setFileError('')
 
     try {
+      // 1. Upload files to Supabase Storage
+      const { images, msds_document_url } = await uploadAllFiles()
+
+      setUploadStatus('Persisting listing lot to registry...')
+
+      // 2. Submit listing payload with image URLs and MSDS URL
       await api.createListing({
         ...form,
+        images,
+        msds_document_url,
         seller_id: user?.id,
-        company_name: user?.company || 'Tata Steel Ltd.',
+        company_name: user?.company || 'Northgate Steelworks Ltd.',
       })
-      setTimeout(() => {
-        setIsSubmitting(false)
-        navigate('/seller')
-      }, 500)
-    } catch (err) {
+
       setIsSubmitting(false)
       navigate('/seller')
+    } catch (err) {
+      console.error('Failed to create listing:', err)
+      setFileError(err.message || 'Failed to publish listing. Please check form fields and try again.')
+      setIsSubmitting(false)
     }
   }
 
@@ -131,10 +301,10 @@ export default function CreateListing() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-fg-primary tracking-tight">
-              Post Industrial Byproduct Lot
+              Post Industrial Byproduct Stream
             </h1>
             <p className="text-xs sm:text-sm text-fg-secondary mt-0.5">
-              Publish secondary raw materials to verified buyers with live Supabase persistence and carbon audit scoring.
+              Publish secondary raw materials to verified buyers with live database persistence and carbon audit scoring.
             </p>
           </div>
           <Badge variant="purple" size="md" icon={<Sparkles className="w-3.5 h-3.5" />}>
@@ -160,7 +330,7 @@ export default function CreateListing() {
             <Input
               label="Listing Title"
               id="title"
-              placeholder="e.g., Surplus HDPE Plastic Regrind from Packaging Line"
+              placeholder="e.g., Surplus Blast Furnace Slag from Primary Smelting"
               value={form.title}
               onChange={update('title')}
               required
@@ -271,22 +441,119 @@ export default function CreateListing() {
               required
             />
 
-            {/* Upload Zone */}
-            <div>
-              <label className="text-xs font-semibold text-fg-secondary uppercase tracking-wider block mb-2">
-                Lab Test Certificates & Material Photos
-              </label>
-              <div className="border border-dashed border-white/20 rounded-2xl p-8 text-center hover:border-emerald-500/50 hover:bg-white/[0.02] transition-all cursor-pointer group">
+            {/* ─── Interactive Upload Dropzone ─── */}
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-semibold text-fg-secondary uppercase tracking-wider block">
+                  Lab Test Certificates & Material Photos
+                </label>
+                <span className="text-[11px] text-fg-muted font-mono">
+                  {selectedFiles.length}/{MAX_FILES} files selected
+                </span>
+              </div>
+
+              {/* Hidden Real File Input */}
+              <input
+                ref={fileInputRef}
+                type="file"
+                multiple
+                accept="image/jpeg,image/png,image/webp,image/gif,application/pdf"
+                className="hidden"
+                onChange={e => handleFiles(e.target.files)}
+              />
+
+              {/* Drag and Drop Box */}
+              <div
+                onClick={() => fileInputRef.current?.click()}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+                className={`border-2 border-dashed rounded-2xl p-8 text-center transition-all cursor-pointer group ${
+                  isDragging
+                    ? 'border-emerald-400 bg-emerald-500/10 scale-[1.01]'
+                    : 'border-white/20 hover:border-emerald-500/50 hover:bg-white/[0.02]'
+                }`}
+              >
                 <div className="w-12 h-12 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center mx-auto mb-3 text-fg-muted group-hover:text-emerald-400 group-hover:border-emerald-500/30 transition-all">
                   <UploadCloud className="w-6 h-6" />
                 </div>
                 <p className="text-xs font-semibold text-fg-primary">
-                  Click to browse or drag & drop MSDS reports or photos
+                  {isDragging ? 'Drop files here to upload' : 'Click to browse or drag & drop MSDS reports or photos'}
                 </p>
                 <p className="text-[11px] text-fg-muted mt-1 font-mono">
-                  PDF, PNG, JPG up to 25MB • Up to 8 files
+                  PDF, PNG, JPG, WEBP up to 25MB • Up to {MAX_FILES} files
                 </p>
               </div>
+
+              {/* Error Message */}
+              {fileError && (
+                <div className="flex items-center gap-2 p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs">
+                  <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                  <span>{fileError}</span>
+                </div>
+              )}
+
+              {/* Selected Files Thumbnail Preview List */}
+              {selectedFiles.length > 0 && (
+                <div className="space-y-2 pt-2">
+                  <span className="text-[11px] font-semibold text-fg-secondary uppercase tracking-wider block">
+                    Selected Uploads ({selectedFiles.length})
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {selectedFiles.map(fileItem => (
+                      <div
+                        key={fileItem.id}
+                        className="flex items-center gap-3 p-2.5 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-white/20 transition-all group"
+                      >
+                        {/* Thumbnail or File Icon */}
+                        {fileItem.isImage && fileItem.previewUrl ? (
+                          <img
+                            src={fileItem.previewUrl}
+                            alt={fileItem.name}
+                            className="w-12 h-12 rounded-lg object-cover bg-black/40 border border-white/10 flex-shrink-0"
+                          />
+                        ) : (
+                          <div className="w-12 h-12 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 flex-shrink-0">
+                            <FileText className="w-6 h-6" />
+                          </div>
+                        )}
+
+                        {/* File Meta */}
+                        <div className="min-w-0 flex-1">
+                          <p className="text-xs font-semibold text-fg-primary truncate" title={fileItem.name}>
+                            {fileItem.name}
+                          </p>
+                          <div className="flex items-center gap-2 mt-0.5">
+                            <span className="text-[10px] text-fg-muted font-mono">
+                              {fileItem.sizeFormatted}
+                            </span>
+                            {fileItem.isPdf && (
+                              <span className="text-[9px] px-1.5 py-0.5 rounded bg-red-500/20 text-red-300 font-bold uppercase">
+                                MSDS / PDF
+                              </span>
+                            )}
+                            {fileItem.isImage && (
+                              <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold uppercase">
+                                Photo
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Remove File Button */}
+                        <button
+                          type="button"
+                          onClick={e => removeFile(fileItem.id, e)}
+                          className="w-7 h-7 rounded-lg bg-white/[0.04] hover:bg-red-500/20 text-fg-muted hover:text-red-400 flex items-center justify-center transition-all flex-shrink-0 cursor-pointer"
+                          title="Remove file"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -353,6 +620,22 @@ export default function CreateListing() {
               </div>
             </div>
 
+            {/* Upload Progress Bar if submitting */}
+            {isSubmitting && selectedFiles.length > 0 && (
+              <div className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 space-y-2">
+                <div className="flex items-center justify-between text-xs font-semibold text-emerald-300">
+                  <span>{uploadStatus}</span>
+                  <span className="font-mono">{uploadProgress}%</span>
+                </div>
+                <div className="w-full h-2 bg-black/40 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-emerald-400 transition-all duration-300 ease-out"
+                    style={{ width: `${uploadProgress}%` }}
+                  />
+                </div>
+              </div>
+            )}
+
             {/* Submission Actions */}
             <div className="pt-4 border-t border-white/[0.08] space-y-2.5">
               <Button
@@ -362,7 +645,7 @@ export default function CreateListing() {
                 variant="primary"
                 isLoading={isSubmitting}
               >
-                Publish Lot to Supabase Marketplace
+                {isSubmitting ? (uploadStatus || 'Publishing Lot...') : 'Publish Lot to Marketplace'}
               </Button>
 
               <Button
@@ -370,6 +653,7 @@ export default function CreateListing() {
                 fullWidth
                 size="md"
                 variant="secondary"
+                disabled={isSubmitting}
                 onClick={() => navigate('/seller')}
               >
                 Cancel & Return

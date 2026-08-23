@@ -18,6 +18,8 @@ import {
   Share2,
   Bookmark,
   RefreshCw,
+  FileText,
+  ExternalLink,
 } from 'lucide-react'
 
 export default function ListingDetail() {
@@ -168,7 +170,7 @@ export default function ListingDetail() {
 
               <div className="absolute bottom-3 left-4 right-4 bg-zinc-950/90 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/[0.08] flex items-center justify-between text-xs text-zinc-400 font-mono">
                 <span>Lot ID: #{String(listing.id).slice(0, 8)}</span>
-                <span>Live on Supabase</span>
+                <span>Live & Verified</span>
               </div>
             </div>
 
@@ -229,6 +231,58 @@ export default function ListingDetail() {
                 {listing.description}
               </p>
             </div>
+
+            {/* Attached Photos & MSDS Documents */}
+            {((listing.images && listing.images.length > 0) || listing.msds_document_url) && (
+              <div className="flex flex-col gap-3 pt-2">
+                <h3 className="text-sm font-bold text-zinc-200 uppercase tracking-wider">
+                  Material Documentation & Lab Photos
+                </h3>
+
+                {/* Images gallery */}
+                {listing.images && listing.images.length > 0 && (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    {listing.images.map((imgUrl, idx) => (
+                      <a
+                        key={idx}
+                        href={imgUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block rounded-xl overflow-hidden border border-white/10 aspect-video bg-black/40 hover:border-emerald-500/50 transition-all group"
+                      >
+                        <img
+                          src={imgUrl}
+                          alt={`Lot media ${idx + 1}`}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </a>
+                    ))}
+                  </div>
+                )}
+
+                {/* MSDS Document Button */}
+                {listing.msds_document_url && (
+                  <div className="flex items-center justify-between p-3.5 rounded-xl bg-red-500/10 border border-red-500/20 text-xs">
+                    <div className="flex items-center gap-2.5">
+                      <FileText className="w-5 h-5 text-red-400 shrink-0" />
+                      <div>
+                        <span className="font-semibold text-zinc-100 block">MSDS / Lab Assay Certificate</span>
+                        <span className="text-[11px] text-zinc-400 block">Verified Certified Laboratory Report</span>
+                      </div>
+                    </div>
+                    <a
+                      href={listing.msds_document_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-300 font-semibold transition-colors no-underline"
+                    >
+                      <span>View PDF</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Pickup & Logistics Info */}
             <div className="flex flex-col gap-2.5 pt-2">
@@ -311,7 +365,7 @@ export default function ListingDetail() {
               <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-3">
                 <CheckCircle2 className="w-6 h-6 text-emerald-400 shrink-0" />
                 <div className="flex flex-col">
-                  <span className="text-xs font-bold text-emerald-300">Bid Recorded in Supabase</span>
+                  <span className="text-xs font-bold text-emerald-300">Bid Recorded in Live Ledger</span>
                   <span className="text-[11px] text-zinc-400">The seller has been notified via smart escrow channel.</span>
                 </div>
               </div>

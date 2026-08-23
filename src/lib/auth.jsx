@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
-import { ClerkProvider, useUser, useClerk, SignedIn, SignedOut, UserButton, SignIn, SignUp } from '@clerk/clerk-react'
-import { api } from './api'
+import { ClerkProvider, useUser, useClerk, useSession, SignedIn, SignedOut, UserButton, SignIn, SignUp } from '@clerk/clerk-react'
+import { api, setTokenProvider } from './api'
 import { supabase, isSupabaseLive } from './supabaseClient'
 
 const CLERK_PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY || ''
@@ -30,8 +30,8 @@ function StandaloneAuthProvider({ children }) {
     return {
       id: 'a0000000-0000-0000-0000-000000000001',
       fullName: 'Rajesh Sharma',
-      company: 'Tata Steel Ltd.',
-      email: 'procurement@tatasteel.com',
+      company: 'Northgate Steelworks Ltd.',
+      email: 'procurement@northgatesteel.demo',
       role: 'seller',
       verified: true
     }
@@ -83,9 +83,15 @@ function StandaloneAuthProvider({ children }) {
       localStorage.setItem('w2w_role', newRole)
       return updated
     })
-    // Also update in Supabase if live
-    if (isSupabaseLive && user?.id) {
-      supabase.from('profiles').update({ role: newRole }).eq('id', user.id).catch(() => {})
+    // Update role via Express API (service role key handles the Supabase write)
+    if (user?.id) {
+      api.syncUser({
+        clerk_user_id: user.clerk_user_id || user.id,
+        email: user.email,
+        full_name: user.fullName,
+        company_name: user.company,
+        role: newRole,
+      }).catch(() => {})
     }
   }
 
@@ -94,12 +100,13 @@ function StandaloneAuthProvider({ children }) {
     let profileData = {
       id: userData.id || `user-${Date.now()}`,
       fullName: userData.name || userData.fullName || 'Rajesh Sharma',
-      company: userData.company || 'Tata Steel Ltd.',
-      email: userData.email || 'procurement@tatasteel.com',
+      company: userData.company || 'Northgate Steelworks Ltd.',
+      email: userData.email || 'procurement@northgatesteel.demo',
       role: userData.role || 'seller',
       verified: true
     }
 
+    // Read existing profile from Supabase (public SELECT is allowed by RLS)
     if (isSupabaseLive && userData.email) {
       try {
         const { data } = await supabase
@@ -120,31 +127,8 @@ function StandaloneAuthProvider({ children }) {
             city: data.city,
             state: data.state
           }
-        } else {
-          // Insert new profile
-          const { data: newP } = await supabase
-            .from('profiles')
-            .insert([{
-              clerk_user_id: `user_${Date.now()}`,
-              email: userData.email,
-              full_name: userData.name || userData.fullName,
-              company_name: userData.company,
-              role: userData.role || 'seller',
-              verified: true
-            }])
-            .select()
-            .single()
-          if (newP) {
-            profileData = {
-              id: newP.id,
-              fullName: newP.full_name,
-              company: newP.company_name,
-              email: newP.email,
-              role: newP.role,
-              verified: true
-            }
-          }
         }
+        // Profile creation is handled by api.syncUser() below (server-side write)
       } catch (e) {}
     }
 
@@ -190,8 +174,18 @@ function StandaloneAuthProvider({ children }) {
 function ClerkInnerSync({ children }) {
   const { user, isLoaded, isSignedIn } = useUser()
   const { signOut } = useClerk()
+  const { session } = useSession()
   const [role, setRoleState] = useState(() => localStorage.getItem('w2w_role') || 'seller')
   const [supabaseProfile, setSupabaseProfile] = useState(null)
+
+  // Register the Clerk session token provider with the API client
+  // so every outgoing request includes the Authorization header
+  useEffect(() => {
+    if (session) {
+      setTokenProvider(() => session.getToken())
+    }
+    return () => setTokenProvider(null)
+  }, [session])
 
   useEffect(() => {
     async function syncAndFetch() {
@@ -201,6 +195,7 @@ function ClerkInnerSync({ children }) {
         const fullName = user.fullName || user.username || 'Industrial Partner'
         const companyName = (user.unsafeMetadata?.company) || 'Industrial Enterprise'
 
+        // Read existing profile from Supabase (public SELECT allowed by RLS)
         if (isSupabaseLive && email) {
           try {
             const { data } = await supabase
@@ -215,34 +210,25 @@ function ClerkInnerSync({ children }) {
                 setRoleState(data.role)
                 localStorage.setItem('w2w_role', data.role)
               }
-            } else {
-              // Create profile in Supabase
-              const { data: newP } = await supabase
-                .from('profiles')
-                .upsert({
-                  clerk_user_id: user.id,
-                  email,
-                  full_name: fullName,
-                  company_name: companyName,
-                  role: userRole,
-                  verified: true
-                }, { onConflict: 'email' })
-                .select()
-                .single()
-              if (newP) setSupabaseProfile(newP)
             }
+            // Profile creation is handled by api.syncUser() below (server-side write)
           } catch (e) {
-            console.warn('Clerk Supabase sync notice:', e.message)
+            console.warn('Clerk profile fetch notice:', e.message)
           }
         }
 
-        api.syncUser({
+        // Sync/create profile via Express API (server-side Supabase write)
+        const syncResult = await api.syncUser({
           clerk_user_id: user.id,
           email,
           full_name: fullName,
           company_name: companyName,
           role: userRole,
         })
+        // Update local profile from sync result if we didn't get one from Supabase
+        if (syncResult?.profile && !supabaseProfile) {
+          setSupabaseProfile(syncResult.profile)
+        }
       }
     }
     syncAndFetch()
@@ -251,8 +237,15 @@ function ClerkInnerSync({ children }) {
   const setRole = (newRole) => {
     setRoleState(newRole)
     localStorage.setItem('w2w_role', newRole)
-    if (isSupabaseLive && supabaseProfile?.id) {
-      supabase.from('profiles').update({ role: newRole }).eq('id', supabaseProfile.id).catch(() => {})
+    // Update role via Express API (service role key handles the Supabase write)
+    if (supabaseProfile?.id) {
+      api.syncUser({
+        clerk_user_id: user?.id || supabaseProfile.clerk_user_id,
+        email: user?.primaryEmailAddress?.emailAddress || supabaseProfile.email,
+        full_name: supabaseProfile.full_name,
+        company_name: supabaseProfile.company_name,
+        role: newRole,
+      }).catch(() => {})
     }
   }
 
@@ -261,7 +254,7 @@ function ClerkInnerSync({ children }) {
       id: supabaseProfile?.id || user.id,
       fullName: supabaseProfile?.full_name || user.fullName || 'Industrial User',
       email: user.primaryEmailAddress?.emailAddress,
-      company: supabaseProfile?.company_name || (user.unsafeMetadata?.company) || 'Tata Steel Ltd.',
+      company: supabaseProfile?.company_name || (user.unsafeMetadata?.company) || 'Northgate Steelworks Ltd.',
       role: supabaseProfile?.role || role,
       verified: supabaseProfile?.verified ?? true
     } : null,

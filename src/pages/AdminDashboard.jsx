@@ -494,7 +494,7 @@ export default function AdminDashboard() {
                     <h2 className="text-base font-bold text-fg-primary">Live Microservices & Model Pipeline Telemetry</h2>
                   </div>
                   <p className="text-xs text-fg-secondary max-w-2xl">
-                    All core components are synchronized. Python Random Forest valuation regressor, TF-IDF category classifier, and Supabase / In-Memory persistence are operational.
+                    All core components are synchronized. Python Random Forest valuation regressor, TF-IDF category classifier, and Cloud Database persistence are operational.
                   </p>
                   <div className="flex flex-wrap items-center gap-3 pt-2">
                     <div className="px-3 py-1.5 rounded-xl bg-zinc-900 border border-white/10 text-xs flex items-center gap-2">
@@ -1730,7 +1730,7 @@ export default function AdminDashboard() {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="text-fg-secondary mb-1 block">Enterprise Name</label>
-                  <Input name="company_name" defaultValue="Tata Steel Ltd." className="text-xs" />
+                  <Input name="company_name" defaultValue="Northgate Steelworks Ltd." className="text-xs" />
                 </div>
                 <div>
                   <label className="text-fg-secondary mb-1 block">Location</label>

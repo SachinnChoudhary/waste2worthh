@@ -22,7 +22,7 @@ export default function Login() {
   const navigate = useNavigate()
   const location = useLocation()
   const { login, role: currentRole } = useWasteAuth()
-  const [email, setEmail] = useState('procurement@tatasteel.com')
+  const [email, setEmail] = useState('procurement@northgatesteel.demo')
   const [password, setPassword] = useState('••••••••••••')
   const [selectedRole, setSelectedRole] = useState('seller')
   const [isLoading, setIsLoading] = useState(false)
@@ -36,14 +36,14 @@ export default function Login() {
     e.preventDefault()
     setIsLoading(true)
 
-    const isSeller = selectedRole === 'seller' || email.includes('tata') || email.includes('steel') || email.includes('reliance')
+    const isSeller = selectedRole === 'seller' || email.includes('northgate') || email.includes('steel') || email.includes('meridian')
     const isAdmin = selectedRole === 'admin' || email.includes('admin')
     const finalRole = isAdmin ? 'admin' : (isSeller ? 'seller' : 'buyer')
 
     const companyMap = {
-      seller: 'Tata Steel Ltd.',
-      buyer: 'UltraTech Cement Ltd.',
-      admin: 'Waste2Worth SuperAdmin'
+      seller: 'Northgate Steelworks Ltd.',
+      buyer: 'Apex Matrix Materials Ltd.',
+      admin: 'Waste2Worth Platform Administration'
     }
 
     await login({
@@ -84,12 +84,12 @@ export default function Login() {
         {/* Demo Fast Login Switcher Cards */}
         <div className="relative z-10 space-y-2 pt-4 border-t border-white/[0.08]">
           <span className="text-[11px] font-semibold text-fg-muted uppercase tracking-wider block">
-            Quick Enterprise Roles (Live Supabase Data)
+            Quick Enterprise Roles (Live Platform Data)
           </span>
           <div className="grid grid-cols-3 gap-2">
             <button
               type="button"
-              onClick={() => handleQuickSelect('seller', 'procurement@tatasteel.com', 'Rajesh Sharma', 'Tata Steel Ltd.')}
+              onClick={() => handleQuickSelect('seller', 'procurement@northgatesteel.demo', 'Rajesh Sharma', 'Northgate Steelworks Ltd.')}
               className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
                 selectedRole === 'seller'
                   ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300'
@@ -98,12 +98,12 @@ export default function Login() {
             >
               <Factory className="w-4 h-4 text-emerald-400 mb-1" />
               <span className="text-xs font-bold block">Seller</span>
-              <span className="text-[10px] text-fg-muted block truncate">Tata Steel</span>
+              <span className="text-[10px] text-fg-muted block truncate">Northgate Steel</span>
             </button>
 
             <button
               type="button"
-              onClick={() => handleQuickSelect('buyer', 'sourcing@ultratechcement.com', 'Karan Verma', 'UltraTech Cement Ltd.')}
+              onClick={() => handleQuickSelect('buyer', 'sourcing@apexmaterials.demo', 'Karan Verma', 'Apex Matrix Materials Ltd.')}
               className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
                 selectedRole === 'buyer'
                   ? 'bg-cyan-500/20 border-cyan-500/40 text-cyan-300'
@@ -112,12 +112,12 @@ export default function Login() {
             >
               <Layers className="w-4 h-4 text-cyan-400 mb-1" />
               <span className="text-xs font-bold block">Buyer</span>
-              <span className="text-[10px] text-fg-muted block truncate">UltraTech</span>
+              <span className="text-[10px] text-fg-muted block truncate">Apex Materials</span>
             </button>
 
             <button
               type="button"
-              onClick={() => handleQuickSelect('admin', 'admin@waste2worth.com', 'SuperAdmin', 'Waste2Worth SuperAdmin')}
+              onClick={() => handleQuickSelect('admin', 'admin@waste2worth.demo', 'SuperAdmin', 'Waste2Worth Platform Administration')}
               className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
                 selectedRole === 'admin'
                   ? 'bg-purple-500/20 border-purple-500/40 text-purple-300'
@@ -186,7 +186,7 @@ export default function Login() {
               <div className="flex items-center gap-2 p-1 rounded-xl bg-zinc-900 border border-white/10">
                 <button
                   type="button"
-                  onClick={() => handleQuickSelect('seller', 'procurement@tatasteel.com', 'Rajesh Sharma', 'Tata Steel Ltd.')}
+                  onClick={() => handleQuickSelect('seller', 'procurement@northgatesteel.demo', 'Rajesh Sharma', 'Northgate Steelworks Ltd.')}
                   className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                     selectedRole === 'seller' ? 'bg-emerald-500 text-zinc-950 shadow-sm' : 'text-fg-secondary hover:text-fg-primary'
                   }`}
@@ -195,7 +195,7 @@ export default function Login() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => handleQuickSelect('buyer', 'sourcing@ultratechcement.com', 'Karan Verma', 'UltraTech Cement Ltd.')}
+                  onClick={() => handleQuickSelect('buyer', 'sourcing@apexmaterials.demo', 'Karan Verma', 'Apex Matrix Materials Ltd.')}
                   className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                     selectedRole === 'buyer' ? 'bg-cyan-500 text-zinc-950 shadow-sm' : 'text-fg-secondary hover:text-fg-primary'
                   }`}
@@ -204,7 +204,7 @@ export default function Login() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => handleQuickSelect('admin', 'admin@waste2worth.com', 'SuperAdmin', 'Waste2Worth SuperAdmin')}
+                  onClick={() => handleQuickSelect('admin', 'admin@waste2worth.demo', 'SuperAdmin', 'Waste2Worth Platform Administration')}
                   className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                     selectedRole === 'admin' ? 'bg-purple-500 text-zinc-950 shadow-sm' : 'text-fg-secondary hover:text-fg-primary'
                   }`}

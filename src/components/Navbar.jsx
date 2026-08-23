@@ -231,7 +231,7 @@ export function Navbar() {
                         </div>
                         <div className="flex flex-col text-left">
                           <span className="text-xs font-semibold text-fg-primary leading-tight">
-                            {user?.company || 'Tata Steel Ltd.'}
+                            {user?.company || 'Northgate Steelworks Ltd.'}
                           </span>
                           <span className="text-[10px] text-emerald-400 font-mono flex items-center gap-1 leading-none">
                             <ShieldCheck className="w-2.5 h-2.5" /> {role?.toUpperCase()}

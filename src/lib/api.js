@@ -1,6 +1,9 @@
 /**
  * Waste2Worth Frontend API Client
  * Connects to Node.js Backend Gateway, Supabase Real-time & Python ML Service
+ * 
+ * All requests include the Clerk session token in the Authorization header
+ * when the user is signed in (set via setTokenProvider from auth.jsx).
  */
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL !== undefined 
@@ -8,12 +11,46 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL !== undefined
   : (import.meta.env.DEV ? 'http://localhost:5001' : '')
 const ML_API_URL = import.meta.env.VITE_ML_API_URL || 'http://localhost:8000'
 
+// Token provider — set by auth.jsx with Clerk's getToken function
+let _getToken = null
+
+/**
+ * Called by the auth layer to provide a function that returns the
+ * current Clerk session JWT. This avoids a circular dependency
+ * between api.js and auth.jsx.
+ */
+export function setTokenProvider(fn) {
+  _getToken = fn
+}
+
+/**
+ * Wrapper around fetch that automatically attaches the Clerk session
+ * token as a Bearer token in the Authorization header.
+ */
+async function authFetch(url, options = {}) {
+  const headers = { ...options.headers }
+
+  if (_getToken) {
+    try {
+      const token = await _getToken()
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`
+      }
+    } catch (e) {
+      // Token retrieval failed — proceed without auth header
+      // (the server will return 401 if the route requires auth)
+    }
+  }
+
+  return fetch(url, { ...options, headers })
+}
+
 export const api = {
   // ---- Listings ----
   async getListings(params = {}) {
     try {
       const query = new URLSearchParams(params).toString()
-      const res = await fetch(`${API_BASE_URL}/api/listings?${query}`)
+      const res = await authFetch(`${API_BASE_URL}/api/listings?${query}`)
       if (!res.ok) throw new Error(`HTTP error ${res.status}`)
       return await res.json()
     } catch (err) {
@@ -24,7 +61,7 @@ export const api = {
 
   async getListingById(id) {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/listings/${id}`)
+      const res = await authFetch(`${API_BASE_URL}/api/listings/${id}`)
       if (!res.ok) throw new Error(`HTTP error ${res.status}`)
       return await res.json()
     } catch (err) {
@@ -35,7 +72,7 @@ export const api = {
 
   async createListing(payload) {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/listings`, {
+      const res = await authFetch(`${API_BASE_URL}/api/listings`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -51,7 +88,7 @@ export const api = {
   // ---- Live AI & ML Service ----
   async classifyAndValue(description, condition = 'Clean / sorted', quantity_kg = 1000) {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/ml/classify-and-value`, {
+      const res = await authFetch(`${API_BASE_URL}/api/ml/classify-and-value`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -79,7 +116,7 @@ export const api = {
 
   async getBuyerRecommendations(buyer_interests, top_n = 6) {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/ml/recommend-matches`, {
+      const res = await authFetch(`${API_BASE_URL}/api/ml/recommend-matches`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ buyer_interests, top_n })
@@ -96,7 +133,7 @@ export const api = {
   async getBids(params = {}) {
     try {
       const query = new URLSearchParams(params).toString()
-      const res = await fetch(`${API_BASE_URL}/api/bids?${query}`)
+      const res = await authFetch(`${API_BASE_URL}/api/bids?${query}`)
       if (!res.ok) throw new Error(`HTTP error ${res.status}`)
       return await res.json()
     } catch (err) {
@@ -106,7 +143,7 @@ export const api = {
 
   async getBidsForListing(listingId) {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/bids/listing/${listingId}`)
+      const res = await authFetch(`${API_BASE_URL}/api/bids/listing/${listingId}`)
       if (!res.ok) throw new Error(`HTTP error ${res.status}`)
       return await res.json()
     } catch (err) {
@@ -116,7 +153,7 @@ export const api = {
 
   async placeBid(payload) {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/bids`, {
+      const res = await authFetch(`${API_BASE_URL}/api/bids`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -131,7 +168,7 @@ export const api = {
 
   async updateBidStatus(bidId, status) {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/bids/${bidId}/status`, {
+      const res = await authFetch(`${API_BASE_URL}/api/bids/${bidId}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status })
@@ -147,7 +184,7 @@ export const api = {
   // ---- Dashboard Analytics & Stats ----
   async getOverviewStats() {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/stats/overview`)
+      const res = await authFetch(`${API_BASE_URL}/api/stats/overview`)
       if (!res.ok) throw new Error(`HTTP error ${res.status}`)
       return await res.json()
     } catch (err) {
@@ -157,7 +194,7 @@ export const api = {
 
   async getSellerDashboardData(sellerId = 'a0000000-0000-0000-0000-000000000001') {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/stats/seller/${sellerId}`)
+      const res = await authFetch(`${API_BASE_URL}/api/stats/seller/${sellerId}`)
       if (!res.ok) throw new Error(`HTTP error ${res.status}`)
       return await res.json()
     } catch (err) {
@@ -168,7 +205,7 @@ export const api = {
 
   async getBuyerDashboardData(buyerId = 'a0000000-0000-0000-0000-000000000005') {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/stats/buyer/${buyerId}`)
+      const res = await authFetch(`${API_BASE_URL}/api/stats/buyer/${buyerId}`)
       if (!res.ok) throw new Error(`HTTP error ${res.status}`)
       return await res.json()
     } catch (err) {
@@ -180,7 +217,7 @@ export const api = {
   // ---- User Profiles & Supabase Auth Sync ----
   async syncUser(userProfile) {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/users/sync`, {
+      const res = await authFetch(`${API_BASE_URL}/api/users/sync`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userProfile)
@@ -193,7 +230,7 @@ export const api = {
 
   async getUserProfile(clerkUserId) {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/users/profile/${clerkUserId}`)
+      const res = await authFetch(`${API_BASE_URL}/api/users/profile/${clerkUserId}`)
       if (!res.ok) throw new Error(`HTTP error ${res.status}`)
       return await res.json()
     } catch (err) {
@@ -204,7 +241,7 @@ export const api = {
   // ---- Admin Control Panel Endpoints ----
   async getAdminOverview() {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/overview`)
+      const res = await authFetch(`${API_BASE_URL}/api/admin/overview`)
       if (!res.ok) throw new Error(`HTTP error ${res.status}`)
       return await res.json()
     } catch (err) {
@@ -214,7 +251,7 @@ export const api = {
 
   async getAdminSystemHealth() {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/system-health`)
+      const res = await authFetch(`${API_BASE_URL}/api/admin/system-health`)
       if (!res.ok) throw new Error(`HTTP error ${res.status}`)
       return await res.json()
     } catch (err) {
@@ -225,7 +262,7 @@ export const api = {
   async getAdminListings(params = {}) {
     try {
       const query = new URLSearchParams(params).toString()
-      const res = await fetch(`${API_BASE_URL}/api/admin/listings?${query}`)
+      const res = await authFetch(`${API_BASE_URL}/api/admin/listings?${query}`)
       if (!res.ok) throw new Error(`HTTP error ${res.status}`)
       return await res.json()
     } catch (err) {
@@ -235,7 +272,7 @@ export const api = {
 
   async updateAdminListing(id, updates) {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/listings/${id}`, {
+      const res = await authFetch(`${API_BASE_URL}/api/admin/listings/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates)
@@ -249,7 +286,7 @@ export const api = {
 
   async reEvaluateAdminListing(id) {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/listings/${id}/re-evaluate`, {
+      const res = await authFetch(`${API_BASE_URL}/api/admin/listings/${id}/re-evaluate`, {
         method: 'POST'
       })
       if (!res.ok) throw new Error(`HTTP error ${res.status}`)
@@ -261,7 +298,7 @@ export const api = {
 
   async deleteAdminListing(id) {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/listings/${id}`, {
+      const res = await authFetch(`${API_BASE_URL}/api/admin/listings/${id}`, {
         method: 'DELETE'
       })
       if (!res.ok) throw new Error(`HTTP error ${res.status}`)
@@ -273,7 +310,7 @@ export const api = {
 
   async getAdminBids() {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/bids`)
+      const res = await authFetch(`${API_BASE_URL}/api/admin/bids`)
       if (!res.ok) throw new Error(`HTTP error ${res.status}`)
       return await res.json()
     } catch (err) {
@@ -283,7 +320,7 @@ export const api = {
 
   async updateAdminBid(id, updates) {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/bids/${id}`, {
+      const res = await authFetch(`${API_BASE_URL}/api/admin/bids/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates)
@@ -297,7 +334,7 @@ export const api = {
 
   async getAdminUsers() {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/users`)
+      const res = await authFetch(`${API_BASE_URL}/api/admin/users`)
       if (!res.ok) throw new Error(`HTTP error ${res.status}`)
       return await res.json()
     } catch (err) {
@@ -307,7 +344,7 @@ export const api = {
 
   async createAdminUser(userProfile) {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/users`, {
+      const res = await authFetch(`${API_BASE_URL}/api/admin/users`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userProfile)
@@ -321,7 +358,7 @@ export const api = {
 
   async updateAdminUser(id, updates) {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/users/${id}`, {
+      const res = await authFetch(`${API_BASE_URL}/api/admin/users/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates)
@@ -335,7 +372,7 @@ export const api = {
 
   async getAdminAuditLogs() {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/audit-logs`)
+      const res = await authFetch(`${API_BASE_URL}/api/admin/audit-logs`)
       if (!res.ok) throw new Error(`HTTP error ${res.status}`)
       return await res.json()
     } catch (err) {
@@ -345,7 +382,7 @@ export const api = {
 
   async updateAdminSystemSettings(settings) {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/system/settings`, {
+      const res = await authFetch(`${API_BASE_URL}/api/admin/system/settings`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(settings)

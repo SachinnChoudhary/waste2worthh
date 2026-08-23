@@ -11,6 +11,7 @@ import mlRouter from './routes/ml.js'
 import statsRouter from './routes/stats.js'
 import usersRouter from './routes/users.js'
 import adminRouter from './routes/admin.js'
+import { clerkAuth } from './middleware/auth.js'
 
 dotenv.config()
 
@@ -25,6 +26,7 @@ const PORT = process.env.PORT || 5001
 // Middleware
 app.use(cors({ origin: '*' }))
 app.use(express.json())
+app.use(clerkAuth)
 
 // Health and Status Routes
 app.get('/health', (req, res) => {

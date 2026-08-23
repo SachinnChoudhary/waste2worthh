@@ -1,10 +1,11 @@
 import { Router } from 'express'
-import { supabase, isSupabaseConfigured, mockDb } from '../config/supabase.js'
+import { supabase, isSupabaseConfigured } from '../config/supabase.js'
+import { requireAuth } from '../middleware/auth.js'
 
 const router = Router()
 
-// POST /api/users/sync - Sync or create user profile upon Clerk login/signup
-router.post('/sync', async (req, res) => {
+// POST /api/users/sync - Sync or create user profile in database (authenticated only)
+router.post('/sync', requireAuth, async (req, res) => {
   try {
     const {
       clerk_user_id,
@@ -20,57 +21,36 @@ router.post('/sync', async (req, res) => {
       return res.status(400).json({ error: 'clerk_user_id is required' })
     }
 
-    if (isSupabaseConfigured) {
-      try {
-        const { data, error } = await supabase
-          .from('profiles')
-          .upsert(
-            {
-              clerk_user_id,
-              email,
-              full_name,
-              company_name,
-              role,
-              gstin,
-              phone,
-              updated_at: new Date().toISOString()
-            },
-            { onConflict: 'clerk_user_id' }
-          )
-          .select()
-          .single()
+    if (isSupabaseConfigured && supabase) {
+      const { data, error } = await supabase
+        .from('profiles')
+        .upsert(
+          {
+            clerk_user_id,
+            email,
+            full_name,
+            company_name,
+            role,
+            gstin,
+            phone,
+            updated_at: new Date().toISOString()
+          },
+          { onConflict: 'clerk_user_id' }
+        )
+        .select()
+        .single()
 
-        if (!error && data) return res.json({ success: true, profile: data })
-      } catch (e) {
-        console.warn('⚡ Supabase user sync notice:', e.message)
+      if (error) {
+        return res.status(500).json({ success: false, error: error.message })
       }
+
+      if (data) return res.json({ success: true, profile: data })
     }
 
-    // Local in-memory mock update
-    let user = mockDb.profiles.find(p => p.clerk_user_id === clerk_user_id)
-    if (user) {
-      user = { ...user, full_name, company_name, role, gstin, phone }
-    } else {
-      user = {
-        id: `user-${Date.now()}`,
-        clerk_user_id,
-        email: email || 'user@waste2worth.com',
-        full_name,
-        company_name,
-        role,
-        gstin,
-        phone,
-        verified: true,
-        credit_score: 780,
-        created_at: new Date().toISOString()
-      }
-      mockDb.profiles.push(user)
-    }
-
-    return res.json({ success: true, profile: user })
+    return res.json({ success: true, profile: { clerk_user_id, email, full_name, company_name, role } })
   } catch (err) {
     console.error('Error syncing user:', err)
-    return res.status(500).json({ error: 'Failed to sync user profile' })
+    return res.status(500).json({ success: false, error: 'Failed to sync user profile' })
   }
 })
 
@@ -79,23 +59,23 @@ router.get('/profile/:clerkUserId', async (req, res) => {
   try {
     const { clerkUserId } = req.params
 
-    if (isSupabaseConfigured) {
-      try {
-        const { data, error } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('clerk_user_id', clerkUserId)
-          .single()
-        if (!error && data) return res.json({ success: true, profile: data })
-      } catch (e) {
-        console.warn('⚡ Supabase profile fetch notice:', e.message)
+    if (isSupabaseConfigured && supabase) {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .or(`clerk_user_id.eq.${clerkUserId},email.eq.${clerkUserId}`)
+        .single()
+
+      if (error) {
+        return res.status(404).json({ success: false, error: 'Profile not found' })
       }
+
+      if (data) return res.json({ success: true, profile: data })
     }
 
-    const user = mockDb.profiles.find(p => p.clerk_user_id === clerkUserId) || mockDb.profiles[0]
-    return res.json({ success: true, profile: user })
+    return res.status(404).json({ success: false, error: 'Profile not found' })
   } catch (err) {
-    return res.status(500).json({ error: 'Failed to get profile' })
+    return res.status(500).json({ success: false, error: 'Failed to get profile' })
   }
 })
 

@@ -6,12 +6,12 @@
 -- Insert Mock Profiles
 INSERT INTO public.profiles (id, clerk_user_id, email, full_name, company_name, role, gstin, phone, city, state, verified, credit_score)
 VALUES
-    ('a0000000-0000-0000-0000-000000000001', 'user_tatasteel_01', 'procurement@tatasteel.com', 'Rajesh Sharma', 'Tata Steel Ltd.', 'seller', '20AAACT2727Q1ZU', '+91 657 664 1234', 'Jamshedpur', 'Jharkhand', true, 890),
-    ('a0000000-0000-0000-0000-000000000002', 'user_reliance_02', 'circular@ril.com', 'Ananya Mehta', 'Reliance Petrochemicals', 'seller', '24AAACR5055K1ZI', '+91 265 669 8800', 'Vadodara', 'Gujarat', true, 920),
-    ('a0000000-0000-0000-0000-000000000003', 'user_iocl_03', 'hazmat.disposal@iocl.co.in', 'Vikram Singh', 'IOCL Mathura Refinery', 'seller', '09AAACI1681G1ZM', '+91 565 241 7000', 'Mathura', 'Uttar Pradesh', true, 860),
-    ('a0000000-0000-0000-0000-000000000004', 'user_arvind_04', 'sustainability@arvind.in', 'Pooja Patel', 'Arvind Mills Ltd.', 'seller', '24AAACA3000P1ZS', '+91 79 6826 4000', 'Ahmedabad', 'Gujarat', true, 840),
-    ('a0000000-0000-0000-0000-000000000005', 'user_ultratech_05', 'sourcing@ultratechcement.com', 'Karan Verma', 'UltraTech Cement Ltd.', 'buyer', '27AAACU1234L1ZX', '+91 22 6691 7800', 'Mumbai', 'Maharashtra', true, 910),
-    ('a0000000-0000-0000-0000-000000000006', 'user_ecoplast_06', 'buy@ecoplastics.co.in', 'Siddharth Rao', 'EcoPlastics Reprocessors', 'buyer', '29AAACE4567M1ZV', '+91 80 4123 9900', 'Bengaluru', 'Karnataka', true, 810)
+    ('a0000000-0000-0000-0000-000000000001', 'user_northgate_01', 'procurement@northgatesteel.demo', 'Rajesh Sharma', 'Northgate Steelworks Ltd.', 'seller', '20AAAAA0000A1Z1', '+91 657 555 0101', 'Jamshedpur', 'Jharkhand', true, 890),
+    ('a0000000-0000-0000-0000-000000000002', 'user_meridian_02', 'circular@meridianchem.demo', 'Ananya Mehta', 'Meridian Petrochemicals', 'seller', '24BBBBB0000B1Z2', '+91 265 555 0102', 'Vadodara', 'Gujarat', true, 920),
+    ('a0000000-0000-0000-0000-000000000003', 'user_zenith_03', 'hazmat@zenithrefining.demo', 'Vikram Singh', 'Zenith Refining & Energy', 'seller', '09DDDDD0000D1Z4', '+91 565 555 0103', 'Mathura', 'Uttar Pradesh', true, 860),
+    ('a0000000-0000-0000-0000-000000000004', 'user_solaria_04', 'sustainability@solariatex.demo', 'Pooja Patel', 'Solaria Industrial Textiles', 'seller', '24EEEEE0000E1Z5', '+91 79 5555 0104', 'Ahmedabad', 'Gujarat', true, 840),
+    ('a0000000-0000-0000-0000-000000000005', 'user_apex_05', 'sourcing@apexmaterials.demo', 'Karan Verma', 'Apex Matrix Materials Ltd.', 'buyer', '27CCCCC0000C1Z3', '+91 22 5555 0105', 'Mumbai', 'Maharashtra', true, 910),
+    ('a0000000-0000-0000-0000-000000000006', 'user_ecoplast_06', 'buy@ecoplastics.demo', 'Siddharth Rao', 'EcoPlastics Reprocessors', 'buyer', '29FFFFF0000F1Z6', '+91 80 5555 0106', 'Bengaluru', 'Karnataka', true, 810)
 ON CONFLICT (clerk_user_id) DO NOTHING;
 
 -- Insert Seed Listings

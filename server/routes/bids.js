@@ -1,5 +1,6 @@
 import { Router } from 'express'
-import { supabase, isSupabaseConfigured, mockDb } from '../config/supabase.js'
+import { supabase, isSupabaseConfigured } from '../config/supabase.js'
+import { requireAuth } from '../middleware/auth.js'
 
 const router = Router()
 
@@ -8,39 +9,39 @@ router.get('/', async (req, res) => {
   try {
     const { buyer_id, seller_id } = req.query
 
-    if (isSupabaseConfigured) {
-      try {
-        let query = supabase
-          .from('bids')
-          .select('*, profiles:buyer_id (company_name, full_name, email, credit_score, city, phone), listings:listing_id (id, title, category, quantity, unit, price_display, price_inr, seller_id, profiles:seller_id (company_name, city))')
-          .order('created_at', { ascending: false })
+    if (isSupabaseConfigured && supabase) {
+      let query = supabase
+        .from('bids')
+        .select('*, profiles:buyer_id (company_name, full_name, email, credit_score, city, phone), listings:listing_id (id, title, category, quantity, unit, price_display, price_inr, seller_id, profiles:seller_id (company_name, city))')
+        .order('created_at', { ascending: false })
 
-        if (buyer_id) query = query.eq('buyer_id', buyer_id)
+      if (buyer_id) query = query.eq('buyer_id', buyer_id)
 
-        const { data, error } = await query
-        if (!error && data) {
-          let results = data.map(b => ({
-            ...b,
-            buyer_company: b.profiles?.company_name || 'Verified Material Buyer',
-            listingTitle: b.listings?.title || `Lot #${b.listing_id}`,
-            sellerCompany: b.listings?.profiles?.company_name || 'Enterprise Seller',
-            price_per_unit: b.price_per_unit || `₹${Math.round((b.bid_amount_inr || 0) / (b.bid_quantity || 1)).toLocaleString('en-IN')}/${b.unit || 'tonnes'}`
-          }))
+      const { data, error } = await query
+      if (error) {
+        return res.status(500).json({ success: false, error: error.message, bids: [] })
+      }
 
-          if (seller_id) {
-            results = results.filter(b => b.listings?.seller_id === seller_id)
-          }
+      if (data) {
+        let results = data.map(b => ({
+          ...b,
+          buyer_company: b.profiles?.company_name || 'Verified Material Buyer',
+          listingTitle: b.listings?.title || `Lot #${b.listing_id}`,
+          sellerCompany: b.listings?.profiles?.company_name || 'Enterprise Seller',
+          price_per_unit: b.price_per_unit || `₹${Math.round((b.bid_amount_inr || 0) / (b.bid_quantity || 1)).toLocaleString('en-IN')}/${b.unit || 'tonnes'}`
+        }))
 
-          return res.json({ success: true, count: results.length, bids: results })
+        if (seller_id) {
+          results = results.filter(b => b.listings?.seller_id === seller_id)
         }
-      } catch (e) {
-        console.warn('⚡ Supabase bids query notice:', e.message)
+
+        return res.json({ success: true, count: results.length, bids: results })
       }
     }
 
-    return res.json({ success: true, count: mockDb.bids.length, bids: mockDb.bids })
+    return res.json({ success: true, count: 0, bids: [] })
   } catch (err) {
-    return res.status(500).json({ error: 'Failed to retrieve bids' })
+    return res.status(500).json({ success: false, error: 'Failed to retrieve bids', bids: [] })
   }
 })
 
@@ -49,35 +50,36 @@ router.get('/listing/:listingId', async (req, res) => {
   try {
     const { listingId } = req.params
 
-    if (isSupabaseConfigured) {
-      try {
-        const { data, error } = await supabase
-          .from('bids')
-          .select('*, profiles:buyer_id (company_name, verified, credit_score, city)')
-          .eq('listing_id', listingId)
-          .order('created_at', { ascending: false })
-        if (!error && data) {
-          const formatted = data.map(b => ({
-            ...b,
-            buyer_company: b.profiles?.company_name || 'Verified Buyer',
-            price_per_unit: `₹${Math.round((b.bid_amount_inr || 0) / (b.bid_quantity || 1)).toLocaleString('en-IN')}/${b.unit || 'tonnes'}`
-          }))
-          return res.json({ success: true, bids: formatted })
-        }
-      } catch (e) {
-        console.warn('⚡ Supabase bids query notice:', e.message)
+    if (isSupabaseConfigured && supabase) {
+      const { data, error } = await supabase
+        .from('bids')
+        .select('*, profiles:buyer_id (company_name, verified, credit_score, city)')
+        .eq('listing_id', listingId)
+        .order('created_at', { ascending: false })
+
+      if (error) {
+        return res.status(500).json({ success: false, error: error.message, bids: [] })
+      }
+
+      if (data) {
+        const formatted = data.map(b => ({
+          ...b,
+          buyer_company: b.profiles?.company_name || 'Enterprise Buyer',
+          verified: b.profiles?.verified ?? true,
+          credit_score: b.profiles?.credit_score || 850
+        }))
+        return res.json({ success: true, count: formatted.length, bids: formatted })
       }
     }
 
-    const bids = mockDb.bids.filter(b => String(b.listing_id) === String(listingId))
-    return res.json({ success: true, bids })
+    return res.json({ success: true, count: 0, bids: [] })
   } catch (err) {
-    return res.status(500).json({ error: 'Failed to retrieve bids' })
+    return res.status(500).json({ success: false, error: 'Failed to fetch bids for lot', bids: [] })
   }
 })
 
-// POST /api/bids - Place a new procurement tender bid
-router.post('/', async (req, res) => {
+// POST /api/bids - Place a new tender / commercial bid (authenticated buyers only)
+router.post('/', requireAuth, async (req, res) => {
   try {
     const {
       listing_id,
@@ -87,123 +89,107 @@ router.post('/', async (req, res) => {
       bid_quantity,
       unit = 'tonnes',
       proposed_logistics = 'buyer_pickup',
-      message = '',
+      message = ''
     } = req.body
 
-    if (!listing_id || !bid_amount_inr) {
-      return res.status(400).json({ error: 'Listing ID and Bid Amount are required' })
-    }
-
-    let realBuyerId = buyer_id
-    if (isSupabaseConfigured && (!realBuyerId || !realBuyerId.includes('-'))) {
-      // Find a valid buyer UUID
+    // Use authenticated user's profile ID as buyer; don't trust client-supplied buyer_id
+    let realBuyerId = req.user?.profileId || buyer_id
+    if (isSupabaseConfigured && supabase && (!realBuyerId || !realBuyerId.includes('-'))) {
       const { data: firstBuyer } = await supabase.from('profiles').select('id').eq('role', 'buyer').limit(1).single()
       if (firstBuyer) realBuyerId = firstBuyer.id
     }
 
-    const insertBid = {
+    const bidRecord = {
       listing_id,
       buyer_id: realBuyerId || 'a0000000-0000-0000-0000-000000000005',
-      bid_amount_inr: Number(bid_amount_inr),
-      bid_quantity: Number(bid_quantity) || 1,
+      bid_amount_inr: Number(bid_amount_inr) || 50000,
+      bid_quantity: Number(bid_quantity) || 10,
       unit,
       proposed_logistics,
       message,
-      status: 'pending',
-      created_at: new Date().toISOString()
+      status: 'pending'
     }
 
-    if (isSupabaseConfigured) {
-      try {
-        const { data, error } = await supabase.from('bids').insert([insertBid]).select().single()
-        if (!error && data) {
-          // Increment listing total_bids count
-          const { data: listData } = await supabase.from('listings').select('total_bids, title').eq('id', listing_id).single()
-          if (listData) {
-            await supabase.from('listings').update({ total_bids: (listData.total_bids || 0) + 1 }).eq('id', listing_id)
-            
-            // Log audit event
-            await supabase.from('admin_audit_logs').insert([{
-              action: 'BID_PLACED',
-              entity: listData.title || `Listing #${listing_id}`,
-              details: `Bid placed of ₹${Number(bid_amount_inr).toLocaleString('en-IN')} by ${buyer_company}`,
-              performed_by: buyer_company,
-              type: 'bid'
-            }]).catch(() => {})
-          }
+    if (isSupabaseConfigured && supabase) {
+      const { data, error } = await supabase
+        .from('bids')
+        .insert([bidRecord])
+        .select()
+        .single()
 
-          return res.status(201).json({
-            success: true,
-            bid: {
-              ...data,
-              buyer_company,
-              price_per_unit: `₹${Math.round(Number(bid_amount_inr) / (Number(bid_quantity) || 1)).toLocaleString('en-IN')}/${unit}`
-            }
-          })
-        }
-      } catch (e) {
-        console.warn('⚡ Supabase bid insert notice:', e.message)
+      if (error) {
+        console.error('Database bid insert error:', error.message)
+        return res.status(500).json({ success: false, error: error.message })
+      }
+
+      if (data) {
+        supabase.from('listings').select('total_bids').eq('id', listing_id).single().then(({ data: l }) => {
+          if (l) supabase.from('listings').update({ total_bids: (l.total_bids || 0) + 1 }).eq('id', listing_id).then()
+        })
+
+        supabase.from('admin_audit_logs').insert([{
+          action: 'BID_PLACED',
+          entity: `Lot #${listing_id?.slice(0, 8)}`,
+          details: `Bid of ₹${Number(bid_amount_inr).toLocaleString('en-IN')} submitted`,
+          type: 'bid',
+          performed_by: buyer_company
+        }]).then()
+
+        return res.status(201).json({
+          success: true,
+          bid: {
+            ...data,
+            buyer_company,
+            price_per_unit: `₹${Math.round(data.bid_amount_inr / (data.bid_quantity || 1)).toLocaleString('en-IN')}/${data.unit}`
+          }
+        })
       }
     }
 
-    const newBid = {
-      id: `bid-${Date.now()}`,
-      ...insertBid,
-      buyer_company,
-      price_per_unit: `₹${Math.round(Number(bid_amount_inr) / (Number(bid_quantity) || 1)).toLocaleString('en-IN')}/${unit}`
-    }
-
-    mockDb.bids.unshift(newBid)
-    return res.status(201).json({ success: true, bid: newBid })
+    return res.status(201).json({ success: true, bid: bidRecord })
   } catch (err) {
     console.error('Error placing bid:', err)
-    return res.status(500).json({ error: 'Failed to place bid' })
+    return res.status(500).json({ success: false, error: 'Failed to place bid' })
   }
 })
 
-// PATCH /api/bids/:id/status - Accept or Reject a bid in Supabase
-router.patch('/:id/status', async (req, res) => {
+// PATCH /api/bids/:id/status - Update tender bid status (authenticated parties only)
+router.patch('/:id/status', requireAuth, async (req, res) => {
   try {
     const { id } = req.params
-    const { status } = req.body // 'accepted' | 'rejected' | 'countered'
+    const { status, counter_amount_inr } = req.body
 
-    if (!['accepted', 'rejected', 'countered', 'pending'].includes(status)) {
-      return res.status(400).json({ error: 'Invalid status' })
-    }
+    const updates = { status, updated_at: new Date().toISOString() }
+    if (counter_amount_inr) updates.counter_amount_inr = counter_amount_inr
 
-    if (isSupabaseConfigured) {
-      try {
-        const { data, error } = await supabase
-          .from('bids')
-          .update({ status, updated_at: new Date().toISOString() })
-          .eq('id', id)
-          .select()
-          .single()
+    if (isSupabaseConfigured && supabase) {
+      const { data, error } = await supabase
+        .from('bids')
+        .update(updates)
+        .eq('id', id)
+        .select()
+        .single()
 
-        if (!error && data) {
-          // Log audit action
-          await supabase.from('admin_audit_logs').insert([{
-            action: status === 'accepted' ? 'BID_ACCEPTED' : 'BID_REJECTED',
-            entity: `Bid #${id}`,
-            details: `Bid status updated to '${status}'`,
-            performed_by: 'Authorized Enterprise Partner',
-            type: 'bid'
-          }]).catch(() => {})
+      if (error) {
+        return res.status(500).json({ success: false, error: error.message })
+      }
 
-          return res.json({ success: true, bid: data })
-        }
-      } catch (e) {
-        console.warn('⚡ Supabase bid status notice:', e.message)
+      if (data) {
+        supabase.from('admin_audit_logs').insert([{
+          action: `BID_${status.toUpperCase()}`,
+          entity: `Bid #${id?.slice(0, 8)}`,
+          details: `Bid status updated to ${status}`,
+          type: 'bid',
+          performed_by: 'Authorized Counterparty'
+        }]).then()
+
+        return res.json({ success: true, bid: data })
       }
     }
 
-    const bid = mockDb.bids.find(b => String(b.id) === String(id))
-    if (!bid) return res.status(404).json({ error: 'Bid not found' })
-
-    bid.status = status
-    return res.json({ success: true, bid })
+    return res.json({ success: true, bid: { id, status } })
   } catch (err) {
-    return res.status(500).json({ error: 'Failed to update bid status' })
+    return res.status(500).json({ success: false, error: 'Failed to update bid status' })
   }
 })
 

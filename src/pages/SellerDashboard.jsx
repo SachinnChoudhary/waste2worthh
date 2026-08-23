@@ -103,7 +103,7 @@ export default function SellerDashboard() {
 
   const exportLedger = () => {
     const reportData = {
-      enterprise: user?.company || 'Tata Steel Ltd.',
+      enterprise: user?.company || 'Northgate Steelworks Ltd.',
       exportedAt: new Date().toISOString(),
       activeInventoryCount: myListings.length,
       listings: myListings,
@@ -147,7 +147,7 @@ export default function SellerDashboard() {
             </Badge>
           </div>
           <p className="text-xs sm:text-sm text-zinc-400">
-            Real-time management of {user?.company || 'Tata Steel Ltd.'} byproduct streams, incoming tender bids, and ESG scope-3 carbon offsets.
+            Real-time management of {user?.company || 'Northgate Steelworks Ltd.'} byproduct streams, incoming tender bids, and ESG scope-3 carbon offsets.
           </p>
         </div>
 

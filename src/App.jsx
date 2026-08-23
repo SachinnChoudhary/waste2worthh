@@ -10,6 +10,14 @@ import CreateListing from './pages/CreateListing'
 import ListingDetail from './pages/ListingDetail'
 import Profile from './pages/Profile'
 import AdminDashboard from './pages/AdminDashboard'
+import CpcbGuidelines from './pages/CpcbGuidelines'
+import CarbonCredits from './pages/CarbonCredits'
+import HazmatMsds from './pages/HazmatMsds'
+import EscrowSettlement from './pages/EscrowSettlement'
+import SecurityTrust from './pages/SecurityTrust'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import TermsOfService from './pages/TermsOfService'
+import ApiDocs from './pages/ApiDocs'
 import { AuthenticateWithRedirectCallback } from '@clerk/clerk-react'
 import { useWasteAuth, isClerkConfigured } from './lib/auth'
 
@@ -70,6 +78,25 @@ export default function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/marketplace" element={<Marketplace />} />
         <Route path="/listing/:id" element={<ListingDetail />} />
+
+        {/* Governance & Compliance */}
+        <Route path="/cpcb-guidelines" element={<CpcbGuidelines />} />
+        <Route path="/cpcb" element={<CpcbGuidelines />} />
+        <Route path="/carbon-credits" element={<CarbonCredits />} />
+        <Route path="/hazmat-msds" element={<HazmatMsds />} />
+        <Route path="/hazmat" element={<HazmatMsds />} />
+        <Route path="/escrow-settlement" element={<EscrowSettlement />} />
+        <Route path="/escrow" element={<EscrowSettlement />} />
+
+        {/* Company, Security & Developer API */}
+        <Route path="/security" element={<SecurityTrust />} />
+        <Route path="/security-trust" element={<SecurityTrust />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsOfService />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
+        <Route path="/api-docs" element={<ApiDocs />} />
+        <Route path="/api" element={<ApiDocs />} />
 
         {/* SSO OAuth Callbacks */}
         <Route path="/login/sso-callback" element={<SSOCallbackHandler />} />
