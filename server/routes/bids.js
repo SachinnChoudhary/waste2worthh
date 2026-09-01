@@ -111,6 +111,17 @@ router.post('/', requireAuth, async (req, res) => {
     }
 
     if (isSupabaseConfigured && supabase) {
+      // Check if bidder is the owner of the listing
+      const { data: targetListing } = await supabase
+        .from('listings')
+        .select('seller_id')
+        .eq('id', listing_id)
+        .single()
+
+      if (targetListing && targetListing.seller_id && targetListing.seller_id === realBuyerId) {
+        return res.status(400).json({ success: false, error: 'Sellers cannot place bids on their own byproduct listings' })
+      }
+
       const { data, error } = await supabase
         .from('bids')
         .insert([bidRecord])
