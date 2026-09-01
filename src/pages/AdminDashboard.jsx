@@ -381,7 +381,7 @@ export default function AdminDashboard() {
               </div>
               <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.08] text-xs">
                 <span className={`w-2 h-2 rounded-full ${systemHealth?.mlService?.status === 'offline' ? 'bg-amber-400' : 'bg-emerald-400'}`} />
-                <span className="text-fg-secondary font-mono text-[11px]">Python ML Engine</span>
+                <span className="text-fg-secondary font-mono text-[11px]">AI Engine</span>
               </div>
               <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.08] text-xs">
                 <span className="w-2 h-2 rounded-full bg-cyan-400" />
@@ -414,7 +414,7 @@ export default function AdminDashboard() {
               { id: 'listings', label: 'Listings Control', icon: Store, count: listings.length },
               { id: 'bids', label: 'Bids & Deals', icon: DollarSign, count: bids.length },
               { id: 'users', label: 'Enterprise & KYC', icon: Users, count: users.length },
-              { id: 'mllab', label: 'AI / ML Inference Lab', icon: Cpu, count: null },
+              { id: 'mllab', label: 'AI Inference Lab', icon: Cpu, count: null },
               { id: 'settings', label: 'Audit Logs & Settings', icon: Settings, count: auditLogs.length }
             ].map(tab => {
               const Icon = tab.icon
@@ -494,12 +494,12 @@ export default function AdminDashboard() {
                     <h2 className="text-base font-bold text-fg-primary">Live Microservices & Model Pipeline Telemetry</h2>
                   </div>
                   <p className="text-xs text-fg-secondary max-w-2xl">
-                    All core components are synchronized. Python Random Forest valuation regressor, TF-IDF category classifier, and Cloud Database persistence are operational.
+                    All core components are synchronized. AI valuation regressor, category classifier, and Cloud Database persistence are operational.
                   </p>
                   <div className="flex flex-wrap items-center gap-3 pt-2">
                     <div className="px-3 py-1.5 rounded-xl bg-zinc-900 border border-white/10 text-xs flex items-center gap-2">
                       <Cpu className="w-4 h-4 text-emerald-400" />
-                      <span className="text-fg-secondary">ML Engine:</span>
+                      <span className="text-fg-secondary">AI Engine:</span>
                       <span className="font-mono text-emerald-400 font-bold">{systemHealth?.mlService?.status?.toUpperCase() || 'HEALTHY'}</span>
                       {systemHealth?.mlService?.latencyMs && (
                         <span className="text-fg-muted font-mono text-[10px]">({systemHealth.mlService.latencyMs}ms)</span>
@@ -828,7 +828,7 @@ export default function AdminDashboard() {
                             <div className="flex items-center justify-end gap-1.5">
                               <button
                                 onClick={() => handleReEvaluateAI(item.id)}
-                                title="Re-run ML Valuation"
+                                title="Re-run AI Valuation"
                                 className="p-1.5 rounded-lg text-cyan-400 hover:bg-cyan-500/10 transition-colors cursor-pointer"
                               >
                                 <Sparkles className="w-4 h-4" />
@@ -1080,16 +1080,16 @@ export default function AdminDashboard() {
                 <div>
                   <h2 className="text-lg font-bold text-fg-primary flex items-center gap-2">
                     <Cpu className="w-5 h-5 text-emerald-400" />
-                    Waste2Worth Live Machine Learning Inference Laboratory
+                    Waste2Worth Live AI Inference & Valuation Laboratory
                   </h2>
                   <p className="text-xs text-fg-muted">
-                    Test classification algorithms, random forest price estimators, CO₂ carbon formulas, and buyer vector matching in real-time.
+                    Test classification algorithms, AI price estimators, CO₂ carbon formulas, and buyer vector matching in real-time.
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    Python Flask Microservice (Port 8000)
+                    Live AI Inference Service
                   </span>
                 </div>
               </div>

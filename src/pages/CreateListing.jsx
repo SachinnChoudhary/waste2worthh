@@ -55,7 +55,7 @@ export default function CreateListing() {
     estimated_value_usd: 0,
     disposal_cost_saved_usd: 0,
     co2_reduction_kg: 0,
-    pricing_model: 'ML Model Active',
+    pricing_model: 'AI Model Active',
     isAnalyzing: false,
   })
 
@@ -106,7 +106,7 @@ export default function CreateListing() {
           estimated_value_usd: res.estimated_value_usd || 0,
           disposal_cost_saved_usd: res.disposal_cost_saved_usd || 0,
           co2_reduction_kg: res.co2_reduction_kg || 0,
-          pricing_model: res.pricing_model || 'ML Active',
+          pricing_model: res.pricing_model || 'AI Active',
           isAnalyzing: false,
         })
 
@@ -416,7 +416,7 @@ export default function CreateListing() {
               placeholder="Detail the chemical composition, moisture percentage, ash content, testing reports available on request, and pickup terms..."
               value={form.description}
               onChange={update('description')}
-              helperText="The ML model extracts chemical descriptors in real-time to benchmark pricing."
+              helperText="The AI model extracts chemical descriptors in real-time to benchmark pricing."
             />
           </div>
 
@@ -558,7 +558,7 @@ export default function CreateListing() {
           </div>
         </div>
 
-        {/* ─── Right Column: AI Co-Pilot & Publishing Actions ─── */}
+        {/* ─── Right Column: AI CoPilot & Publishing Actions ─── */}
         <div className="space-y-6">
           {/* AI Valuation Card */}
           <div className="surface-card rounded-2xl p-6 border border-emerald-500/30 bg-gradient-to-b from-emerald-950/30 to-zinc-950/90 space-y-4 sticky top-20">
@@ -566,11 +566,11 @@ export default function CreateListing() {
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-emerald-400" />
                 <span className="text-xs font-bold text-fg-primary uppercase tracking-wider">
-                  Python ML Co-Pilot
+                  AI CoPilot
                 </span>
               </div>
               <Badge variant={aiData.isAnalyzing ? 'cyan' : 'emerald'} size="sm">
-                {aiData.isAnalyzing ? 'Analyzing ML...' : 'ML Synced'}
+                {aiData.isAnalyzing ? 'Analyzing...' : 'AI Synced'}
               </Badge>
             </div>
 
@@ -592,7 +592,7 @@ export default function CreateListing() {
               {/* Valuation */}
               <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
                 <span className="text-[11px] text-fg-muted font-medium block">
-                  Projected Fair Market Value (ML)
+                  Projected Fair Market Value (AI)
                 </span>
                 <span className="text-xl font-bold text-emerald-400 font-sans mt-0.5 block">
                   {aiData.estimated_value_usd > 0
