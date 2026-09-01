@@ -1,4 +1,4 @@
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { Button } from '../components/Button'
 import { Input } from '../components/Input'
@@ -16,46 +16,50 @@ import {
   Factory,
   Layers,
   Shield,
+  KeyRound,
 } from 'lucide-react'
 
 export default function Login() {
   const navigate = useNavigate()
-  const location = useLocation()
-  const { login, role: currentRole } = useWasteAuth()
-  const [email, setEmail] = useState('procurement@northgatesteel.demo')
-  const [password, setPassword] = useState('••••••••••••')
-  const [selectedRole, setSelectedRole] = useState('seller')
+  const { login } = useWasteAuth()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [loginError, setLoginError] = useState(null)
 
-  const handleQuickSelect = (roleKey, emailVal, nameVal, companyVal) => {
-    setSelectedRole(roleKey)
-    setEmail(emailVal)
+  const handleFillDemo = (demoEmail, demoPassword = '••••••••••••') => {
+    setEmail(demoEmail)
+    setPassword(demoPassword)
+    setLoginError(null)
   }
 
   const handleSubmit = async e => {
     e.preventDefault()
     setIsLoading(true)
+    setLoginError(null)
 
-    const isSeller = selectedRole === 'seller' || email.includes('northgate') || email.includes('steel') || email.includes('meridian')
-    const isAdmin = selectedRole === 'admin' || email.includes('admin')
-    const finalRole = isAdmin ? 'admin' : (isSeller ? 'seller' : 'buyer')
+    try {
+      const profile = await login({
+        email,
+        password
+      })
 
-    const companyMap = {
-      seller: 'Northgate Steelworks Ltd.',
-      buyer: 'Apex Matrix Materials Ltd.',
-      admin: 'Waste2Worth Platform Administration'
+      setIsLoading(false)
+
+      // Direct user to their dashboard according to the role chosen during ID creation
+      const userRole = profile?.role || 'seller'
+      if (userRole === 'buyer') {
+        navigate('/buyer')
+      } else if (userRole === 'admin') {
+        navigate('/admin')
+      } else {
+        // 'seller' or 'both'
+        navigate('/seller')
+      }
+    } catch (err) {
+      setIsLoading(false)
+      setLoginError('Failed to sign in. Please verify your credentials.')
     }
-
-    await login({
-      name: finalRole === 'seller' ? 'Rajesh Sharma' : finalRole === 'buyer' ? 'Karan Verma' : 'SuperAdmin',
-      company: companyMap[finalRole] || 'Industrial Partner',
-      email,
-      role: finalRole
-    })
-
-    setIsLoading(false)
-    const targetDashboard = finalRole === 'buyer' ? '/buyer' : finalRole === 'admin' ? '/admin' : '/seller'
-    navigate(targetDashboard)
   }
 
   return (
@@ -76,56 +80,44 @@ export default function Login() {
               Welcome back to India’s leading circular raw material exchange.
             </h2>
             <p className="text-xs sm:text-sm text-fg-secondary leading-relaxed max-w-sm">
-              Log in to access your role-specific dashboard with live inventory, active tender bids, and automated scope-3 audit reports.
+              Log in to automatically access your account dashboard with live byproduct inventory, active tender bids, and automated scope-3 audit reports.
             </p>
           </div>
         </div>
 
-        {/* Demo Fast Login Switcher Cards */}
+        {/* Demo Fast Autofill Credentials */}
         <div className="relative z-10 space-y-2 pt-4 border-t border-white/[0.08]">
           <span className="text-[11px] font-semibold text-fg-muted uppercase tracking-wider block">
-            Quick Enterprise Roles (Live Platform Data)
+            Demo Sample Accounts (Autofill Credentials)
           </span>
           <div className="grid grid-cols-3 gap-2">
             <button
               type="button"
-              onClick={() => handleQuickSelect('seller', 'procurement@northgatesteel.demo', 'Rajesh Sharma', 'Northgate Steelworks Ltd.')}
-              className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
-                selectedRole === 'seller'
-                  ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300'
-                  : 'bg-white/[0.03] border-white/10 text-fg-secondary hover:border-white/20'
-              }`}
+              onClick={() => handleFillDemo('procurement@northgatesteel.demo')}
+              className="p-2.5 rounded-xl border border-white/10 bg-white/[0.03] hover:border-emerald-500/40 hover:bg-emerald-500/10 text-left transition-all cursor-pointer group"
             >
-              <Factory className="w-4 h-4 text-emerald-400 mb-1" />
-              <span className="text-xs font-bold block">Seller</span>
+              <Factory className="w-4 h-4 text-emerald-400 mb-1 group-hover:scale-110 transition-transform" />
+              <span className="text-xs font-bold text-fg-primary block">Seller Demo</span>
               <span className="text-[10px] text-fg-muted block truncate">Northgate Steel</span>
             </button>
 
             <button
               type="button"
-              onClick={() => handleQuickSelect('buyer', 'sourcing@apexmaterials.demo', 'Karan Verma', 'Apex Matrix Materials Ltd.')}
-              className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
-                selectedRole === 'buyer'
-                  ? 'bg-cyan-500/20 border-cyan-500/40 text-cyan-300'
-                  : 'bg-white/[0.03] border-white/10 text-fg-secondary hover:border-white/20'
-              }`}
+              onClick={() => handleFillDemo('sourcing@apexmaterials.demo')}
+              className="p-2.5 rounded-xl border border-white/10 bg-white/[0.03] hover:border-cyan-500/40 hover:bg-cyan-500/10 text-left transition-all cursor-pointer group"
             >
-              <Layers className="w-4 h-4 text-cyan-400 mb-1" />
-              <span className="text-xs font-bold block">Buyer</span>
+              <Layers className="w-4 h-4 text-cyan-400 mb-1 group-hover:scale-110 transition-transform" />
+              <span className="text-xs font-bold text-fg-primary block">Buyer Demo</span>
               <span className="text-[10px] text-fg-muted block truncate">Apex Materials</span>
             </button>
 
             <button
               type="button"
-              onClick={() => handleQuickSelect('admin', 'admin@waste2worth.demo', 'SuperAdmin', 'Waste2Worth Platform Administration')}
-              className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
-                selectedRole === 'admin'
-                  ? 'bg-purple-500/20 border-purple-500/40 text-purple-300'
-                  : 'bg-white/[0.03] border-white/10 text-fg-secondary hover:border-white/20'
-              }`}
+              onClick={() => handleFillDemo('admin@waste2worth.demo')}
+              className="p-2.5 rounded-xl border border-white/10 bg-white/[0.03] hover:border-purple-500/40 hover:bg-purple-500/10 text-left transition-all cursor-pointer group"
             >
-              <Shield className="w-4 h-4 text-purple-400 mb-1" />
-              <span className="text-xs font-bold block">Admin</span>
+              <Shield className="w-4 h-4 text-purple-400 mb-1 group-hover:scale-110 transition-transform" />
+              <span className="text-xs font-bold text-fg-primary block">Admin Demo</span>
               <span className="text-[10px] text-fg-muted block truncate">SuperAdmin</span>
             </button>
           </div>
@@ -138,7 +130,7 @@ export default function Login() {
           </span>
           <span>•</span>
           <span className="flex items-center gap-1">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Supabase Realtime Active
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Automated Role Routing
           </span>
         </div>
       </div>
@@ -162,13 +154,19 @@ export default function Login() {
             </p>
           </div>
 
+          {loginError && (
+            <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-xs font-medium">
+              {loginError}
+            </div>
+          )}
+
           {isClerkConfigured ? (
             <div className="clerk-signin-wrapper">
               <SignIn
                 routing="path"
                 path="/login"
                 signUpUrl="/signup"
-                fallbackRedirectUrl={selectedRole === 'buyer' ? '/buyer' : selectedRole === 'admin' ? '/admin' : '/seller'}
+                fallbackRedirectUrl="/marketplace"
                 appearance={{
                   elements: {
                     rootBox: 'w-full',
@@ -182,37 +180,6 @@ export default function Login() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Role Toggle for Mobile / Direct Selection */}
-              <div className="flex items-center gap-2 p-1 rounded-xl bg-zinc-900 border border-white/10">
-                <button
-                  type="button"
-                  onClick={() => handleQuickSelect('seller', 'procurement@northgatesteel.demo', 'Rajesh Sharma', 'Northgate Steelworks Ltd.')}
-                  className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                    selectedRole === 'seller' ? 'bg-emerald-500 text-zinc-950 shadow-sm' : 'text-fg-secondary hover:text-fg-primary'
-                  }`}
-                >
-                  Seller
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleQuickSelect('buyer', 'sourcing@apexmaterials.demo', 'Karan Verma', 'Apex Matrix Materials Ltd.')}
-                  className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                    selectedRole === 'buyer' ? 'bg-cyan-500 text-zinc-950 shadow-sm' : 'text-fg-secondary hover:text-fg-primary'
-                  }`}
-                >
-                  Buyer
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleQuickSelect('admin', 'admin@waste2worth.demo', 'SuperAdmin', 'Waste2Worth Platform Administration')}
-                  className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                    selectedRole === 'admin' ? 'bg-purple-500 text-zinc-950 shadow-sm' : 'text-fg-secondary hover:text-fg-primary'
-                  }`}
-                >
-                  Admin
-                </button>
-              </div>
-
               <Input
                 label="Enterprise Work Email"
                 id="login-email"
@@ -257,7 +224,7 @@ export default function Login() {
                 isLoading={isLoading}
                 rightIcon={<ArrowRight className="w-4 h-4" />}
               >
-                Sign In & Open {selectedRole === 'buyer' ? 'Buyer Procurement Hub' : selectedRole === 'admin' ? 'Admin Control Center' : 'Seller Command Center'}
+                Sign In to Enterprise Hub
               </Button>
             </form>
           )}
@@ -266,3 +233,4 @@ export default function Login() {
     </div>
   )
 }
+

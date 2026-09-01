@@ -61,11 +61,26 @@ export default function Signup() {
     setIsLoading(true)
     setGlobalRole(role)
 
+    // Persist to registered accounts cache so login will remember their chosen role
+    try {
+      const savedAccounts = JSON.parse(localStorage.getItem('w2w_registered_users') || '{}')
+      const emailKey = form.email.trim().toLowerCase()
+      savedAccounts[emailKey] = {
+        fullName: form.name || 'Industrial Leader',
+        company: form.company || 'Enterprise Partner',
+        email: form.email,
+        role: role,
+        gstin: form.gstin || '',
+      }
+      localStorage.setItem('w2w_registered_users', JSON.stringify(savedAccounts))
+    } catch (err) {}
+
     await login({
       name: form.name || 'Industrial Leader',
       company: form.company || 'Enterprise Partner',
       email: form.email,
-      role: role
+      role: role,
+      gstin: form.gstin || ''
     })
 
     setIsLoading(false)

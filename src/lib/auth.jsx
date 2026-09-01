@@ -97,22 +97,60 @@ function StandaloneAuthProvider({ children }) {
 
   const login = async (userData) => {
     setIsLoading(true)
+    const emailNorm = (userData.email || '').trim().toLowerCase()
+
+    let defaultRole = userData.role || 'seller'
+    let defaultName = userData.name || userData.fullName || 'Industrial Leader'
+    let defaultCompany = userData.company || 'Enterprise Partner'
+
+    if (!userData.role) {
+      if (emailNorm.includes('apex') || emailNorm.includes('sourcing') || emailNorm.includes('buyer')) {
+        defaultRole = 'buyer'
+        defaultName = 'Karan Verma'
+        defaultCompany = 'Apex Matrix Materials Ltd.'
+      } else if (emailNorm.includes('admin')) {
+        defaultRole = 'admin'
+        defaultName = 'SuperAdmin'
+        defaultCompany = 'Waste2Worth Platform Administration'
+      } else if (emailNorm.includes('northgate') || emailNorm.includes('steel') || emailNorm.includes('procurement')) {
+        defaultRole = 'seller'
+        defaultName = 'Rajesh Sharma'
+        defaultCompany = 'Northgate Steelworks Ltd.'
+      }
+    }
+
     let profileData = {
       id: userData.id || `user-${Date.now()}`,
-      fullName: userData.name || userData.fullName || 'Rajesh Sharma',
-      company: userData.company || 'Northgate Steelworks Ltd.',
+      fullName: defaultName,
+      company: defaultCompany,
       email: userData.email || 'procurement@northgatesteel.demo',
-      role: userData.role || 'seller',
+      role: defaultRole,
       verified: true
     }
 
-    // Read existing profile from Supabase (public SELECT is allowed by RLS)
+    // 1. Check local registered user cache (from signup / id creation on this device)
+    try {
+      const savedAccounts = JSON.parse(localStorage.getItem('w2w_registered_users') || '{}')
+      if (emailNorm && savedAccounts[emailNorm]) {
+        const saved = savedAccounts[emailNorm]
+        profileData = {
+          ...profileData,
+          id: saved.id || profileData.id,
+          fullName: saved.fullName || saved.name || profileData.fullName,
+          company: saved.company || profileData.company,
+          role: saved.role || profileData.role,
+          gstin: saved.gstin || profileData.gstin,
+        }
+      }
+    } catch (e) {}
+
+    // 2. Read existing profile from Supabase
     if (isSupabaseLive && userData.email) {
       try {
         const { data } = await supabase
           .from('profiles')
           .select('*')
-          .eq('email', userData.email)
+          .eq('email', emailNorm)
           .single()
 
         if (data) {
@@ -122,13 +160,12 @@ function StandaloneAuthProvider({ children }) {
             company: data.company_name || profileData.company,
             email: data.email,
             role: data.role || profileData.role,
-            verified: data.verified,
+            verified: data.verified ?? true,
             gstin: data.gstin,
             city: data.city,
             state: data.state
           }
         }
-        // Profile creation is handled by api.syncUser() below (server-side write)
       } catch (e) {}
     }
 
@@ -145,7 +182,9 @@ function StandaloneAuthProvider({ children }) {
       full_name: profileData.fullName,
       company_name: profileData.company,
       role: profileData.role,
-    })
+    }).catch(() => {})
+
+    return profileData
   }
 
   const logout = () => {
