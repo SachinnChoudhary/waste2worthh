@@ -45,6 +45,122 @@ async function authFetch(url, options = {}) {
   return fetch(url, { ...options, headers })
 }
 
+// Client-side rule heuristics for robust offline/fallback classification
+const CLIENT_HEURISTICS = [
+  {
+    regex: /\b(hdpe|ldpe|lldpe|pet|pete|polypropylene|pp|pvc|polyethylene|abs|polystyrene|thermocol|eps|polymer|plastic|polythene|acrylic|nylon|regrind|blow mould|plastic bottle|pet bottle|plastic bottles|water bottle)\b/i,
+    category: 'Plastic Waste',
+    hazard: 'Non-hazardous',
+    pricePerKg: 0.28,
+    co2Factor: 2.2
+  },
+  {
+    regex: /\b(pcb|printed circuit|motherboard|cpu|ram module|semiconductor|lithium|li-ion|battery|batteries|e-waste|electronic|capacitors?|smps|microchip|circuit board|server board|inverter battery)\b/i,
+    category: 'Electronic Waste',
+    hazard: 'Moderate',
+    pricePerKg: 0.85,
+    co2Factor: 4.5
+  },
+  {
+    regex: /\b(acid|solvent|caustic|naoh|hcl|sludge|effluent|etp|coolant|distillation|phosphating|petroleum sludge|spent catalyst|resin waste|chemical|pickle liquor|lubricant|toxic|chemical effluent)\b/i,
+    category: 'Chemical Byproducts',
+    hazard: 'High',
+    pricePerKg: 0.35,
+    co2Factor: 1.5
+  },
+  {
+    regex: /\b(tyres?|tires?|rubber|epdm|vulcanized|crumb rubber|butyl|inner tube|gasket|conveyor belt|retread)\b/i,
+    category: 'Rubber & Tires',
+    hazard: 'Low',
+    pricePerKg: 0.22,
+    co2Factor: 1.4
+  },
+  {
+    regex: /\b(cardboard|carton|kraft|paper|newsprint|pulp|sawdust|timber|pallets?|plywood|mdf|wood|lumber|shavings|woodchips?|box scrap)\b/i,
+    category: 'Wood & Paper',
+    hazard: 'Non-hazardous',
+    pricePerKg: 0.14,
+    co2Factor: 0.9
+  },
+  {
+    regex: /\b(cotton|denim|fabric|yarn|textile|garment|hosiery|viscose|rayon|silk|wool|cloth|selvedge|rags?|apparel scrap)\b/i,
+    category: 'Textile Waste',
+    hazard: 'Non-hazardous',
+    pricePerKg: 0.20,
+    co2Factor: 3.8
+  },
+  {
+    regex: /\b(bagasse|husk|food waste|vegetable|fruit pulp|compost|manure|spent grain|crop|paddy|brewery|organic|bio-?waste|peelings?)\b/i,
+    category: 'Organic Waste',
+    hazard: 'Non-hazardous',
+    pricePerKg: 0.05,
+    co2Factor: 0.5
+  },
+  {
+    regex: /\b(concrete|brick|mortar|drywall|gypsum|plaster|fly ash|bottom ash|granite|marble|demolition|rubble|asphalt|stone chips|cement|aggregate)\b/i,
+    category: 'Construction Debris',
+    hazard: 'Low',
+    pricePerKg: 0.08,
+    co2Factor: 0.45
+  },
+  {
+    regex: /\b(flint glass|borosilicate|windshield|vial|ampoule|bottle glass|glass cullet|cullet|crushed glass|glass shards?|glass scrap|glass bottles?|glass)\b/i,
+    category: 'Glass',
+    hazard: 'Non-hazardous',
+    pricePerKg: 0.10,
+    co2Factor: 0.7
+  },
+  {
+    regex: /\b(steel|iron|copper|aluminum|aluminium|brass|bronze|zinc|lead|nickel|titanium|metal|slag|dross|swarf|turnings?|filings?|rebar|tinplate|pipes?|wire scrap|sheet scrap|cables?)\b/i,
+    category: 'Metal Scrap',
+    hazard: 'Non-hazardous',
+    pricePerKg: 0.45,
+    co2Factor: 1.8
+  }
+]
+
+export function evaluateClientFallback(description = '', condition = 'Clean / sorted', quantity_kg = 1000) {
+  const normText = description.toLowerCase()
+  let matched = null
+
+  for (const rule of CLIENT_HEURISTICS) {
+    if (rule.regex.test(normText)) {
+      matched = rule
+      break
+    }
+  }
+
+  const category = matched ? matched.category : 'Metal Scrap'
+  let hazard_level = matched ? matched.hazard : 'Non-hazardous'
+  const basePrice = matched ? matched.pricePerKg : 0.45
+  const co2Factor = matched ? matched.co2Factor : 1.8
+  const confidence = matched ? 0.92 : 0.60
+
+  if (/\b(toxic|acid|corrosive|flammable|hazard|hazardous|cyanide|cadmium|lead acid)\b/i.test(normText)) {
+    hazard_level = 'High'
+  }
+
+  const conditionMultiplier = {
+    'Clean / sorted': 1.15,
+    'Baled': 1.05,
+    'Loose': 0.95,
+    'Mixed / unsorted': 0.85,
+    'Contaminated': 0.55
+  }[condition] || 1.0
+
+  const pricePerKg = basePrice * conditionMultiplier
+
+  return {
+    category,
+    hazard_level,
+    classification_confidence: confidence,
+    estimated_value_usd: Math.round(quantity_kg * pricePerKg),
+    disposal_cost_saved_usd: Math.round(quantity_kg * 0.06),
+    co2_reduction_kg: Math.round(quantity_kg * co2Factor * conditionMultiplier),
+    pricing_model: 'Heuristic Baseline (Offline Sync)'
+  }
+}
+
 export const api = {
   // ---- Listings ----
   async getListings(params = {}) {
@@ -101,16 +217,8 @@ export const api = {
       if (!res.ok) throw new Error(`HTTP error ${res.status}`)
       return await res.json()
     } catch (err) {
-      console.warn('ML Assistant call failed, using calculated baseline:', err)
-      return {
-        category: 'Metal Scrap',
-        hazard_level: 'Low',
-        classification_confidence: 0.88,
-        estimated_value_usd: Math.round(quantity_kg * 0.35),
-        disposal_cost_saved_usd: Math.round(quantity_kg * 0.06),
-        co2_reduction_kg: Math.round(quantity_kg * 1.8),
-        pricing_model: 'Random Forest ML'
-      }
+      console.warn('ML Assistant service unavailable, executing client heuristics fallback:', err)
+      return evaluateClientFallback(description, condition, quantity_kg)
     }
   },
 

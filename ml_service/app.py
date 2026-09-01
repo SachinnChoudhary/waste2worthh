@@ -5,6 +5,7 @@ market valuation estimation, ESG carbon savings, and buyer matching recommendati
 """
 
 import os
+import re
 import json
 from flask import Flask, request, jsonify
 import numpy as np
@@ -19,6 +20,34 @@ app = Flask(__name__)
 
 # Global model state
 models = {}
+
+# Canonical category mapping aliases
+CATEGORY_ALIASES = {
+    "chemical residue": "Chemical Byproducts",
+    "e-waste": "Electronic Waste",
+    "paper & cardboard": "Wood & Paper",
+    "wood waste": "Wood & Paper",
+    "rubber waste": "Rubber & Tires",
+    "plastics & polymers": "Plastic Waste",
+    "fly ash & slag": "Construction Debris",
+    "e-waste & pcbs": "Electronic Waste",
+    "wood & biomass": "Wood & Paper",
+    "rubber & tyres": "Rubber & Tires",
+}
+
+# High-accuracy keyword lookup rules for fast, unambiguous resolution
+KEYWORD_RULES = [
+    (r"\b(hdpe|ldpe|lldpe|pet|pete|polypropylene|pp woven|pp granules|pvc|polyethylene|abs|polystyrene|thermocol|eps|polymer|plastic|polythene|acrylic|nylon|regrind|plastic bottles?|pet bottles?|water bottles?)\b", "Plastic Waste", "Non-hazardous"),
+    (r"\b(flint glass|borosilicate|windshield|vial|ampoule|bottle glass|glass cullet|cullet|crushed glass|glass shards?|glass scrap|glass bottles?|glass)\b", "Glass", "Non-hazardous"),
+    (r"\b(pcb|printed circuit|motherboard|cpu|ram module|semiconductor|lithium|li-ion|battery|batteries|e-waste|electronic|capacitors?|smps|microchip|circuit board|server board|inverter battery)\b", "Electronic Waste", "Moderate"),
+    (r"\b(acid|solvent|caustic|naoh|hcl|sludge|effluent|etp|coolant|distillation|phosphating|petroleum sludge|spent catalyst|resin waste|chemical|pickle liquor|lubricant oil|chemical effluent|toxic)\b", "Chemical Byproducts", "High"),
+    (r"\b(tyres?|tires?|rubber|epdm|vulcanized|crumb rubber|butyl|inner tube|gasket|conveyor belt|retread)\b", "Rubber & Tires", "Low"),
+    (r"\b(cardboard|carton|kraft|paper|newsprint|pulp|sawdust|timber|pallets?|plywood|mdf|wood|lumber|shavings|woodchips?|box scrap)\b", "Wood & Paper", "Non-hazardous"),
+    (r"\b(cotton|denim|fabric|yarn|textile|garment|hosiery|viscose|rayon|silk|wool|cloth|selvedge|rags?|apparel scrap)\b", "Textile Waste", "Non-hazardous"),
+    (r"\b(bagasse|husk|food waste|vegetable|fruit pulp|compost|manure|spent grain|crop|paddy|brewery|organic|bio-?waste|peelings?)\b", "Organic Waste", "Non-hazardous"),
+    (r"\b(concrete|brick|mortar|drywall|gypsum|plaster|fly ash|bottom ash|granite|marble|demolition|rubble|asphalt|stone chips|cement|aggregate)\b", "Construction Debris", "Low"),
+    (r"\b(steel|iron|copper|aluminum|aluminium|brass|bronze|zinc|lead|nickel|titanium|metal|slag|dross|swarf|turnings?|filings?|rebar|tinplate|pipes?|wire scrap|sheet scrap|cables?)\b", "Metal Scrap", "Non-hazardous"),
+]
 
 def load_models():
     """Loads pre-trained model artifacts into memory."""
@@ -58,7 +87,7 @@ def root_index():
     return jsonify({
         "status": "online",
         "service": "Waste2Worth Python ML Inference Microservice",
-        "version": "1.0.0",
+        "version": "2.0.0",
         "models_loaded": len(models) >= 5,
         "endpoints": [
             {"method": "GET", "path": "/health", "desc": "Service health and loaded models"},
@@ -89,12 +118,83 @@ def handle_405(e):
 
 # ---- Helper Functions ----
 
-def rule_based_valuation(category: str, condition: str, quantity_kg: float):
-    cat_info = models.get("category_info", {})
-    if category not in cat_info:
-        base_price, co2_factor = 0.20, 1.0
+def normalize_category(category: str) -> str:
+    """Normalizes any category string or legacy alias to canonical Waste2Worth taxonomy."""
+    if not category:
+        return "Metal Scrap"
+    cleaned = category.strip()
+    lowered = cleaned.lower()
+    return CATEGORY_ALIASES.get(lowered, cleaned)
+
+def classify_text_hybrid(text: str):
+    """
+    Hybrid classification engine:
+    1. Evaluates direct domain-specific keyword / material indicators
+    2. Runs TF-IDF + Calibrated Logistic Regression model
+    3. Blends keyword evidence and statistical distribution for maximum precision
+    """
+    norm_text = text.lower()
+    matched_keyword_cat = None
+    matched_hazard = None
+
+    for pattern, cat, haz in KEYWORD_RULES:
+        if re.search(pattern, norm_text, re.IGNORECASE):
+            matched_keyword_cat = cat
+            matched_hazard = haz
+            break
+
+    # Statistical ML prediction
+    ml_category = None
+    ml_confidence = 0.50
+
+    if "category_classifier" in models and "tfidf_vectorizer" in models:
+        try:
+            vec = models["tfidf_vectorizer"].transform([text])
+            ml_category = models["category_classifier"].predict(vec)[0]
+            ml_category = normalize_category(ml_category)
+            probs = models["category_classifier"].predict_proba(vec)[0]
+            ml_confidence = float(np.max(probs))
+        except Exception as e:
+            print(f"Error during ML inference: {e}")
+
+    # Decision fusion
+    if matched_keyword_cat:
+        if ml_category and ml_category == matched_keyword_cat:
+            final_cat = matched_keyword_cat
+            confidence = max(0.92, ml_confidence)
+        else:
+            # If keyword matched strongly but text is short or sparse, trust keyword
+            final_cat = matched_keyword_cat
+            confidence = 0.90 if len(text.split()) <= 4 else max(0.85, ml_confidence)
+    elif ml_category:
+        final_cat = ml_category
+        confidence = ml_confidence
     else:
-        _, base_price, co2_factor, _ = cat_info[category]
+        final_cat = "Metal Scrap"
+        confidence = 0.50
+
+    # Hazard determination
+    cat_info = models.get("category_info", {})
+    if matched_hazard:
+        hazard_level = matched_hazard
+    elif final_cat in cat_info:
+        hazard_level = cat_info[final_cat][0]
+    else:
+        hazard_level = "Non-hazardous"
+
+    # Contextual hazard boosts
+    if any(w in norm_text for w in ["toxic", "hazard", "acid", "corrosive", "flammable", "lead acid", "cyanide", "cadmium"]):
+        hazard_level = "High"
+
+    return final_cat, hazard_level, round(confidence, 3)
+
+def rule_based_valuation(category: str, condition: str, quantity_kg: float):
+    norm_cat = normalize_category(category)
+    cat_info = models.get("category_info", {})
+    if norm_cat not in cat_info:
+        base_price, co2_factor = 0.25, 1.2
+    else:
+        _, base_price, co2_factor, _ = cat_info[norm_cat]
 
     condition_multiplier = {
         "Clean / sorted": 1.15,
@@ -110,30 +210,35 @@ def rule_based_valuation(category: str, condition: str, quantity_kg: float):
     co2_reduction_kg = round(quantity_kg * co2_factor * condition_multiplier, 1)
 
     return {
-        "estimated_value_usd": market_value,
+        "estimated_value_usd": max(1.0, market_value),
         "disposal_cost_saved_usd": disposal_cost_saved,
         "co2_reduction_kg": co2_reduction_kg,
     }
 
 def ml_valuation(category: str, condition: str, quantity_kg: float):
+    norm_cat = normalize_category(category)
     cols = models.get("value_model_columns")
     regressor = models.get("value_regressor")
     
     if not cols or not regressor:
-        return rule_based_valuation(category, condition, quantity_kg)
+        return rule_based_valuation(norm_cat, condition, quantity_kg)
 
     row = {col: 0 for col in cols}
     row["quantity_kg"] = quantity_kg
-    cat_col = f"category_{category}"
+    cat_col = f"category_{norm_cat}"
     cond_col = f"condition_{condition}"
     if cat_col in row:
         row[cat_col] = 1
     if cond_col in row:
         row[cond_col] = 1
 
-    df_input = pd.DataFrame([row])[cols]
-    pred_val = float(regressor.predict(df_input)[0])
-    rule_extra = rule_based_valuation(category, condition, quantity_kg)
+    try:
+        df_input = pd.DataFrame([row])[cols]
+        pred_val = float(regressor.predict(df_input)[0])
+    except Exception:
+        pred_val = rule_based_valuation(norm_cat, condition, quantity_kg)["estimated_value_usd"]
+
+    rule_extra = rule_based_valuation(norm_cat, condition, quantity_kg)
 
     return {
         "estimated_value_usd": max(1.0, round(pred_val, 2)),
@@ -148,6 +253,7 @@ def health_check():
     return jsonify({
         "status": "healthy",
         "service": "Waste2Worth ML Engine",
+        "version": "2.0.0",
         "models_loaded": len(models) >= 5,
         "loaded_keys": list(models.keys())
     })
@@ -163,34 +269,25 @@ def predict_category():
     if not description:
         return jsonify({"error": "Field 'description' is required. Provide via JSON body or ?description=... query param"}), 400
 
-    if "category_classifier" not in models or "tfidf_vectorizer" not in models:
-        return jsonify({"error": "Classification model not loaded"}), 503
-
-    vec = models["tfidf_vectorizer"].transform([description])
-    category = models["category_classifier"].predict(vec)[0]
-    probabilities = models["category_classifier"].predict_proba(vec)[0]
-    confidence = float(np.max(probabilities))
-
-    cat_info = models.get("category_info", {})
-    hazard_level = cat_info.get(category, ("Low",))[0]
+    category, hazard_level, confidence = classify_text_hybrid(description)
 
     return jsonify({
         "input_description": description,
         "category": category,
         "hazard_level": hazard_level,
-        "confidence": round(confidence, 3),
+        "confidence": confidence,
     })
 
 @app.route("/api/ml/estimate-value", methods=["GET", "POST"])
 def estimate_value():
     if request.method == "GET":
-        category = request.args.get("category", "Metal Scrap")
+        category = normalize_category(request.args.get("category", "Metal Scrap"))
         condition = request.args.get("condition", "Clean / sorted")
         quantity_kg = float(request.args.get("quantity_kg", 1000))
         use_ml_valuation = request.args.get("use_ml_valuation", "true").lower() != "false"
     else:
         data = request.get_json(silent=True) or {}
-        category = data.get("category", "Metal Scrap")
+        category = normalize_category(data.get("category", "Metal Scrap"))
         condition = data.get("condition", "Clean / sorted")
         try:
             quantity_kg = float(data.get("quantity_kg", 1000))
@@ -233,16 +330,7 @@ def classify_and_value():
         use_ml_valuation = data.get("use_ml_valuation", True)
 
     # 1. Classification
-    if description and "category_classifier" in models and "tfidf_vectorizer" in models:
-        vec = models["tfidf_vectorizer"].transform([description])
-        category = models["category_classifier"].predict(vec)[0]
-        confidence = float(np.max(models["category_classifier"].predict_proba(vec)[0]))
-        cat_info = models.get("category_info", {})
-        hazard_level = cat_info.get(category, ("Low",))[0]
-    else:
-        category = "Metal Scrap"
-        hazard_level = "Low"
-        confidence = 0.50
+    category, hazard_level, confidence = classify_text_hybrid(description)
 
     # 2. Valuation & Impact
     if use_ml_valuation and "value_regressor" in models:
@@ -256,7 +344,7 @@ def classify_and_value():
         "description": description,
         "category": category,
         "hazard_level": hazard_level,
-        "classification_confidence": round(confidence, 3),
+        "classification_confidence": confidence,
         "estimated_value_usd": val["estimated_value_usd"],
         "disposal_cost_saved_usd": val["disposal_cost_saved_usd"],
         "co2_reduction_kg": val["co2_reduction_kg"],

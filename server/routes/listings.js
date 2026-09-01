@@ -161,8 +161,8 @@ router.post('/', requireAuth, async (req, res) => {
     const insertPayload = {
       seller_id: realSellerId || 'a0000000-0000-0000-0000-000000000001',
       title,
-      category: aiMeta.category || userCategory || 'Metal Scrap',
-      hazard_level: aiMeta.hazard_level || userHazard || 'Non-hazardous',
+      category: userCategory || aiMeta.category || 'Metal Scrap',
+      hazard_level: userHazard || aiMeta.hazard_level || 'Non-hazardous',
       condition,
       quantity: qtyNum,
       unit,

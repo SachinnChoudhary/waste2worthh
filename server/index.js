@@ -13,10 +13,13 @@ import usersRouter from './routes/users.js'
 import adminRouter from './routes/admin.js'
 import { clerkAuth } from './middleware/auth.js'
 
-dotenv.config()
-
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+
+// Load env from server/.env and root .env
+dotenv.config({ path: path.resolve(__dirname, '.env') })
+dotenv.config({ path: path.resolve(__dirname, '../.env') })
+
 const distPath = path.resolve(__dirname, '../dist')
 const hasDist = fs.existsSync(path.join(distPath, 'index.html'))
 
