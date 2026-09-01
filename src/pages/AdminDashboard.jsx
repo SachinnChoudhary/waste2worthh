@@ -38,6 +38,7 @@ import {
   X
 } from 'lucide-react'
 import { api } from '../lib/api'
+import { supabase, isSupabaseLive } from '../lib/supabaseClient'
 import { StatCard } from '../components/StatCard'
 import { Badge } from '../components/Badge'
 import { Button } from '../components/Button'
@@ -49,6 +50,8 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
   const [toastMessage, setToastMessage] = useState(null)
+  const [lastSyncedTime, setLastSyncedTime] = useState(new Date())
+  const [isRealtimeConnected, setIsRealtimeConnected] = useState(false)
 
   // Data states
   const [overviewStats, setOverviewStats] = useState(null)
@@ -93,8 +96,8 @@ export default function AdminDashboard() {
   }
 
   // Load all platform data
-  const loadPlatformData = async () => {
-    setRefreshing(true)
+  const loadPlatformData = async (silent = false) => {
+    if (!silent) setRefreshing(true)
     try {
       const [ovRes, healthRes, listRes, bidsRes, usersRes, logsRes] = await Promise.all([
         api.getAdminOverview(),
@@ -105,7 +108,7 @@ export default function AdminDashboard() {
         api.getAdminAuditLogs()
       ])
 
-      if (ovRes) {
+      if (ovRes?.stats) {
         setOverviewStats(ovRes.stats)
         if (ovRes.settings) setSettings(ovRes.settings)
       }
@@ -114,18 +117,58 @@ export default function AdminDashboard() {
       if (bidsRes?.bids) setBids(bidsRes.bids)
       if (usersRes?.users) setUsers(usersRes.users)
       if (logsRes?.logs) setAuditLogs(logsRes.logs)
+
+      setLastSyncedTime(new Date())
     } catch (err) {
       console.error('Failed to load admin data:', err)
-      showToast('Error synchronizing admin platform data')
+      if (!silent) showToast('Error synchronizing admin platform data')
     } finally {
       setLoading(false)
-      setRefreshing(false)
+      if (!silent) setRefreshing(false)
     }
   }
 
   useEffect(() => {
     loadPlatformData()
+
+    let channel = null
+    if (isSupabaseLive && supabase) {
+      try {
+        channel = supabase
+          .channel('admin-realtime-sync')
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'listings' }, () => {
+            loadPlatformData(true)
+          })
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'bids' }, () => {
+            loadPlatformData(true)
+          })
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'profiles' }, () => {
+            loadPlatformData(true)
+          })
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'admin_audit_logs' }, () => {
+            loadPlatformData(true)
+          })
+          .subscribe((status) => {
+            if (status === 'SUBSCRIBED') {
+              setIsRealtimeConnected(true)
+            }
+          })
+      } catch (e) {
+        console.warn('Realtime channel subscription notice:', e)
+      }
+    }
+
+    // Auto-polling heartbeat (every 5 seconds) to ensure continuous live data
+    const pollInterval = setInterval(() => {
+      loadPlatformData(true)
+    }, 5000)
+
+    return () => {
+      if (channel && supabase) supabase.removeChannel(channel)
+      clearInterval(pollInterval)
+    }
   }, [])
+
 
   // Listing Handlers
   const handleUpdateListingStatus = async (id, status) => {
@@ -375,9 +418,9 @@ export default function AdminDashboard() {
 
             {/* Quick Diagnostic Pills & Actions */}
             <div className="flex items-center flex-wrap gap-2">
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.08] text-xs">
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-400 font-medium">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-fg-secondary font-mono text-[11px]">API Gateway</span>
+                <span className="font-mono text-[11px]">{isRealtimeConnected ? 'Live Real-Time' : 'Auto-Sync 5s'}</span>
               </div>
               <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.08] text-xs">
                 <span className={`w-2 h-2 rounded-full ${systemHealth?.mlService?.status === 'offline' ? 'bg-amber-400' : 'bg-emerald-400'}`} />
@@ -388,10 +431,14 @@ export default function AdminDashboard() {
                 <span className="text-fg-secondary font-mono text-[11px]">{systemHealth?.database?.provider || 'Database'}</span>
               </div>
 
+              <span className="text-[10px] text-fg-muted font-mono hidden sm:inline-block">
+                {lastSyncedTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+              </span>
+
               <Button
                 variant="secondary"
                 size="sm"
-                onClick={loadPlatformData}
+                onClick={() => loadPlatformData(false)}
                 leftIcon={<RefreshCw className={`w-3.5 h-3.5 ${refreshing ? 'animate-spin' : ''}`} />}
               >
                 Sync
@@ -457,29 +504,29 @@ export default function AdminDashboard() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <StatCard
                 title="Gross Platform Volume"
-                value={`${overviewStats?.impact?.grossVolumeTonnes || '548.0'} T`}
+                value={`${overviewStats?.metrics?.grossVolumeTonnes ?? overviewStats?.impact?.grossVolumeTonnes ?? (listings.reduce((s, l) => s + (Number(l.quantity_kg) || 0), 0) / 1000).toFixed(1)} T`}
                 description="Industrial waste listed & diverted"
                 icon={<Leaf className="w-5 h-5" />}
                 accentColor="emerald"
               />
               <StatCard
                 title="Platform GMV Traded"
-                value={overviewStats?.impact?.totalGmvFormatted || '₹48,04,000'}
+                value={overviewStats?.metrics?.totalGmvFormatted ?? overviewStats?.impact?.totalGmvFormatted ?? `₹${listings.reduce((s, l) => s + (Number(l.price_inr) || 0), 0).toLocaleString('en-IN')}`}
                 description="Gross industrial marketplace valuation"
                 icon={<DollarSign className="w-5 h-5" />}
                 accentColor="cyan"
               />
               <StatCard
                 title="Active Escrow Bids"
-                value={`${overviewStats?.bids?.total || bids.length}`}
-                description={`${overviewStats?.bids?.accepted || 0} accepted • ${overviewStats?.bids?.pending || 0} in negotiation`}
+                value={`${overviewStats?.bids?.total ?? bids.length}`}
+                description={`${overviewStats?.bids?.accepted ?? bids.filter(b => b.status === 'accepted').length} accepted • ${overviewStats?.bids?.pending ?? bids.filter(b => b.status === 'pending').length} in negotiation`}
                 icon={<TrendingUp className="w-5 h-5" />}
                 accentColor="blue"
               />
               <StatCard
                 title="Enterprise Directory"
-                value={`${overviewStats?.users?.total || users.length}`}
-                description={`${overviewStats?.users?.verified || 0} KYC verified manufacturers`}
+                value={`${overviewStats?.users?.total ?? users.length}`}
+                description={`${overviewStats?.users?.verified ?? users.filter(u => u.verified).length} KYC verified manufacturers`}
                 icon={<Users className="w-5 h-5" />}
                 accentColor="purple"
               />
@@ -886,8 +933,13 @@ export default function AdminDashboard() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filteredBids.map(bid => (
+            {filteredBids.length === 0 ? (
+              <div className="surface-card rounded-2xl p-12 text-center text-fg-muted border border-white/10">
+                No bids match the selected filter.
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {filteredBids.map(bid => (
                 <div key={bid.id} className="surface-card rounded-2xl p-5 space-y-4 flex flex-col justify-between border border-white/10 hover:border-cyan-500/30 transition-all">
                   <div className="space-y-3">
                     <div className="flex items-start justify-between gap-2">
@@ -952,6 +1004,7 @@ export default function AdminDashboard() {
                 </div>
               ))}
             </div>
+            )}
           </div>
         )}
 

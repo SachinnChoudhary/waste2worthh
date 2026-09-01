@@ -199,6 +199,12 @@ router.get('/overview', async (req, res) => {
           totalGmvInr: totalGmvInr,
           totalGmvFormatted: `₹${totalGmvInr.toLocaleString('en-IN')}`,
         },
+        impact: {
+          grossVolumeTonnes: Number(grossVolumeTonnes) || 0,
+          totalCo2SavedTonnes: Number(totalCo2SavedTonnes) || 0,
+          totalGmvInr: totalGmvInr,
+          totalGmvFormatted: `₹${totalGmvInr.toLocaleString('en-IN')}`,
+        },
       },
       settings: currentSettings,
       recentLogs: logs.slice(0, 15),
