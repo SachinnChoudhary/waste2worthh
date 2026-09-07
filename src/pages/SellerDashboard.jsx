@@ -221,10 +221,10 @@ export default function SellerDashboard() {
         />
       </div>
 
-      {/* ─── Main Operations Split Grid ─── */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-        {/* Left 2 Cols: Tabs & Inventory Management Table */}
-        <div className="lg:col-span-2 flex flex-col gap-5">
+      {/* ─── Main Operations Grid ─── */}
+      <div className="grid grid-cols-1 gap-8 items-start">
+        {/* Main Content: Tabs & Inventory Management Table */}
+        <div className="flex flex-col gap-5">
           {/* Sub Navigation Tabs */}
           <div className="flex items-center gap-1 border-b border-white/[0.08] pb-1">
             {[
@@ -408,77 +408,7 @@ export default function SellerDashboard() {
           )}
         </div>
 
-        {/* Right Col: Live Activity Stream & ESG Certificate Box */}
-        <div className="flex flex-col gap-6">
-          {/* Live Activity Feed */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-sm flex items-center justify-between">
-                <span>Real-Time Audit Stream</span>
-                <Badge variant="zinc" size="sm">Supabase Sync</Badge>
-              </CardTitle>
-              <CardDescription>
-                Recent tender bids, logistics confirmations, and payments
-              </CardDescription>
-            </CardHeader>
 
-            <CardBody className="flex flex-col gap-4">
-              {recentLogs.length === 0 ? (
-                <div className="text-xs text-zinc-500 text-center py-4">
-                  No recent audit events recorded.
-                </div>
-              ) : (
-                recentLogs.map((act, i) => (
-                  <div key={i} className="flex items-start gap-3 text-xs">
-                    <div className="w-2 h-2 rounded-full mt-1.5 shrink-0 bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
-                    <div className="flex flex-col gap-0.5 flex-1">
-                      <p className="font-bold text-zinc-100 leading-snug">
-                        {act.action}
-                      </p>
-                      <p className="text-zinc-300 text-[11px] leading-normal">
-                        {act.detail}
-                      </p>
-                      <span className="text-[10px] text-zinc-500 font-mono block">
-                        {act.time}
-                      </span>
-                    </div>
-                  </div>
-                ))
-              )}
-            </CardBody>
-          </Card>
-
-          {/* ESG Scope-3 Certification Card */}
-          <div className="surface-card rounded-2xl p-6 border border-emerald-500/30 bg-gradient-to-b from-emerald-950/40 to-zinc-950/80 flex flex-col gap-4">
-            <div className="flex items-center justify-between">
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-                <Leaf className="w-5 h-5" />
-              </div>
-              <Badge variant="emerald" size="sm" icon={<ShieldCheck className="w-3 h-3" />}>
-                ISO 14064
-              </Badge>
-            </div>
-
-            <div className="flex flex-col gap-1">
-              <h4 className="text-sm font-bold text-zinc-100">
-                Official Circular Audit Certificate
-              </h4>
-              <p className="text-xs text-zinc-300 leading-relaxed">
-                Your enterprise has abated {stats.co2Saved} this fiscal year. Download your official ESG report for audit filing.
-              </p>
-            </div>
-
-            <Button
-              fullWidth
-              size="sm"
-              variant="outline"
-              onClick={exportLedger}
-              leftIcon={<Download className="w-3.5 h-3.5" />}
-            >
-              Download PDF Certificate
-            </Button>
-          </div>
-        </div>
       </div>
     </div>
   )
