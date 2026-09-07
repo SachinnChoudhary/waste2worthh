@@ -21,6 +21,8 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env') })
 let _clerkMiddlewareInstance = null
 let _clerkInitAttempted = false
 
+const isClerkEnabled = process.env.CLERK_ENABLED === 'true' || !!process.env.CLERK_SECRET_KEY;
+
 function getClerkHandler() {
   if (_clerkInitAttempted) return _clerkMiddlewareInstance
   _clerkInitAttempted = true
