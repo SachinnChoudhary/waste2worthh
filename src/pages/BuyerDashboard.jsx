@@ -19,7 +19,8 @@ import {
   TrendingUp,
   RefreshCw,
   Clock,
-  Check
+  Check,
+  X
 } from 'lucide-react'
 
 export default function BuyerDashboard() {
@@ -83,18 +84,40 @@ export default function BuyerDashboard() {
     loadBuyerData()
   }, [user?.id])
 
-  // Live ML Buyer Recommendation Query
-  useEffect(() => {
-    async function fetchMatches() {
-      if (!searchQuery.trim()) return
-      setIsLoadingRecs(true)
-      const res = await api.getBuyerRecommendations(searchQuery, 6)
-      if (res && res.matches && res.matches.length > 0) {
+  const executeRecommendationQuery = async (queryText) => {
+    const q = (queryText || '').trim()
+    if (!q) {
+      setRecommendations([])
+      setIsLoadingRecs(false)
+      return
+    }
+    setIsLoadingRecs(true)
+    try {
+      const res = await api.getBuyerRecommendations(q, 6)
+      if (res && res.matches) {
         setRecommendations(res.matches)
       }
+    } catch (err) {
+      console.warn('Failed to query recommendations:', err)
+    } finally {
       setIsLoadingRecs(false)
     }
-    fetchMatches()
+  }
+
+  // Live ML Buyer Recommendation Query (Debounced 350ms with cleanup)
+  useEffect(() => {
+    if (!searchQuery.trim()) {
+      setRecommendations([])
+      setIsLoadingRecs(false)
+      return
+    }
+
+    setIsLoadingRecs(true)
+    const timer = setTimeout(() => {
+      executeRecommendationQuery(searchQuery)
+    }, 350)
+
+    return () => clearTimeout(timer)
   }, [searchQuery])
 
   const handlePlaceQuickBid = async (e) => {
@@ -124,8 +147,28 @@ export default function BuyerDashboard() {
   }
 
   const filteredListings = listings.filter(l => {
-    if (selectedFilter === 'All') return true
-    return l.category === selectedFilter
+    // 1. Category pill filter
+    if (selectedFilter !== 'All') {
+      const matchCat = l.category?.toLowerCase() === selectedFilter.toLowerCase()
+      if (!matchCat) return false
+    }
+
+    // 2. Custom search text filter
+    const query = searchQuery.trim().toLowerCase()
+    if (!query) return true
+
+    const fullText = `${l.title || ''} ${l.description || ''} ${l.category || ''} ${l.company || ''} ${l.location || ''}`.toLowerCase()
+    if (fullText.includes(query)) return true
+
+    // Tokenize search query (ignoring common conversational stop words)
+    const stopWords = new Set(['looking', 'for', 'we', 'need', 'sourcing', 'require', 'seeking', 'buyer', 'want', 'supply', 'and', 'the', 'with', 'lot', 'batch', 'scrap', 'waste', 'recycling', 'reprocessing', 'remelting', 'from', 'our'])
+    const tokens = query
+      .split(/[^a-zA-Z0-9_\-\/]+/)
+      .filter(t => t.length >= 3 && !stopWords.has(t))
+
+    if (tokens.length === 0) return true
+
+    return tokens.some(t => fullText.includes(t))
   })
 
   return (
@@ -202,9 +245,6 @@ export default function BuyerDashboard() {
             <h1 className="text-2xl sm:text-3xl font-extrabold text-zinc-100 tracking-tight">
               Buyer Procurement Hub
             </h1>
-            <Badge variant="cyan" size="sm" dot>
-              Live Supabase Database
-            </Badge>
           </div>
           <p className="text-xs sm:text-sm text-zinc-400">
             Real-time material procurement for {user?.company || 'Apex Matrix Materials Ltd.'} with cosine similarity matching and verified factory lots.
@@ -293,7 +333,13 @@ export default function BuyerDashboard() {
           </Badge>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-3">
+        <form
+          onSubmit={e => {
+            e.preventDefault()
+            executeRecommendationQuery(searchQuery)
+          }}
+          className="flex flex-col sm:flex-row gap-3"
+        >
           <div className="relative flex-1">
             <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-fg-muted" />
             <input
@@ -301,41 +347,101 @@ export default function BuyerDashboard() {
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
               placeholder="e.g. looking for HDPE and PET plastic packaging waste for recycling..."
-              className="w-full h-11 pl-10 pr-4 rounded-xl bg-zinc-900/90 border border-white/15 text-xs text-fg-primary placeholder:text-fg-muted focus:outline-none focus:border-emerald-500/60 focus:ring-2 focus:ring-emerald-500/20 transition-all font-sans"
+              className="w-full h-11 pl-10 pr-24 rounded-xl bg-zinc-900/90 border border-white/15 text-xs text-fg-primary placeholder:text-fg-muted focus:outline-none focus:border-emerald-500/60 focus:ring-2 focus:ring-emerald-500/20 transition-all font-sans"
             />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchQuery('')
+                  setRecommendations([])
+                }}
+                className="absolute right-14 top-1/2 -translate-y-1/2 p-1 text-zinc-500 hover:text-zinc-200 transition-colors cursor-pointer"
+                title="Clear search"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+            <button
+              type="submit"
+              disabled={isLoadingRecs}
+              className="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 text-[11px] font-semibold transition-all cursor-pointer disabled:opacity-50"
+            >
+              Match
+            </button>
           </div>
           <div className="flex items-center gap-2 flex-wrap">
             <button
-              onClick={() => setSearchQuery('looking for HDPE and PET plastic packaging waste for recycling')}
-              className="px-3 py-2 rounded-lg bg-white/[0.04] border border-white/10 text-[11px] text-fg-secondary hover:text-emerald-400 hover:border-emerald-500/30 transition-all cursor-pointer shrink-0"
+              type="button"
+              onClick={() => {
+                const q = 'looking for HDPE and PET plastic packaging waste for recycling'
+                setSearchQuery(q)
+                setSelectedFilter('Plastic Waste')
+                executeRecommendationQuery(q)
+              }}
+              className={`px-3 py-2 rounded-lg border text-[11px] transition-all cursor-pointer shrink-0 ${
+                searchQuery.includes('HDPE')
+                  ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 font-semibold'
+                  : 'bg-white/[0.04] border-white/10 text-fg-secondary hover:text-emerald-400 hover:border-emerald-500/30'
+              }`}
             >
               Plastic Scrap
             </button>
             <button
-              onClick={() => setSearchQuery('we need steel offcuts and scrap metal sheets for remelting')}
-              className="px-3 py-2 rounded-lg bg-white/[0.04] border border-white/10 text-[11px] text-fg-secondary hover:text-emerald-400 hover:border-emerald-500/30 transition-all cursor-pointer shrink-0"
+              type="button"
+              onClick={() => {
+                const q = 'we need steel offcuts and scrap metal sheets for remelting'
+                setSearchQuery(q)
+                setSelectedFilter('Metal Scrap')
+                executeRecommendationQuery(q)
+              }}
+              className={`px-3 py-2 rounded-lg border text-[11px] transition-all cursor-pointer shrink-0 ${
+                searchQuery.includes('steel')
+                  ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 font-semibold'
+                  : 'bg-white/[0.04] border-white/10 text-fg-secondary hover:text-emerald-400 hover:border-emerald-500/30'
+              }`}
             >
               Steel / Metal
             </button>
             <button
-              onClick={() => setSearchQuery('sourcing fabric offcuts and cotton scrap for fiber reprocessing')}
-              className="px-3 py-2 rounded-lg bg-white/[0.04] border border-white/10 text-[11px] text-fg-secondary hover:text-emerald-400 hover:border-emerald-500/30 transition-all cursor-pointer shrink-0"
+              type="button"
+              onClick={() => {
+                const q = 'sourcing fabric offcuts and cotton scrap for fiber reprocessing'
+                setSearchQuery(q)
+                setSelectedFilter('Textile Waste')
+                executeRecommendationQuery(q)
+              }}
+              className={`px-3 py-2 rounded-lg border text-[11px] transition-all cursor-pointer shrink-0 ${
+                searchQuery.includes('cotton')
+                  ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 font-semibold'
+                  : 'bg-white/[0.04] border-white/10 text-fg-secondary hover:text-emerald-400 hover:border-emerald-500/30'
+              }`}
             >
               Cotton Scrap
             </button>
           </div>
-        </div>
+        </form>
 
         {/* Live Recommendation Chips */}
         {recommendations.length > 0 && (
           <div className="pt-2 border-t border-white/[0.06] grid grid-cols-1 sm:grid-cols-3 gap-3">
             {recommendations.slice(0, 3).map((rec, idx) => (
-              <div key={idx} className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.08] flex items-center justify-between gap-3">
+              <div
+                key={idx}
+                onClick={() => {
+                  if (rec.category) {
+                    const matchedCat = categories.find(c => c.toLowerCase() === rec.category.toLowerCase())
+                    if (matchedCat) setSelectedFilter(matchedCat)
+                  }
+                }}
+                className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-emerald-500/40 hover:bg-white/[0.04] flex items-center justify-between gap-3 cursor-pointer transition-all group"
+                title={`Filter lots by ${rec.category}`}
+              >
                 <div className="flex flex-col min-w-0">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400">
                     {rec.category} • Lot #{rec.listing_id}
                   </span>
-                  <span className="text-xs text-fg-primary truncate font-medium mt-0.5">
+                  <span className="text-xs text-fg-primary truncate font-medium mt-0.5 group-hover:text-emerald-300 transition-colors">
                     {rec.description}
                   </span>
                   <span className="text-[11px] text-fg-muted font-mono mt-0.5">
@@ -388,7 +494,23 @@ export default function BuyerDashboard() {
           <div className="surface-card rounded-2xl p-12 text-center border border-white/[0.08] space-y-3">
             <Search className="w-10 h-10 text-zinc-500 mx-auto" />
             <h3 className="text-base font-bold text-zinc-100">No Industrial Streams Found</h3>
-            <p className="text-xs text-zinc-400">No active lots match the selected category filter.</p>
+            <p className="text-xs text-zinc-400">
+              {searchQuery.trim()
+                ? `No active lots match query "${searchQuery}". Try different keywords or clear filters.`
+                : 'No active lots match the selected category filter.'}
+            </p>
+            {searchQuery.trim() && (
+              <Button
+                size="xs"
+                variant="secondary"
+                onClick={() => {
+                  setSearchQuery('')
+                  setSelectedFilter('All')
+                }}
+              >
+                Clear Search Filter
+              </Button>
+            )}
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

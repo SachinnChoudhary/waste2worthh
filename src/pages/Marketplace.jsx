@@ -37,12 +37,16 @@ function ListingCard({ listing, viewMode = 'grid' }) {
       <Link to={`/listing/${listing.id}`} className="no-underline block group">
         <div className="surface-card rounded-2xl p-5 border border-white/[0.08] hover:border-emerald-500/40 hover:bg-zinc-900/80 transition-all duration-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
           <div className="flex items-start gap-4 flex-1">
-            <div className="w-14 h-14 rounded-2xl bg-zinc-800/80 border border-white/10 flex items-center justify-center text-2xl shrink-0">
-              {listing.category === 'Metal Scrap' ? '🔩' :
-               listing.category === 'Plastic Waste' ? '♳' :
-               listing.category?.includes('Chemical') ? '🧪' :
-               listing.category?.includes('Textile') ? '🧵' :
-               listing.category?.includes('Electronic') || listing.category === 'E-Waste' ? '💻' : '🏭'}
+            <div className="w-14 h-14 rounded-2xl bg-zinc-800/80 border border-white/10 flex items-center justify-center text-2xl shrink-0 overflow-hidden">
+              {listing.images && listing.images.length > 0 ? (
+                <img src={listing.images[0]} alt={listing.category} className="w-full h-full object-cover" />
+              ) : (
+                listing.category === 'Metal Scrap' ? '🔩' :
+                 listing.category === 'Plastic Waste' ? '♳' :
+                 listing.category?.includes('Chemical') ? '🧪' :
+                 listing.category?.includes('Textile') ? '🧵' :
+                 listing.category?.includes('Electronic') || listing.category === 'E-Waste' ? '💻' : '🏭'
+              )}
             </div>
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center gap-2 flex-wrap text-xs">
@@ -98,12 +102,16 @@ function ListingCard({ listing, viewMode = 'grid' }) {
         <div className="flex flex-col gap-4">
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-zinc-800/80 border border-white/10 flex items-center justify-center text-2xl shrink-0 group-hover:scale-105 transition-transform">
-                {listing.category === 'Metal Scrap' ? '🔩' :
-                 listing.category === 'Plastic Waste' ? '♳' :
-                 listing.category?.includes('Chemical') ? '🧪' :
-                 listing.category?.includes('Textile') ? '🧵' :
-                 listing.category?.includes('Electronic') || listing.category === 'E-Waste' ? '💻' : '🏭'}
+              <div className="w-12 h-12 rounded-xl bg-zinc-800/80 border border-white/10 flex items-center justify-center text-2xl shrink-0 group-hover:scale-105 transition-transform overflow-hidden">
+                {listing.images && listing.images.length > 0 ? (
+                  <img src={listing.images[0]} alt={listing.category} className="w-full h-full object-cover" />
+                ) : (
+                  listing.category === 'Metal Scrap' ? '🔩' :
+                   listing.category === 'Plastic Waste' ? '♳' :
+                   listing.category?.includes('Chemical') ? '🧪' :
+                   listing.category?.includes('Textile') ? '🧵' :
+                   listing.category?.includes('Electronic') || listing.category === 'E-Waste' ? '💻' : '🏭'
+                )}
               </div>
               <div className="flex flex-col gap-0.5">
                 <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">

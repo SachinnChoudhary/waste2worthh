@@ -371,27 +371,83 @@ def recommend_buyers():
     listings_df = models["listings_df"]
     listing_vectors = models["listing_vectors"]
 
-    buyer_vec = rec_vec.transform([buyer_interests])
-    similarities = cosine_similarity(buyer_vec, listing_vectors).flatten()
+    # 1. Normalize query and strip conversational procurement stop phrases
+    cleaned_query = re.sub(
+        r"\b(looking for|we need|sourcing|require|requiring|seeking|buyer for|buyer of|want|need|supply of|interested in|purchase of|purchasing|for recycling|for remelting|for reprocessing|for pulping|for reuse|scrap for|waste for|for sale|lot of|looking to buy|we are looking for)\b",
+        "",
+        buyer_interests,
+        flags=re.IGNORECASE
+    )
+    cleaned_query = re.sub(r"\s+", " ", cleaned_query).strip()
 
-    top_idx = similarities.argsort()[::-1][:top_n]
+    # 2. Extract specific intent category via keyword rules or classifier
+    pred_category = None
+    for pattern, cat, _ in KEYWORD_RULES:
+        if re.search(pattern, buyer_interests, re.IGNORECASE):
+            pred_category = cat
+            break
+
+    if not pred_category and "category_classifier" in models and "tfidf_vectorizer" in models:
+        try:
+            eval_text = cleaned_query if len(cleaned_query) > 2 else buyer_interests
+            q_vec = models["tfidf_vectorizer"].transform([eval_text])
+            pred_category = models["category_classifier"].predict(q_vec)[0]
+        except Exception:
+            pred_category = None
+
+    # 3. Vectorize query
+    q_to_vec = cleaned_query if len(cleaned_query) > 2 else buyer_interests
+    buyer_vec = rec_vec.transform([q_to_vec])
+    raw_sims = cosine_similarity(buyer_vec, listing_vectors).flatten()
+
+    # Extract distinct query words for keyword-specific boost
+    query_words = set(re.findall(r"\b[a-zA-Z0-9_\-\/]{3,}\b", buyer_interests.lower()))
+    non_informative = {"looking", "need", "sourcing", "require", "seeking", "buyer", "scrap", "waste", "materials", "industrial"}
+    specific_keywords = query_words - non_informative
+
+    # 4. Apply category intent weighting & specific keyword boost
+    boosted_scores = np.zeros(len(listings_df), dtype=float)
+
+    for idx in range(len(listings_df)):
+        row = listings_df.iloc[idx]
+        row_cat = str(row["category"])
+        row_desc = str(row["description"]).lower()
+        score = float(raw_sims[idx])
+
+        # Category alignment
+        if pred_category and row_cat.lower() == pred_category.lower():
+            score = (score * 2.2) + 0.18
+        elif pred_category:
+            score = score * 0.30
+
+        # Specific keyword overlap bonus (e.g. 'hdpe', 'pet', 'copper', 'slag')
+        overlap_count = sum(1 for kw in specific_keywords if kw in row_desc)
+        if overlap_count > 0:
+            score += min(0.35, overlap_count * 0.12)
+
+        boosted_scores[idx] = score
+
+    top_idx = boosted_scores.argsort()[::-1][:top_n]
     matches = []
 
     for idx in top_idx:
         row = listings_df.iloc[idx]
+        calibrated_score = min(0.98, max(0.25, round(float(boosted_scores[idx]), 3)))
         matches.append({
             "listing_id": str(row["listing_id"]),
             "category": str(row["category"]),
             "description": str(row["description"]),
             "market_value_usd": float(row["market_value_usd"]),
-            "match_score": round(float(similarities[idx]), 3),
+            "match_score": calibrated_score,
         })
 
     return jsonify({
         "query": buyer_interests,
         "count": len(matches),
         "matches": matches,
+        "detected_category": pred_category or "Unspecified"
     })
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))

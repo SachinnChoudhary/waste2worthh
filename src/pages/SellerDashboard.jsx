@@ -142,9 +142,6 @@ export default function SellerDashboard() {
             <h1 className="text-2xl sm:text-3xl font-extrabold text-zinc-100 tracking-tight">
               Seller Command Center
             </h1>
-            <Badge variant="emerald" size="sm" dot>
-              Live Supabase Data
-            </Badge>
           </div>
           <p className="text-xs sm:text-sm text-zinc-400">
             Real-time management of {user?.company || 'Northgate Steelworks Ltd.'} byproduct streams, incoming tender bids, and ESG scope-3 carbon offsets.
@@ -282,12 +279,16 @@ export default function SellerDashboard() {
                   >
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                       <div className="flex items-start gap-3.5">
-                        <div className="w-12 h-12 rounded-xl bg-zinc-800/80 border border-white/10 flex items-center justify-center text-2xl shrink-0">
-                          {listing.category === 'Metal Scrap' ? '🔩' :
-                           listing.category === 'Plastic Waste' ? '♳' :
-                           listing.category?.includes('Chemical') ? '🧪' :
-                           listing.category?.includes('Textile') ? '🧵' :
-                           listing.category?.includes('Electronic') || listing.category === 'E-Waste' ? '💻' : '🏭'}
+                        <div className="w-12 h-12 rounded-xl bg-zinc-800/80 border border-white/10 flex items-center justify-center text-2xl shrink-0 overflow-hidden">
+                          {listing.images && listing.images.length > 0 ? (
+                            <img src={listing.images[0]} alt={listing.category} className="w-full h-full object-cover" />
+                          ) : (
+                            listing.category === 'Metal Scrap' ? '🔩' :
+                             listing.category === 'Plastic Waste' ? '♳' :
+                             listing.category?.includes('Chemical') ? '🧪' :
+                             listing.category?.includes('Textile') ? '🧵' :
+                             listing.category?.includes('Electronic') || listing.category === 'E-Waste' ? '💻' : '🏭'
+                          )}
                         </div>
 
                         <div className="flex flex-col gap-1">

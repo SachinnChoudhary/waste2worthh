@@ -24,7 +24,23 @@ router.get('/', async (req, res) => {
       if (search) {
         const sanitizedSearch = String(search).replace(/[,()."\\:%]/g, '').trim()
         if (sanitizedSearch) {
-          query = query.or(`title.ilike.%${sanitizedSearch}%,description.ilike.%${sanitizedSearch}%,category.ilike.%${sanitizedSearch}%`)
+          const stopWords = new Set(['looking', 'for', 'we', 'need', 'sourcing', 'require', 'and', 'the', 'with', 'lot', 'batch', 'bulk', 'industrial', 'procurement', 'ready', 'supply', 'from', 'our'])
+          const words = sanitizedSearch.split(/\s+/).filter(w => w.length >= 2)
+          if (words.length <= 2) {
+            query = query.or(`title.ilike.%${sanitizedSearch}%,description.ilike.%${sanitizedSearch}%,category.ilike.%${sanitizedSearch}%`)
+          } else {
+            const tokens = words.filter(w => !stopWords.has(w.toLowerCase()) && w.length >= 3).slice(0, 4)
+            if (tokens.length > 0) {
+              const orClauses = tokens.flatMap(t => [
+                `title.ilike.%${t}%`,
+                `description.ilike.%${t}%`,
+                `category.ilike.%${t}%`
+              ]).join(',')
+              query = query.or(orClauses)
+            } else {
+              query = query.or(`title.ilike.%${sanitizedSearch}%,description.ilike.%${sanitizedSearch}%`)
+            }
+          }
         }
       }
 
